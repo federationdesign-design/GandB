@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'var(--blush)', minHeight: '100vh' }}>
+    <div style={{ background: '#FF7B7B', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -284,7 +284,7 @@ export default function AerospacePage() {
             left: 0,
             right: 0,
             height: '120px',
-            background: 'linear-gradient(to bottom, transparent, var(--blush))',
+            background: 'linear-gradient(to bottom, transparent, #FF7B7B)',
           }} />
         </div>
       </div>
