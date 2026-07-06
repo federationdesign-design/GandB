@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 100px, #ffffff 400px)', minHeight: '100vh' }}>
+    <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 60px, #ffffff 700px)', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -282,9 +282,9 @@ export default function AerospacePage() {
           position: 'absolute', inset: 0,
           display: 'flex', flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '72px 24px 28px',
+          padding: '68px 24px 28px',
         }}>
-          {/* Breadcrumb - top below logo */}
+          {/* Breadcrumb - tight below nav */}
           <p style={{
             color: 'rgba(255,255,255,0.6)',
             fontSize: '11px', fontWeight: 400,
@@ -294,23 +294,24 @@ export default function AerospacePage() {
             Home &rsaquo; Specialisms &rsaquo; Aerospace, Aviation &amp; Defence
           </p>
 
-          {/* Title - vertically centred */}
+          {/* Title - centred horizontally, mid hero */}
           <h1 style={{
-            color: 'white', fontSize: '30px', fontWeight: 700,
+            color: 'white', fontSize: '36px', fontWeight: 700,
             lineHeight: '1.15',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            textAlign: 'left',
+            textAlign: 'center',
           }}>
             Aerospace, Aviation &amp; Defence
           </h1>
 
-          {/* Body - bottom, right aligned */}
+          {/* Body - right aligned, 80% width, larger font */}
           <p style={{
-            color: 'rgba(255,255,255,0.85)',
-            fontSize: '13px', fontWeight: 400,
+            color: 'rgba(255,255,255,0.9)',
+            fontSize: '16px', fontWeight: 400,
             lineHeight: '1.6',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'right',
+            marginLeft: '20%',
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
           </p>
@@ -412,11 +413,10 @@ export default function AerospacePage() {
               position: 'absolute',
               left: '20px',
               top: idx === 0 ? '44px' : '52px',
-              width: '16px',
-              height: '16px',
+              width: '14px',
+              height: '14px',
               borderRadius: '50%',
-              border: '2px solid var(--navy)',
-              background: 'var(--blush)',
+              background: 'var(--coral)',
               zIndex: 2,
             }} />
 
