@@ -308,7 +308,7 @@ export default function AerospacePage() {
           <p style={{
             color: 'rgba(255,255,255,0.9)',
             fontSize: '16px', fontWeight: 400,
-            lineHeight: '1.6',
+            lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'right',
             marginLeft: '20%',
@@ -389,7 +389,7 @@ export default function AerospacePage() {
       </div>
 
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffb3b3 400px, #ffffff 1200px)' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)' }}>
 
         {/* Vertical timeline line */}
         <div style={{
@@ -500,8 +500,8 @@ export default function AerospacePage() {
                       <div style={{
                         position: 'absolute',
                         top: 0,
-                        left: '126px',
-                        width: '50%',
+                        left: '136px',
+                        width: '45%',
                         height: '1px',
                         background: '#FF7B7B',
                       }} />
@@ -532,11 +532,13 @@ export default function AerospacePage() {
                       {/* Text */}
                       <p style={{
                         fontSize: '13px',
-                        lineHeight: '1.5',
+                        lineHeight: '1.3',
                         color: 'var(--text-body)',
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
                         paddingTop: '4px',
+                        paddingRight: '12px',
+                        maxWidth: '180px',
                       }}>
                         {bullet.text}
                       </p>
@@ -715,7 +717,7 @@ export default function AerospacePage() {
           <p style={{
             color: 'var(--navy)',
             fontSize: '13px',
-            lineHeight: '1.6',
+            lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             marginBottom: '24px',
             opacity: 0.7,
@@ -727,7 +729,7 @@ export default function AerospacePage() {
           <p style={{
             color: 'var(--navy)',
             fontSize: '13px',
-            lineHeight: '1.7',
+            lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             marginBottom: '20px',
           }}>
