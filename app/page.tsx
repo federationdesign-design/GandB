@@ -221,7 +221,7 @@ export default function AerospacePage() {
         padding: '0 20px',
         height: '56px',
       }}>
-        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '20px', width: 'auto' }} />
+        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '14px', width: 'auto' }} />
         <button
           onClick={() => setNavOpen(!navOpen)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -324,7 +324,7 @@ export default function AerospacePage() {
           onClick={() => setNavOpen(!navOpen)}
           style={{
             width: '100%',
-            background: 'var(--coral)',
+            background: '#FF7B7B',
             border: 'none',
             padding: '14px 20px',
             display: 'flex',
@@ -488,17 +488,13 @@ export default function AerospacePage() {
                 <div style={{ marginTop: '8px' }}>
                   {section.bullets.map((bullet, bi) => (
                     <div key={bi}>
-                      <div style={{
-                        marginLeft: '126px',
-                        height: '1px',
-                        background: 'rgba(26,35,64,0.2)',
-                        marginBottom: '14px',
-                      }} />
                     <div style={{
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '16px',
                       paddingBottom: '16px',
+                      paddingTop: '0',
+                      borderTop: '1px solid #FF7B7B',
                     }}>
                       {/* Thumbnail */}
                       <div style={{
@@ -532,6 +528,7 @@ export default function AerospacePage() {
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
                         paddingTop: '4px',
+                        width: '80%',
                       }}>
                         {bullet.text}
                       </p>
@@ -622,13 +619,14 @@ export default function AerospacePage() {
                 padding: '14px 20px',
                 marginBottom: '12px',
                 borderRadius: '100px',
-                border: 'none',
-                background: 'rgba(255,255,255,0.25)',
+                border: '1.5px solid white',
+                background: 'transparent',
                 color: 'white',
                 fontSize: '14px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 400,
                 outline: 'none',
+                WebkitTextFillColor: 'white',
               }}
             />
           ))}
@@ -694,7 +692,7 @@ export default function AerospacePage() {
 
       {/* Footer */}
       <footer style={{
-        background: 'var(--navy)',
+        background: 'white',
         padding: '40px 0 40px 24px',
         position: 'relative',
         display: 'flex',
@@ -707,18 +705,19 @@ export default function AerospacePage() {
 
           {/* Specialisms */}
           <p style={{
-            color: 'rgba(255,255,255,0.6)',
+            color: 'var(--navy)',
             fontSize: '13px',
             lineHeight: '1.6',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             marginBottom: '24px',
+            opacity: 0.7,
           }}>
             Aviation, Commercial, Corporate, Data Protection, Employment, Franchising, Information Technology, and Intellectual Property
           </p>
 
           {/* Address */}
           <p style={{
-            color: 'rgba(255,255,255,0.5)',
+            color: 'var(--navy)',
             fontSize: '13px',
             lineHeight: '1.7',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
@@ -732,7 +731,7 @@ export default function AerospacePage() {
 
           {/* Phone */}
           <p style={{
-            color: 'rgba(255,255,255,0.7)',
+            color: 'var(--navy)',
             fontSize: '13px',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             marginBottom: '20px',
@@ -742,8 +741,9 @@ export default function AerospacePage() {
 
           {/* Copyright */}
           <p style={{
-            color: 'rgba(255,255,255,0.35)',
+            color: 'var(--navy)',
             fontSize: '12px',
+            opacity: 0.4,
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
             &copy; 2026 Herbert &amp; Ball LLP 2026
@@ -760,7 +760,7 @@ export default function AerospacePage() {
           paddingRight: '0',
           height: '100%',
           alignSelf: 'stretch',
-          background: 'rgba(255,255,255,0.04)',
+          background: 'white',
           padding: '24px 0',
           width: '36px',
           minWidth: '36px',
@@ -770,7 +770,7 @@ export default function AerospacePage() {
               key={link}
               href="#"
               style={{
-                color: 'rgba(255,255,255,0.4)',
+                color: 'var(--navy)',
                 fontSize: '10px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
                 textDecoration: 'none',
@@ -778,7 +778,7 @@ export default function AerospacePage() {
                 transform: 'rotate(180deg)',
                 letterSpacing: '0.06em',
                 padding: '8px 0',
-                borderTop: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                borderTop: i > 0 ? '1px solid rgba(26,35,64,0.1)' : 'none',
                 display: 'block',
                 width: '100%',
                 textAlign: 'center',
