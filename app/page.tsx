@@ -545,7 +545,7 @@ export default function AerospacePage() {
                         color: 'var(--text-body)',
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
-                        paddingTop: '4px',
+                        paddingTop: '15px',
                         flex: 1,
                         maxWidth: '55%',
                       }}>
