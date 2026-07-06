@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'var(--blush)', minHeight: '100vh' }}>
+    <div style={{ background: '#FF7B7B', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -250,7 +250,7 @@ export default function AerospacePage() {
       </nav>
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '140vh', position: 'relative' }}>
+      <div ref={heroSectionRef} style={{ height: '100vh', position: 'relative' }}>
         <div style={{
           position: 'sticky',
           top: 0,
@@ -277,7 +277,6 @@ export default function AerospacePage() {
               display: framesLoaded ? 'block' : 'none',
             }}
           />
-          <div style={{
         </div>
       </div>
 
@@ -452,7 +451,7 @@ export default function AerospacePage() {
                       alignItems: 'flex-start',
                       gap: '16px',
                       paddingTop: '16px',
-                      
+                      borderTop: bi === 0 ? 'none' : '1px solid rgba(201,112,90,0.3)',
                       marginTop: bi === 0 ? '0' : '0',
                     }}>
                       {/* Thumbnail */}
