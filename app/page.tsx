@@ -389,7 +389,7 @@ export default function AerospacePage() {
       </div>
 
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffffff 650px)' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffb3b3 400px, #ffffff 1200px)' }}>
 
         {/* Vertical timeline line */}
         <div style={{
@@ -454,7 +454,7 @@ export default function AerospacePage() {
 
               {/* Intro paragraph */}
               <p style={{
-                fontSize: section.isAbout ? '20px' : '15px',
+                fontSize: section.isAbout ? '22px' : '17px',
                 fontWeight: 400,
                 lineHeight: section.isAbout ? '1.4' : '1.6',
                 color: 'var(--text-dark)',
@@ -501,15 +501,15 @@ export default function AerospacePage() {
                         position: 'absolute',
                         top: 0,
                         left: '126px',
-                        right: 0,
+                        width: '50%',
                         height: '1px',
                         background: '#FF7B7B',
                       }} />
                       {/* Thumbnail */}
                       <div style={{
-                        width: '90px',
-                        minWidth: '90px',
-                        height: '68px',
+                        width: '120px',
+                        minWidth: '120px',
+                        height: '90px',
                         borderRadius: '4px',
                         overflow: 'hidden',
                         background: 'var(--navy)',
@@ -537,7 +537,6 @@ export default function AerospacePage() {
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
                         paddingTop: '4px',
-                        width: '80%',
                       }}>
                         {bullet.text}
                       </p>
