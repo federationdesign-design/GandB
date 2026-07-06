@@ -35,3 +35,11 @@ body {
   background: var(--coral);
   color: white;
 }
+
+html {
+  scroll-snap-type: y proximity;
+}
+
+section, [data-snap] {
+  scroll-snap-align: start;
+}
