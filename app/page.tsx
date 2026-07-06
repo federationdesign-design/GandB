@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 60px, #ffffff 700px)', minHeight: '100vh' }}>
+    <div style={{ background: 'white', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -389,7 +389,7 @@ export default function AerospacePage() {
       </div>
 
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffffff 650px)' }}>
 
         {/* Vertical timeline line */}
         <div style={{
@@ -411,12 +411,13 @@ export default function AerospacePage() {
             {/* Timeline node */}
             <div style={{
               position: 'absolute',
-              left: '20px',
+              left: '19px',
               top: idx === 0 ? '44px' : '52px',
               width: '14px',
               height: '14px',
               borderRadius: '50%',
-              background: 'var(--coral)',
+              border: '2px solid var(--coral)',
+              background: 'white',
               zIndex: 2,
             }} />
 
@@ -485,7 +486,7 @@ export default function AerospacePage() {
 
               {/* Bullet rows */}
               {'bullets' in section && section.bullets && (
-                <div style={{ marginTop: '8px' }}>
+                <div style={{ marginTop: '4px' }}>
                   {section.bullets.map((bullet, bi) => (
                     <div key={bi}>
                     <div style={{
@@ -494,13 +495,21 @@ export default function AerospacePage() {
                       gap: '16px',
                       paddingBottom: '16px',
                       paddingTop: '0',
-                      borderTop: '1px solid #FF7B7B',
+                      position: 'relative',
                     }}>
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: '126px',
+                        right: 0,
+                        height: '1px',
+                        background: '#FF7B7B',
+                      }} />
                       {/* Thumbnail */}
                       <div style={{
-                        width: '110px',
-                        minWidth: '110px',
-                        height: '80px',
+                        width: '90px',
+                        minWidth: '90px',
+                        height: '68px',
                         borderRadius: '4px',
                         overflow: 'hidden',
                         background: 'var(--navy)',
