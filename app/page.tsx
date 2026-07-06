@@ -19,15 +19,15 @@ const sections = [
     intro: 'Military and government aerospace contracts operate under entirely different legal frameworks to commercial work. Specialist counsel navigates procurement law, security classifications, export controls, and the unique dispute resolution mechanisms that govern defence relationships.',
     bullets: [
       {
-        img: '/images/Defence & Procurement Contracts 1.png',
+        img: '/images/Defence%20%26%20Procurement%20Contracts%201.png',
         text: 'Drafting and negotiating complex government and military procurement agreements under defence-specific legal frameworks',
       },
       {
-        img: '/images/Defence & Procurement Contracts 2.png',
+        img: '/images/Defence%20%26%20Procurement%20Contracts%202.png',
         text: 'Advising on export controls, security classifications, and ITAR compliance for clients operating across allied nations',
       },
       {
-        img: '/images/Defence & Procurement Contracts 3.png',
+        img: '/images/Defence%20%26%20Procurement%20Contracts%203.png',
         text: 'Managing disputes within the specialist resolution mechanisms that govern defence and public sector contracts',
       },
     ],
@@ -39,15 +39,15 @@ const sections = [
     intro: 'From airworthiness directives to accident investigation protocols, safety law in aerospace carries criminal as well as civil exposure. Having counsel who understands the technical language of safety management systems means legal advice that is grounded in operational reality, not just statute.',
     bullets: [
       {
-        img: '/images/Safety Legislation & Liability 1.png',
+        img: '/images/Safety%20Legislation%20%26%20Liability%201.png',
         text: 'Advising on airworthiness obligations, safety management systems, and operator liability frameworks',
       },
       {
-        img: '/images/Safety Legislation & Liability 2.png',
+        img: '/images/Safety%20Legislation%20%26%20Liability%202.png',
         text: 'Representing clients during accident investigations and inquests where criminal or civil exposure exists',
       },
       {
-        img: '/images/Safety Legislation & Liability 3.png',
+        img: '/images/Safety%20Legislation%20%26%20Liability%203.png',
         text: 'Structuring contracts to allocate safety liability appropriately between manufacturers, operators, and maintainers',
       },
     ],
@@ -59,15 +59,15 @@ const sections = [
     intro: 'Aerospace is one of the most heavily regulated industries on earth, governed by bodies including the CAA, EASA, FAA, and ICAO. Specialist counsel understands how these frameworks interact across jurisdictions, ensuring clients remain compliant whether they operate domestically or across multiple territories.',
     bullets: [
       {
-        img: '/images/Regulatory & Compliance 1.png',
+        img: '/images/Regulatory%20%26%20Compliance%201.png',
         text: 'Navigating the overlapping requirements of the CAA, EASA, FAA, and ICAO across multiple operating territories',
       },
       {
-        img: '/images/Regulatory & Compliance 2.png',
+        img: '/images/Regulatory%20%26%20Compliance%202.png',
         text: 'Advising on regulatory change and ensuring business structures remain compliant as legislation evolves',
       },
       {
-        img: '/images/Regulatory & Compliance 3.png',
+        img: '/images/Regulatory%20%26%20Compliance%203.png',
         text: 'Representing clients in enforcement proceedings and licence applications before aviation authorities',
       },
     ],
@@ -79,15 +79,15 @@ const sections = [
     intro: 'Aerospace is driven by proprietary technology. Protecting patents, licensing agreements, and trade secrets across international borders requires counsel who understands both IP law and the sector\'s competitive dynamics.',
     bullets: [
       {
-        img: '/images/Intellectual Property & Trade Secrets 1.png',
+        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%201.png',
         text: 'Protecting proprietary technology through patent strategy, licensing agreements, and trade secret protocols',
       },
       {
-        img: '/images/Intellectual Property & Trade Secrets 2.png',
+        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%202.png',
         text: 'Advising on IP ownership structures within consortium and joint development arrangements',
       },
       {
-        img: '/images/Intellectual Property & Trade Secrets 1.png',
+        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%201.png',
         text: 'Pursuing and defending infringement claims across international jurisdictions where aerospace IP is most at risk',
       },
     ],
@@ -99,15 +99,15 @@ const sections = [
     intro: 'Aerospace disputes rarely stay within a single jurisdiction. Specialist counsel with experience in international arbitration ensures clients are represented effectively when commercial relationships break down across borders.',
     bullets: [
       {
-        img: '/images/Arbitration & Dispute Resolution 1.png',
+        img: '/images/Arbitration%20%26%20Dispute%20Resolution%201.png',
         text: 'Representing clients before international arbitration tribunals including the ICC, LCIA, and UNCITRAL panels',
       },
       {
-        img: '/images/Arbitration & Dispute Resolution 2.png',
+        img: '/images/Arbitration%20%26%20Dispute%20Resolution%202.png',
         text: 'Advising on jurisdiction strategy and governing law clauses at the contract stage to protect clients before disputes arise',
       },
       {
-        img: '/images/Arbitration & Dispute Resolution 3.png',
+        img: '/images/Arbitration%20%26%20Dispute%20Resolution%203.png',
         text: 'Managing multi-party disputes involving manufacturers, insurers, governments, and operators across different legal systems',
       },
     ],
@@ -119,15 +119,15 @@ const sections = [
     intro: 'Large aerospace programmes frequently involve consortium arrangements between manufacturers, governments, and suppliers across multiple countries. Getting the legal architecture right from the outset protects all parties when complexity increases.',
     bullets: [
       {
-        img: '/images/Cross-Border Structuring 1.png',
+        img: '/images/Cross-Border%20Structuring%201.png',
         text: 'Structuring consortium and joint venture agreements between international partners on large-scale aerospace programmes',
       },
       {
-        img: '/images/Cross-Border Structuring 2.png',
+        img: '/images/Cross-Border%20Structuring%202.png',
         text: 'Advising on the regulatory approvals, competition law considerations, and governance frameworks required at formation',
       },
       {
-        img: '/images/Cross-Border Structuring 3.png',
+        img: '/images/Cross-Border%20Structuring%203.png',
         text: 'Protecting client interests when joint arrangements are restructured, wound down, or subject to dispute',
       },
     ],
@@ -277,6 +277,7 @@ export default function AerospacePage() {
               display: framesLoaded ? 'block' : 'none',
             }}
           />
+
         </div>
       </div>
 
@@ -316,10 +317,10 @@ export default function AerospacePage() {
         {/* Section nav dropdown */}
         {navOpen && (
           <div style={{
-            background: 'var(--navy)',
-            padding: '8px 0',
+            background: 'var(--coral)',
+            padding: '12px 20px 20px',
           }}>
-            {sections.map(s => (
+            {sections.filter(s => !s.isAbout).map(s => (
               <button
                 key={s.id}
                 onClick={() => scrollToSection(s.id)}
@@ -329,19 +330,23 @@ export default function AerospacePage() {
                   textAlign: 'left',
                   background: 'none',
                   border: 'none',
-                  padding: '12px 20px',
-                  color: 'white',
-                  fontSize: '13px',
+                  padding: '4px 0',
+                  color: 'var(--navy)',
+                  fontSize: '11px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontWeight: 400,
-                  letterSpacing: '0.04em',
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
                   cursor: 'pointer',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
                 }}
               >
-                {s.label}
+                — {s.title || s.label.toUpperCase()}
               </button>
             ))}
+            <div style={{
+              marginTop: '16px',
+              height: '1px',
+              background: 'rgba(26,35,64,0.2)',
+            }} />
           </div>
         )}
       </div>
@@ -446,13 +451,20 @@ export default function AerospacePage() {
               {'bullets' in section && section.bullets && (
                 <div style={{ marginTop: '8px' }}>
                   {section.bullets.map((bullet, bi) => (
-                    <div key={bi} style={{
+                    <div key={bi}>
+                      {bi > 0 && (
+                        <div style={{
+                          marginLeft: '126px',
+                          height: '1px',
+                          background: 'rgba(26,35,64,0.25)',
+                          marginBottom: '16px',
+                        }} />
+                      )}
+                    <div style={{
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '16px',
-                      paddingTop: '16px',
-                      borderTop: bi === 0 ? 'none' : '1px solid rgba(201,112,90,0.3)',
-                      marginTop: bi === 0 ? '0' : '0',
+                      paddingBottom: '16px',
                     }}>
                       {/* Thumbnail */}
                       <div style={{
@@ -490,6 +502,7 @@ export default function AerospacePage() {
                         {bullet.text}
                       </p>
                     </div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -509,28 +522,247 @@ export default function AerospacePage() {
         ))}
       </div>
 
+      {/* Enquire Section */}
+      <div style={{ position: 'relative' }}>
+        {/* Timeline node for enquire */}
+        <div style={{
+          position: 'absolute',
+          left: '20px',
+          top: '52px',
+          width: '16px',
+          height: '16px',
+          borderRadius: '50%',
+          border: '2px solid var(--navy)',
+          background: 'var(--blush)',
+          zIndex: 2,
+        }} />
+        {/* Vertical line above */}
+        <div style={{
+          position: 'absolute',
+          left: '28px',
+          top: 0,
+          height: '52px',
+          width: '1px',
+          background: 'var(--navy)',
+          opacity: 0.2,
+        }} />
+
+        <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingTop: '48px', paddingBottom: '0' }}>
+          <p style={{
+            fontSize: '11px',
+            fontWeight: 600,
+            letterSpacing: '0.12em',
+            color: 'var(--coral)',
+            marginBottom: '0',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+          }}>
+            ENQUIRE
+          </p>
+        </div>
+
+        {/* Form card */}
+        <div style={{
+          background: 'var(--coral)',
+          marginTop: '20px',
+          padding: '32px 24px 40px',
+        }}>
+          <h2 style={{
+            fontSize: '22px',
+            fontWeight: 700,
+            color: 'white',
+            marginBottom: '24px',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+          }}>
+            Enquire here
+          </h2>
+
+          {/* Input fields */}
+          {['Name', 'Email', 'Mobile', 'Company', 'Domain', 'Postcode'].map((field) => (
+            <input
+              key={field}
+              type={field === 'Email' ? 'email' : field === 'Mobile' ? 'tel' : 'text'}
+              placeholder={field}
+              style={{
+                display: 'block',
+                width: '100%',
+                padding: '14px 20px',
+                marginBottom: '12px',
+                borderRadius: '100px',
+                border: 'none',
+                background: 'rgba(255,255,255,0.25)',
+                color: 'white',
+                fontSize: '14px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                fontWeight: 400,
+                outline: 'none',
+              }}
+            />
+          ))}
+
+          {/* Contact preference */}
+          <p style={{
+            color: 'white',
+            fontSize: '13px',
+            fontWeight: 600,
+            marginBottom: '16px',
+            marginTop: '8px',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+          }}>
+            Ideal method of initial contact
+          </p>
+
+          {['Phone call', 'Mobile call', 'SMS/whatsapp', 'Email'].map((option) => (
+            <label key={option} style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: '14px',
+              cursor: 'pointer',
+            }}>
+              <span style={{
+                width: '28px',
+                height: '28px',
+                minWidth: '28px',
+                borderRadius: '6px',
+                border: '2px solid rgba(255,255,255,0.6)',
+                background: 'transparent',
+                display: 'inline-block',
+              }} />
+              <span style={{
+                color: 'white',
+                fontSize: '14px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+              }}>
+                {option}
+              </span>
+            </label>
+          ))}
+
+          {/* Submit button */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
+            <button style={{
+              background: 'white',
+              border: 'none',
+              borderRadius: '100px',
+              padding: '14px 36px',
+              fontSize: '13px',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              color: 'var(--coral)',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              cursor: 'pointer',
+            }}>
+              ENQUIRE
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer style={{
         background: 'var(--navy)',
-        padding: '40px 20px',
-        textAlign: 'center',
+        padding: '40px 0 40px 24px',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
       }}>
-        <p style={{
-          color: 'rgba(255,255,255,0.5)',
-          fontSize: '11px',
-          letterSpacing: '0.08em',
-          fontFamily: 'Plus Jakarta Sans, sans-serif',
+        <div style={{ flex: 1, paddingRight: '48px' }}>
+          {/* H&B wordmark */}
+          <p style={{
+            color: 'var(--coral)',
+            fontSize: '48px',
+            fontWeight: 700,
+            lineHeight: 1,
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '16px',
+          }}>
+            H&amp;B
+          </p>
+
+          {/* Specialisms */}
+          <p style={{
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '13px',
+            lineHeight: '1.6',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '24px',
+          }}>
+            Aviation, Commercial, Corporate, Data Protection, Employment, Franchising, Information Technology, and Intellectual Property
+          </p>
+
+          {/* Address */}
+          <p style={{
+            color: 'rgba(255,255,255,0.5)',
+            fontSize: '13px',
+            lineHeight: '1.7',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '20px',
+          }}>
+            International House,<br />
+            142 Cromwell Rd,<br />
+            London<br />
+            SW7 4EF
+          </p>
+
+          {/* Phone */}
+          <p style={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '13px',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '20px',
+          }}>
+            Call: 020 3897 0445
+          </p>
+
+          {/* Copyright */}
+          <p style={{
+            color: 'rgba(255,255,255,0.35)',
+            fontSize: '12px',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+          }}>
+            &copy; 2026 Herbert &amp; Ball LLP 2026
+          </p>
+        </div>
+
+        {/* Vertical legal links on right edge */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          gap: '0',
+          paddingRight: '0',
+          height: '100%',
+          alignSelf: 'stretch',
+          background: 'rgba(255,255,255,0.04)',
+          padding: '24px 0',
+          width: '36px',
+          minWidth: '36px',
         }}>
-          HERBERT &amp; BALL<sup style={{ fontSize: '7px' }}>LC</sup> — MAYFAIR, LONDON
-        </p>
-        <p style={{
-          color: 'rgba(255,255,255,0.3)',
-          fontSize: '10px',
-          marginTop: '8px',
-          fontFamily: 'Plus Jakarta Sans, sans-serif',
-        }}>
-          Regulated by the Bar Standards Board
-        </p>
+          {['Cookies', 'Privacy Policy', 'Certification.', 'Data Request'].map((link, i) => (
+            <a
+              key={link}
+              href="#"
+              style={{
+                color: 'rgba(255,255,255,0.4)',
+                fontSize: '10px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                textDecoration: 'none',
+                writingMode: 'vertical-rl',
+                transform: 'rotate(180deg)',
+                letterSpacing: '0.06em',
+                padding: '8px 0',
+                borderTop: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                display: 'block',
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
+              {link}
+            </a>
+          ))}
+        </div>
       </footer>
     </div>
   )
