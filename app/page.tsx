@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'white', minHeight: '100vh', scrollSnapType: 'y proximity', overflowY: 'scroll', height: '100vh' }}>
+    <div style={{ background: 'white', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
