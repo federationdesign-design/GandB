@@ -371,7 +371,7 @@ export default function AerospacePage() {
                   color: 'var(--navy)',
                   fontSize: '11px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontWeight: 700,
+                  fontWeight: 400,
                   letterSpacing: '0.1em',
                   cursor: 'pointer',
                 }}
@@ -497,19 +497,28 @@ export default function AerospacePage() {
                       paddingTop: '0',
                       position: 'relative',
                     }}>
+                      {/* Timeline tick mark */}
+                      <div style={{
+                        position: 'absolute',
+                        left: '-32px',
+                        top: '50px',
+                        width: '10px',
+                        height: '1px',
+                        background: 'rgba(26,35,64,0.2)',
+                      }} />
                       <div style={{
                         position: 'absolute',
                         top: 0,
-                        left: '136px',
-                        width: '45%',
+                        left: '156px',
+                        right: '20px',
                         height: '1px',
                         background: '#FF7B7B',
                       }} />
                       {/* Thumbnail */}
                       <div style={{
-                        width: '120px',
-                        minWidth: '120px',
-                        height: '90px',
+                        width: '140px',
+                        minWidth: '140px',
+                        height: '105px',
                         borderRadius: '4px',
                         overflow: 'hidden',
                         background: 'var(--navy)',
@@ -537,8 +546,7 @@ export default function AerospacePage() {
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
                         paddingTop: '4px',
-                        paddingRight: '12px',
-                        maxWidth: '180px',
+                        flex: 1,
                       }}>
                         {bullet.text}
                       </p>
