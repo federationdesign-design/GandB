@@ -382,7 +382,7 @@ export default function AerospacePage() {
             <div style={{
               marginTop: '16px',
               height: '1px',
-              background: 'rgba(26,35,64,0.2)',
+              background: 'white',
             }} />
           </div>
         )}
@@ -503,7 +503,7 @@ export default function AerospacePage() {
                         top: '50px',
                         width: '10px',
                         height: '1px',
-                        background: 'rgba(26,35,64,0.2)',
+                        background: 'white',
                       }} />
                       <div style={{
                         position: 'absolute',
