@@ -352,15 +352,19 @@ export default function AerospacePage() {
         </button>
 
         {/* Section nav dropdown */}
-        {navOpen && (
-          <div style={{
+        <div style={{
             background: 'var(--coral)',
-            padding: '12px 20px 20px',
+            padding: navOpen ? '12px 20px 20px' : '0 20px',
+            maxHeight: navOpen ? '400px' : '0',
+            overflow: 'hidden',
+            transition: 'max-height 0.35s ease, padding 0.35s ease',
           }}>
             {sections.filter(s => !s.isAbout).map(s => (
               <button
                 key={s.id}
                 onClick={() => scrollToSection(s.id)}
+                onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
+                onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -374,6 +378,7 @@ export default function AerospacePage() {
                   fontWeight: 400,
                   letterSpacing: '0.1em',
                   cursor: 'pointer',
+                  textDecoration: 'none',
                 }}
               >
                 — {s.title || s.label.toUpperCase()}
@@ -382,10 +387,9 @@ export default function AerospacePage() {
             <div style={{
               marginTop: '16px',
               height: '1px',
-              background: 'white',
+              background: '#ffffff',
             }} />
           </div>
-        )}
       </div>
 
       {/* Content sections with timeline */}
@@ -411,7 +415,7 @@ export default function AerospacePage() {
             {/* Timeline node */}
             <div style={{
               position: 'absolute',
-              left: '19px',
+              left: '21px',
               top: idx === 0 ? '44px' : '52px',
               width: '14px',
               height: '14px',
@@ -429,9 +433,10 @@ export default function AerospacePage() {
                   fontSize: '11px',
                   fontWeight: 600,
                   letterSpacing: '0.12em',
-                  color: 'var(--coral)',
+                  color: '#FF7B7B',
                   marginBottom: '16px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  opacity: 1,
                 }}>
                   {section.title}
                 </p>
@@ -474,7 +479,7 @@ export default function AerospacePage() {
                     fontSize: '12px',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
-                    color: 'var(--navy)',
+                    color: '#1a2340',
                     fontFamily: 'Plus Jakarta Sans, sans-serif',
                     cursor: 'pointer',
                   }}>
@@ -503,7 +508,7 @@ export default function AerospacePage() {
                         top: '50px',
                         width: '10px',
                         height: '1px',
-                        background: 'white',
+                        background: 'rgba(26,35,64,0.2)',
                       }} />
                       <div style={{
                         position: 'absolute',
@@ -629,7 +634,7 @@ export default function AerospacePage() {
                 marginBottom: '12px',
                 borderRadius: '100px',
                 border: '1.5px solid white',
-                background: 'white',
+                background: 'transparent',
                 color: 'white',
                 fontSize: '14px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
@@ -666,7 +671,7 @@ export default function AerospacePage() {
                 minWidth: '28px',
                 borderRadius: '6px',
                 border: '2px solid rgba(255,255,255,0.6)',
-                background: 'white',
+                background: 'transparent',
                 display: 'inline-block',
               }} />
               <span style={{
