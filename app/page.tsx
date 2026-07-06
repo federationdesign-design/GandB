@@ -406,7 +406,7 @@ export default function AerospacePage() {
           <div
             key={section.id}
             id={section.id}
-            style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '56px' }}
+            style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '100px' }}
           >
             {/* Timeline node */}
             <div style={{
@@ -467,7 +467,7 @@ export default function AerospacePage() {
               {section.isAbout && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
                   <button style={{
-                    border: '1.5px solid var(--navy)',
+                    border: '2px solid #FF7B7B',
                     background: 'transparent',
                     padding: '12px 32px',
                     borderRadius: '100px',
