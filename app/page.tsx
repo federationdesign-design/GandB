@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'white', minHeight: '100vh' }}>
+    <div style={{ background: 'white', minHeight: '100vh', scrollSnapType: 'y proximity', overflowY: 'scroll', height: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -242,7 +242,7 @@ export default function AerospacePage() {
       </nav>
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '60vh', position: 'relative', overflow: 'hidden' }}>
+      <div ref={heroSectionRef} style={{ height: '60vh', position: 'relative', overflow: 'hidden', scrollSnapAlign: 'start' }}>
         {/* Layer 1: Solid blue base */}
         <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
 
@@ -406,7 +406,7 @@ export default function AerospacePage() {
           <div
             key={section.id}
             id={section.id}
-            style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px' }}
+            style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '56px' }}
           >
             {/* Timeline node */}
             <div style={{
