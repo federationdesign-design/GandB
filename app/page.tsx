@@ -221,15 +221,7 @@ export default function AerospacePage() {
         padding: '0 20px',
         height: '56px',
       }}>
-        <span style={{
-          color: 'white',
-          fontWeight: 700,
-          fontSize: '13px',
-          letterSpacing: '0.12em',
-          fontFamily: 'Plus Jakarta Sans, sans-serif',
-        }}>
-          HERBERT &amp; BALL<sup style={{ fontSize: '8px', marginLeft: '2px' }}>LC</sup>
-        </span>
+        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '28px', width: 'auto' }} />
         <button
           onClick={() => setNavOpen(!navOpen)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -254,7 +246,7 @@ export default function AerospacePage() {
         <div style={{
           position: 'sticky',
           top: 0,
-          height: '100vh',
+          height: '60vh',
           width: '100%',
           overflow: 'hidden',
         }}>
@@ -667,16 +659,7 @@ export default function AerospacePage() {
       }}>
         <div style={{ flex: 1, paddingRight: '48px' }}>
           {/* H&B wordmark */}
-          <p style={{
-            color: 'var(--coral)',
-            fontSize: '48px',
-            fontWeight: 700,
-            lineHeight: 1,
-            fontFamily: 'Plus Jakarta Sans, sans-serif',
-            marginBottom: '16px',
-          }}>
-            H&amp;B
-          </p>
+          <img src="/footer-logo.svg" alt="Herbert & Ball" style={{ height: '60px', width: 'auto', marginBottom: '16px' }} />
 
           {/* Specialisms */}
           <p style={{
