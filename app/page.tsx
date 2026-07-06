@@ -510,7 +510,7 @@ export default function AerospacePage() {
                         position: 'absolute',
                         top: 0,
                         left: '156px',
-                        right: '20px',
+                        width: '50%',
                         height: '1px',
                         background: '#FF7B7B',
                       }} />
@@ -547,6 +547,7 @@ export default function AerospacePage() {
                         fontWeight: 400,
                         paddingTop: '4px',
                         flex: 1,
+                        maxWidth: '55%',
                       }}>
                         {bullet.text}
                       </p>
