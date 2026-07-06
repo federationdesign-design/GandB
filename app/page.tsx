@@ -468,7 +468,7 @@ export default function AerospacePage() {
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
                   <button style={{
                     border: '2px solid #FF7B7B',
-                    background: 'transparent',
+                    background: 'white',
                     padding: '12px 32px',
                     borderRadius: '100px',
                     fontSize: '12px',
@@ -629,7 +629,7 @@ export default function AerospacePage() {
                 marginBottom: '12px',
                 borderRadius: '100px',
                 border: '1.5px solid white',
-                background: 'transparent',
+                background: 'white',
                 color: 'white',
                 fontSize: '14px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
@@ -666,7 +666,7 @@ export default function AerospacePage() {
                 minWidth: '28px',
                 borderRadius: '6px',
                 border: '2px solid rgba(255,255,255,0.6)',
-                background: 'transparent',
+                background: 'white',
                 display: 'inline-block',
               }} />
               <span style={{
