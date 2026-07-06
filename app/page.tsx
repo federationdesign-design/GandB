@@ -456,7 +456,7 @@ export default function AerospacePage() {
               <p style={{
                 fontSize: section.isAbout ? '22px' : '17px',
                 fontWeight: 400,
-                lineHeight: section.isAbout ? '1.4' : '1.6',
+                lineHeight: '1.3',
                 color: 'var(--text-dark)',
                 marginBottom: section.isAbout ? '28px' : '24px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
