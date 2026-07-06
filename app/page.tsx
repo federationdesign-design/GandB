@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: '#FF7B7B', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--blush)', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
@@ -284,7 +284,7 @@ export default function AerospacePage() {
             left: 0,
             right: 0,
             height: '120px',
-            background: 'linear-gradient(to bottom, transparent, #FF7B7B)',
+            background: 'linear-gradient(to bottom, transparent, var(--blush))',
           }} />
         </div>
       </div>
@@ -460,7 +460,7 @@ export default function AerospacePage() {
                       alignItems: 'flex-start',
                       gap: '16px',
                       paddingTop: '16px',
-                      borderTop: bi === 0 ? 'none' : '1px solid rgba(201,112,90,0.3)',
+                      
                       marginTop: bi === 0 ? '0' : '0',
                     }}>
                       {/* Thumbnail */}
