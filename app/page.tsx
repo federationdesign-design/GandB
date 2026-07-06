@@ -281,32 +281,36 @@ export default function AerospacePage() {
         <div style={{
           position: 'absolute', inset: 0,
           display: 'flex', flexDirection: 'column',
-          justifyContent: 'flex-end',
-          padding: '24px 24px 32px',
+          justifyContent: 'space-between',
+          padding: '72px 24px 28px',
         }}>
+          {/* Breadcrumb - top below logo */}
           <p style={{
             color: 'rgba(255,255,255,0.6)',
             fontSize: '11px', fontWeight: 400,
-            letterSpacing: '0.08em',
+            letterSpacing: '0.06em',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            marginBottom: '12px',
           }}>
             Home &rsaquo; Specialisms &rsaquo; Aerospace, Aviation &amp; Defence
           </p>
+
+          {/* Title - vertically centred */}
           <h1 style={{
-            color: 'white', fontSize: '32px', fontWeight: 700,
+            color: 'white', fontSize: '30px', fontWeight: 700,
             lineHeight: '1.15',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            marginBottom: '16px',
+            textAlign: 'left',
           }}>
             Aerospace, Aviation &amp; Defence
           </h1>
+
+          {/* Body - bottom, right aligned */}
           <p style={{
             color: 'rgba(255,255,255,0.85)',
-            fontSize: '14px', fontWeight: 400,
+            fontSize: '13px', fontWeight: 400,
             lineHeight: '1.6',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            textAlign: 'center',
+            textAlign: 'right',
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
           </p>
