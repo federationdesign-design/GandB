@@ -445,7 +445,6 @@ export default function AerospacePage() {
                   letterSpacing: '0.12em',
                   color: 'var(--navy)',
                   marginBottom: '16px',
-                  opacity: 0.5,
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
                 }}>
                   ABOUT
@@ -493,7 +492,7 @@ export default function AerospacePage() {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '16px',
-                      paddingBottom: '16px',
+                      paddingBottom: '12px',
                       paddingTop: '0',
                       position: 'relative',
                     }}>
@@ -558,16 +557,7 @@ export default function AerospacePage() {
               )}
             </div>
 
-            {/* Section divider */}
-            {idx < sections.length - 1 && (
-              <div style={{
-                marginLeft: '52px',
-                marginRight: '20px',
-                marginTop: '40px',
-                height: '1px',
-                background: 'rgba(26,35,64,0.12)',
-              }} />
-            )}
+
           </div>
         ))}
       </div>
@@ -582,7 +572,7 @@ export default function AerospacePage() {
           width: '16px',
           height: '16px',
           borderRadius: '50%',
-          border: '2px solid var(--navy)',
+          border: '2px solid #FF7B7B',
           background: 'var(--blush)',
           zIndex: 2,
         }} />
