@@ -250,7 +250,7 @@ export default function AerospacePage() {
       </nav>
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '200vh', position: 'relative' }}>
+      <div ref={heroSectionRef} style={{ height: '140vh', position: 'relative' }}>
         <div style={{
           position: 'sticky',
           top: 0,
@@ -277,15 +277,7 @@ export default function AerospacePage() {
               display: framesLoaded ? 'block' : 'none',
             }}
           />
-          {/* Gradient overlay at bottom */}
           <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '120px',
-            background: 'linear-gradient(to bottom, transparent, var(--blush))',
-          }} />
         </div>
       </div>
 
