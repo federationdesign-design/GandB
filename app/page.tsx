@@ -418,7 +418,7 @@ export default function AerospacePage() {
               {/* Intro paragraph */}
               <p style={{
                 fontSize: section.isAbout ? '20px' : '15px',
-                fontWeight: section.isAbout ? 700 : 400,
+                fontWeight: 400,
                 lineHeight: section.isAbout ? '1.4' : '1.6',
                 color: 'var(--text-dark)',
                 marginBottom: section.isAbout ? '28px' : '24px',
