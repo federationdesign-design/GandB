@@ -205,7 +205,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0%, #FF7B7B 8%, #ffffff 35%)', minHeight: '100vh' }}>
+    <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 100px, #ffffff 400px)', minHeight: '100vh' }}>
 
       {/* Fixed Nav */}
       <nav style={{
