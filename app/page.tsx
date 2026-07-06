@@ -221,7 +221,7 @@ export default function AerospacePage() {
         padding: '0 20px',
         height: '56px',
       }}>
-        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '28px', width: 'auto' }} />
+        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '20px', width: 'auto' }} />
         <button
           onClick={() => setNavOpen(!navOpen)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -242,34 +242,74 @@ export default function AerospacePage() {
       </nav>
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '60vh', position: 'relative' }}>
-        <div style={{
-          position: 'sticky',
-          top: 0,
-          height: '60vh',
-          width: '100%',
-          overflow: 'hidden',
-        }}>
-          {/* Fallback image while frames load */}
-          {!framesLoaded && (
-            <img
-              src="/jetplane.jpg"
-              alt="Aerospace"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          )}
-          <canvas
-            ref={canvasRef}
-            width={834}
-            height={1112}
+      <div ref={heroSectionRef} style={{ height: '60vh', position: 'relative', overflow: 'hidden' }}>
+        {/* Layer 1: Solid blue base */}
+        <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
+
+        {/* Layer 2: Video canvas at 58% opacity */}
+        {!framesLoaded && (
+          <img
+            src="/jetplane.jpg"
+            alt="Aerospace"
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: framesLoaded ? 'block' : 'none',
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover', opacity: 0.58,
             }}
           />
+        )}
+        <canvas
+          ref={canvasRef}
+          width={834}
+          height={1112}
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', opacity: 0.58,
+            display: framesLoaded ? 'block' : 'none',
+          }}
+        />
 
+        {/* Layer 3: Blue gradient overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to bottom, #0B4EBA, #06275D)',
+          opacity: 0.72,
+        }} />
+
+        {/* Layer 4: Text */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column',
+          justifyContent: 'flex-end',
+          padding: '24px 24px 32px',
+        }}>
+          <p style={{
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '11px', fontWeight: 400,
+            letterSpacing: '0.08em',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '12px',
+          }}>
+            Home &rsaquo; Specialisms &rsaquo; Aerospace, Aviation &amp; Defence
+          </p>
+          <h1 style={{
+            color: 'white', fontSize: '32px', fontWeight: 700,
+            lineHeight: '1.15',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            marginBottom: '16px',
+          }}>
+            Aerospace, Aviation &amp; Defence
+          </h1>
+          <p style={{
+            color: 'rgba(255,255,255,0.85)',
+            fontSize: '14px', fontWeight: 400,
+            lineHeight: '1.6',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            textAlign: 'center',
+          }}>
+            Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
+          </p>
         </div>
       </div>
 
