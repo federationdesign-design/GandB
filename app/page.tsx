@@ -242,7 +242,13 @@ export default function AerospacePage() {
       </nav>
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '60vh', position: 'relative', overflow: 'hidden', scrollSnapAlign: 'start' }}>
+      <div ref={heroSectionRef} style={{ height: '80vh', position: 'relative', overflow: 'hidden', scrollSnapAlign: 'start' }}>
+        <div style={{
+          position: 'sticky',
+          top: 0,
+          height: '80vh',
+          overflow: 'hidden',
+        }}>
         {/* Layer 1: Solid blue base */}
         <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
 
@@ -274,7 +280,7 @@ export default function AerospacePage() {
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, #0B4EBA, #06275D)',
-          opacity: 0.72,
+          opacity: 0.45,
         }} />
 
         {/* Layer 4: Text */}
@@ -315,6 +321,7 @@ export default function AerospacePage() {
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
           </p>
+        </div>
         </div>
       </div>
 
