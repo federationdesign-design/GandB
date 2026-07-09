@@ -312,7 +312,7 @@ export default function AerospacePage() {
           if (nextRow) nextBoundaryTop = nextRow.getBoundingClientRect().top
         }
 
-        if (rowTop > navH + 10) {
+        if (rowTop > navH) {
           // In flow
           if (outerCard.style.position === 'fixed') {
             outerCard.style.position = ''
@@ -323,7 +323,7 @@ export default function AerospacePage() {
             outerCard.style.zIndex = ''
           }
         } else {
-          // Fixed - calculate clamped top
+          // Fixed - always 10px below nav, clamped by next card
           const idealTop = navH + 10
           const maxTop = nextBoundaryTop - cardH - 10
           const top = Math.min(idealTop, maxTop)
