@@ -834,6 +834,15 @@ export default function AerospacePage() {
               </label>
             ))}
 
+            {/* GDPR consent */}
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginTop: '16px', marginBottom: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" required style={{ marginTop: '3px', minWidth: '18px', height: '18px', accentColor: 'white', cursor: 'pointer' }} />
+              <span style={{ color: 'white', fontSize: '12px', lineHeight: '1.5', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+                I agree to Herbert &amp; Ball LLP contacting me in response to this enquiry. My data will be handled in accordance with the{' '}
+                <a href="/legal/privacy-policy" style={{ color: 'white', textDecoration: 'underline' }}>privacy policy</a>.
+              </span>
+            </label>
+
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
               <button style={{ background: 'white', border: 'none', borderRadius: '100px', padding: '14px 36px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--coral)', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>
                 ENQUIRE
