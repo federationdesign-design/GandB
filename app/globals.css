@@ -55,3 +55,99 @@ section, [data-snap] {
     display: none !important;
   }
 }
+
+/* ── Herbert & Ball responsive layout ── */
+
+/* Gradient background spans full outer wrapper */
+.gandb-outer {
+  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 300px, #ffffff 700px);
+}
+
+/* About section inner padding */
+.gandb-about-wrap {
+  padding: 0;
+}
+.gandb-about-inner {
+  padding-left: 52px;
+  padding-right: 20px;
+}
+
+/* Two-column area */
+.gandb-cols {
+  display: block;
+}
+
+/* Left column – full width on mobile */
+.gandb-left {
+  width: 100%;
+}
+
+/* Sticky panel – hidden on mobile */
+.gandb-panel {
+  display: none;
+}
+
+/* ── Tablet: 768px – 1023px ── */
+@media (min-width: 768px) {
+  .gandb-about-inner {
+    padding-left: 80px;
+    padding-right: 60px;
+  }
+  .gandb-about-inner p:first-child {
+    font-size: 13px !important;
+  }
+  .gandb-about-inner p:nth-child(2) {
+    font-size: 24px !important;
+  }
+}
+
+/* ── Desktop: 1024px – 1439px ── */
+@media (min-width: 1024px) {
+  .gandb-cols {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .gandb-left {
+    flex: 0 0 58%;
+    max-width: 58%;
+  }
+  .gandb-about-inner {
+    padding-left: 100px;
+    padding-right: 60px;
+  }
+  .gandb-about-inner p:nth-child(2) {
+    font-size: 26px !important;
+    text-align: left !important;
+  }
+  .gandb-panel {
+    display: block;
+    flex: 0 0 42%;
+    max-width: 42%;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    background: var(--navy);
+    overflow: hidden;
+    align-self: flex-start;
+  }
+}
+
+/* ── Super wide: 1440px+ ── */
+@media (min-width: 1440px) {
+  .gandb-left {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+  .gandb-panel {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+  .gandb-about-inner {
+    padding-left: 140px;
+    padding-right: 80px;
+  }
+  .gandb-about-inner p:nth-child(2) {
+    font-size: 30px !important;
+  }
+}
