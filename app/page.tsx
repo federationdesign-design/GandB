@@ -310,7 +310,7 @@ export default function AerospacePage() {
           // Section has passed nav - card should be fixed
           // Calculate ideal top: navH + 16 (gap below nav)
           // But clamp so it doesn't overlap next card: nextBoundaryTop - cardH - 15
-          const idealTop = navH + 16
+          const idealTop = navH
           const maxTop = nextBoundaryTop - cardH - 15
           const top = Math.min(idealTop, maxTop)
 
@@ -749,12 +749,13 @@ export default function AerospacePage() {
                       left: (cardStates[section.id].left ?? 0) + 'px',
                       width: (cardStates[section.id].width ?? 400) + 'px',
                       zIndex: idx + 1,
-                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
+                      borderTop: idx === 0 ? 'none' : '16px solid white',
+                      background: 'var(--navy)',
                     } : {
                       position: 'relative',
                       zIndex: 2,
-                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
-                      marginTop: idx === 0 ? '0' : '16px',
+                      borderTop: idx === 0 ? 'none' : '16px solid white',
+                      background: 'var(--navy)',
                     }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
