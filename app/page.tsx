@@ -457,10 +457,10 @@ export default function AerospacePage() {
       </div>
 
       {/* Desktop two-column layout */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', maxWidth: '1400px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', width: '100%', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)' }}>
 
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', flex: '0 0 55%', maxWidth: '55%' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
 
         {/* Vertical timeline line */}
         <div style={{
@@ -641,11 +641,12 @@ export default function AerospacePage() {
         flex: '0 0 45%',
         maxWidth: '45%',
         display: 'none',
-        position: 'sticky',
-        top: '80px',
-        height: 'calc(100vh - 80px)',
-        background: 'var(--navy)',
         alignSelf: 'flex-start',
+        position: 'sticky',
+        top: '56px',
+        height: 'calc(100vh - 56px)',
+        background: 'var(--navy)',
+        overflow: 'hidden',
       }} className="desktop-panel">
         <div style={{
           padding: '60px 48px',
