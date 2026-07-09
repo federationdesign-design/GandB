@@ -476,48 +476,43 @@ export default function AerospacePage() {
           }}>▼</span>
         </button>
 
-        {/* Section nav dropdown */}
+        {/* Section nav dropdown - pill style */}
         <div style={{
             background: 'var(--coral)',
-            padding: navOpen ? '12px 20px 20px' : '0 20px',
-            maxHeight: navOpen ? '400px' : '0',
+            maxHeight: navOpen ? '200px' : '0',
             overflow: 'hidden',
-            transition: 'max-height 0.35s ease, padding 0.35s ease',
+            transition: 'max-height 0.3s ease',
           }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', padding: navOpen ? '12px 20px 16px' : '0 20px' }}>
             {sections.filter(s => !s.isAbout).map(s => (
               <button
                 key={s.id}
                 onClick={() => scrollToSection(s.id)}
-                onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
-                onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'white' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--navy)' }}
                 style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'left',
-                  background: 'none',
-                  border: 'none',
-                  padding: '4px 0',
+                  display: 'inline-block',
+                  background: 'transparent',
+                  border: '1.5px solid var(--navy)',
+                  borderRadius: '100px',
+                  padding: '5px 14px',
                   color: 'var(--navy)',
-                  fontSize: '11px',
+                  fontSize: '10px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontWeight: 400,
-                  letterSpacing: '0.1em',
+                  fontWeight: 600,
+                  letterSpacing: '0.08em',
                   cursor: 'pointer',
-                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  transition: 'background 0.15s, color 0.15s',
                 }}
               >
-                — {s.title || s.label.toUpperCase()}
+                {s.label.toUpperCase()}
               </button>
             ))}
-            <div style={{
-              marginTop: '16px',
-              height: '1px',
-              background: '#ffffff',
-            }} />
           </div>
-      </div>
+        </div>
+      </div>{/* end in this section bar */}
 
-      {/* Desktop two-column layout */}
       {/* About section - full width, outside two-column layout */}
       <div className="gandb-about-full">
         <div style={{ position: 'relative' }}>
