@@ -258,9 +258,8 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Sticky card handler - card persists until next card arrives
+  // Sticky card handler - cards stack on top of each other
   useEffect(() => {
-    // Store last known good rect per section
     const knownRects: Record<string, { top: number; left: number; width: number }> = {}
 
     const onScroll = () => {
@@ -272,37 +271,39 @@ export default function AerospacePage() {
       const navH = 56
       const nonAbout = sections.filter(s => !s.isAbout)
 
-      // Find which card should be showing:
-      // The most recent section whose top has passed navH
-      let active: string | null = null
-
-      for (let i = 0; i < nonAbout.length; i++) {
-        const section = nonAbout[i]
-        const row = document.getElementById('row-' + section.id)
-        if (!row) continue
-        const rowRect = row.getBoundingClientRect()
+      // Capture rects for all cards while in flow
+      for (const section of nonAbout) {
         const cardEl = document.getElementById('card-' + section.id)
         if (!cardEl) continue
-        const cardRect = cardEl.getBoundingClientRect()
-
-        // Capture rect while card is still in flow (not yet fixed)
-        if (stickyCard !== section.id) {
-          knownRects[section.id] = {
-            top: navH,
-            left: cardRect.left,
-            width: cardRect.width,
+        // Only capture when not currently fixed
+        const isFixed = cardEl.style.position === 'fixed'
+        if (!isFixed) {
+          const cardRect = cardEl.getBoundingClientRect()
+          if (cardRect.width > 0) {
+            knownRects[section.id] = {
+              top: navH,
+              left: cardRect.left,
+              width: cardRect.width,
+            }
           }
         }
+      }
 
-        // This section has scrolled past nav - it becomes the active card
-        if (rowRect.top <= navH + 10) {
+      // Find active: most recent row whose top passed nav
+      let active: string | null = null
+      for (const section of nonAbout) {
+        const row = document.getElementById('row-' + section.id)
+        if (!row) continue
+        if (row.getBoundingClientRect().top <= navH + 10) {
           active = section.id
         }
       }
 
       setStickyCard(active)
       if (active && knownRects[active]) {
-        setStickyRect(knownRects[active])
+        setStickyRect({ ...knownRects[active] })
+      } else if (!active) {
+        setStickyRect(null)
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -312,7 +313,7 @@ export default function AerospacePage() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [stickyCard])
+  }, [])
 
   const scrollToSection = (id: string) => {
     setNavOpen(false)
@@ -741,9 +742,14 @@ export default function AerospacePage() {
                     top: stickyRect.top + 'px',
                     left: stickyRect.left + 'px',
                     width: stickyRect.width + 'px',
-                    zIndex: 0,
-                    borderTop: '10px solid white',
-                  } : { position: 'relative', zIndex: 1 }}
+                    zIndex: 1,
+                    marginTop: '10px',
+                  } : {
+                    position: 'relative',
+                    zIndex: 2,
+                    marginTop: '10px',
+                    marginBottom: '10px',
+                  }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
                     {panelContent[section.id].label}
