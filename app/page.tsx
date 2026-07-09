@@ -742,6 +742,7 @@ export default function AerospacePage() {
                     left: stickyRect.left + 'px',
                     width: stickyRect.width + 'px',
                     zIndex: 0,
+                    borderTop: '10px solid white',
                   } : { position: 'relative', zIndex: 1 }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
