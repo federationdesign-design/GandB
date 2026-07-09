@@ -178,6 +178,8 @@ export default function AerospacePage() {
   const frameIndexRef = useRef(0)
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
+  const [stickyCard, setStickyCard] = useState<string | null>(null)
+  const [cardTop, setCardTop] = useState(56)
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -498,7 +500,7 @@ export default function AerospacePage() {
         }} />
 
         {sections.filter(s => !s.isAbout).map((section, idx) => (
-          <div key={section.id} className="gandb-section-row">
+          <div key={section.id} id={'row-' + section.id} className="gandb-section-row">
 
             {/* Left: section content */}
             <div className="gandb-left" style={{ position: 'relative' }}>
@@ -675,7 +677,17 @@ export default function AerospacePage() {
             {/* Right: card alongside this section */}
             {panelContent[section.id] && (
               <div className="gandb-card">
-                <div className="gandb-card-inner">
+                <div
+                  id={'card-' + section.id}
+                  className="gandb-card-inner"
+                  style={stickyCard === section.id ? {
+                    position: 'fixed',
+                    top: '56px',
+                    right: 0,
+                    width: '42%',
+                    zIndex: 10,
+                  } : {}}
+                >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
                     {panelContent[section.id].label}
                   </p>

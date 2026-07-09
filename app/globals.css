@@ -72,9 +72,7 @@ body { overflow-x: hidden; }
     position: relative;
   }
 
-  /* Card inner: sticky within its card column
-     top: 56px = nav height
-     Pushed off by next card via parent height */
+  /* Card inner: default position, JS overrides to fixed when sticky */
   .gandb-card-inner {
     display: flex;
     flex-direction: column;
@@ -82,12 +80,6 @@ body { overflow-x: hidden; }
     padding: 40px;
     background: var(--navy);
     width: 100%;
-    /* Sticky: pins when entering view, pushed by next section */
-    position: sticky;
-    top: 56px;
-    /* 15px bottom gap so it never touches the card below */
-    align-self: flex-start;
-    margin-bottom: 15px;
   }
 }
 
