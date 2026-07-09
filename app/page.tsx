@@ -176,6 +176,7 @@ export default function AerospacePage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const framesRef = useRef<HTMLImageElement[]>([])
   const frameIndexRef = useRef(0)
+  const cardStatesRef = useRef<Record<string, { mode: string; top?: number; left?: number; width?: number }>>({})
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const [cardStates, setCardStates] = useState<Record<string, {
@@ -324,7 +325,21 @@ export default function AerospacePage() {
         }
       }
 
-      setCardStates(newStates)
+      // Only update state if something changed to prevent bounce from re-renders
+      const prev = cardStatesRef.current
+      let changed = false
+      for (const id of Object.keys(newStates)) {
+        const n = newStates[id]
+        const p = prev[id]
+        if (!p || p.mode !== n.mode || p.top !== n.top || p.left !== n.left || p.width !== n.width) {
+          changed = true
+          break
+        }
+      }
+      if (changed) {
+        cardStatesRef.current = newStates
+        setCardStates(newStates)
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
