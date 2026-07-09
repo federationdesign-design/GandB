@@ -488,22 +488,19 @@ export default function AerospacePage() {
               <button
                 key={s.id}
                 onClick={() => scrollToSection(s.id)}
-                onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'white' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--navy)' }}
                 style={{
                   display: 'inline-block',
-                  background: 'transparent',
+                  background: 'var(--navy)',
                   border: '1.5px solid var(--navy)',
                   borderRadius: '100px',
-                  padding: '5px 14px',
-                  color: 'var(--navy)',
+                  padding: '8px 20px',
+                  color: 'white',
                   fontSize: '10px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
                   fontWeight: 600,
                   letterSpacing: '0.08em',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  transition: 'background 0.15s, color 0.15s',
                 }}
               >
                 {s.label.toUpperCase()}
@@ -738,12 +735,12 @@ export default function AerospacePage() {
                     left: stickyRect.left + 'px',
                     width: stickyRect.width + 'px',
                     zIndex: 1,
-                    marginTop: '10px',
+                    boxShadow: '0 -16px 0 0 white',
                   } : {
                     position: 'relative',
                     zIndex: 2,
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    boxShadow: '0 -16px 0 0 white',
+                    marginTop: '16px',
                   }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
