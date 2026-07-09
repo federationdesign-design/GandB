@@ -634,8 +634,6 @@ export default function AerospacePage() {
         ))}
       </div>
 
-      </div>
-
       {/* Sticky right panel - desktop only */}
       <div style={{
         flex: '0 0 45%',
@@ -699,6 +697,8 @@ export default function AerospacePage() {
           )}
         </div>
       </div>
+
+      </div>{/* end desktop two-column layout */}
 
       {/* Enquire Section */}
       <div style={{ position: 'relative' }}>
