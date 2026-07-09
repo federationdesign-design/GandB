@@ -927,12 +927,8 @@ export default function AerospacePage() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'flex-end',
-          gap: '0',
-          paddingRight: '0',
-          height: '100%',
-          alignSelf: 'stretch',
           background: 'white',
-          padding: '24px 0',
+          padding: '24px 8px',
           width: '36px',
           minWidth: '36px',
         }}>
