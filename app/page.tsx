@@ -180,6 +180,7 @@ export default function AerospacePage() {
   const [navOpen, setNavOpen] = useState(false)
   const [stickyCard, setStickyCard] = useState<string | null>(null)
   const [stickyRect, setStickyRect] = useState<{ top: number; left: number; width: number } | null>(null)
+  const [finalCard, setFinalCard] = useState<{ id: string; top: number; left: number; width: number } | null>(null)
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -303,13 +304,22 @@ export default function AerospacePage() {
         }
       }
 
-      // Stop sticky when enquire section is within 15px of card bottom
+      // When enquire section arrives, freeze last card at its final position
       if (active && enquireEl) {
         const cardEl = document.getElementById('card-' + active)
         const cardH = cardEl ? cardEl.offsetHeight : 300
         if (enquireTop <= navH + 16 + cardH + 15) {
+          // Freeze at resting position - 15px above enquire
+          const frozenTop = enquireTop - cardH - 15
+          if (knownRects[active]) {
+            setFinalCard({ id: active, top: frozenTop, left: knownRects[active].left, width: knownRects[active].width })
+          }
           active = null
+        } else {
+          setFinalCard(null)
         }
+      } else if (!active) {
+        setFinalCard(null)
       }
 
       setStickyCard(active)
@@ -742,19 +752,26 @@ export default function AerospacePage() {
                 <div
                   id={'card-' + section.id}
                   className="gandb-card-inner"
-                  style={stickyCard === section.id && stickyRect ? {
-                    position: 'fixed',
-                    top: (stickyRect.top + 16) + 'px',
-                    left: stickyRect.left + 'px',
-                    width: stickyRect.width + 'px',
-                    zIndex: 1,
-                    boxShadow: '0 -16px 0 0 white',
-                  } : {
-                    position: 'relative',
-                    zIndex: 2,
-                    boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
-                    marginTop: idx === 0 ? '0' : '16px',
-                  }}
+                  style={
+                    stickyCard === section.id && stickyRect ? {
+                      position: 'fixed',
+                      top: (stickyRect.top + 16) + 'px',
+                      left: stickyRect.left + 'px',
+                      width: stickyRect.width + 'px',
+                      zIndex: 1,
+                      boxShadow: '0 -16px 0 0 white',
+                    } : finalCard && finalCard.id === section.id ? {
+                      position: 'fixed',
+                      top: finalCard.top + 'px',
+                      left: finalCard.left + 'px',
+                      width: finalCard.width + 'px',
+                      zIndex: 1,
+                    } : {
+                      position: 'relative',
+                      zIndex: 2,
+                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
+                      marginTop: idx === 0 ? '0' : '16px',
+                    }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
                     {panelContent[section.id].label}
