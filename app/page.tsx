@@ -697,10 +697,10 @@ export default function AerospacePage() {
                         />
                       </div>
                       {/* Text column with pink line at top */}
-                      <div style={{ flex: 1, paddingTop: '0' }}>
+                      <div style={{ flex: 1, paddingTop: '0', maxWidth: '70%' }}>
                         <div style={{ height: '1px', background: '#FF7B7B', marginBottom: '10px' }} />
                       <p style={{
-                        fontSize: '13px',
+                        fontSize: '14px',
                         lineHeight: '1.3',
                         color: 'var(--text-body)',
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
