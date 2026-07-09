@@ -240,14 +240,14 @@ export default function AerospacePage() {
   // Intersection Observer for active section detection
   useEffect(() => {
     const observers: IntersectionObserver[] = []
-    sections.forEach(section => {
+    sections.filter(s => !s.isAbout).forEach(section => {
       const el = document.getElementById(section.id)
       if (!el) return
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(section.id)
         },
-        { threshold: 0.3 }
+        { threshold: 0.1, rootMargin: '-10% 0px -50% 0px' }
       )
       observer.observe(el)
       observers.push(observer)
@@ -456,8 +456,91 @@ export default function AerospacePage() {
           </div>
       </div>
 
+      {/* About section - full width */}
+      <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', position: 'relative' }}>
+        <style>{`@media (min-width: 1024px) { .about-inner { padding-left: 100px !important; padding-right: 100px !important; } }`}</style>
+        <div className="about-inner">
+        {/* Vertical timeline line */}
+        <div style={{
+          position: 'absolute',
+          left: '28px',
+          top: 0,
+          bottom: 0,
+          width: '1px',
+          background: 'var(--navy)',
+          opacity: 0.2,
+        }} />
+        {sections.filter(s => s.isAbout).map((section, idx) => (
+          <div
+            key={section.id}
+            id={section.id}
+            style={{ position: 'relative', paddingTop: '40px' }}
+          >
+            <div style={{
+              position: 'absolute',
+              left: '21px',
+              top: '44px',
+              width: '14px',
+              height: '14px',
+              borderRadius: '50%',
+              border: '2px solid var(--coral)',
+              background: 'white',
+              zIndex: 2,
+            }} />
+            <div style={{ paddingLeft: '52px', paddingRight: '20px' }}>
+              <p style={{
+                fontSize: '11px',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                color: 'var(--navy)',
+                marginBottom: '16px',
+                opacity: 1,
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+              }}>
+                ABOUT
+              </p>
+              <p style={{
+                fontSize: '22px',
+                fontWeight: 400,
+                lineHeight: '1.3',
+                color: 'var(--text-dark)',
+                marginBottom: '28px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                textAlign: 'right',
+              }}>
+                {section.intro}
+              </p>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
+                <button style={{
+                  border: '2px solid #FF7B7B',
+                  background: '#ffffff',
+                  padding: '12px 32px',
+                  borderRadius: '100px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  color: '#1a2340',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  cursor: 'pointer',
+                }}>
+                  ENQUIRE
+                </button>
+              </div>
+            </div>
+            <div style={{
+              marginLeft: '52px',
+              marginRight: '20px',
+              marginTop: '40px',
+              height: '1px',
+              background: 'rgba(26,35,64,0.12)',
+            }} />
+          </div>
+        ))}
+        </div>
+      </div>
+
       {/* Desktop two-column layout */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', width: '100%', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', width: '100%', background: 'white' }}>
 
       {/* Content sections with timeline */}
       <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
