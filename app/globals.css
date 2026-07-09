@@ -49,28 +49,32 @@ body { overflow-x: hidden; }
     position: relative;
   }
 
-  /* Each section row: content left, card right */
+  /* Each section row: content left, card right, equal height */
   .gandb-section-row {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
-  /* Left content column */
+  /* Left content column - drives the row height */
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
   }
 
-  /* Card sits alongside its section, natural height */
+  /* Card column: same height as left content */
   .gandb-card {
     display: flex;
     flex: 0 0 42%;
     max-width: 42%;
-    align-items: flex-start;
-    padding: 48px 0 48px 40px;
+    padding: 40px 0 40px 32px;
+    /* Must be position relative for sticky child to work */
+    position: relative;
   }
 
+  /* Card inner: sticky within its card column
+     top: 56px = nav height
+     Pushed off by next card via parent height */
   .gandb-card-inner {
     display: flex;
     flex-direction: column;
@@ -78,6 +82,12 @@ body { overflow-x: hidden; }
     padding: 40px;
     background: var(--navy);
     width: 100%;
+    /* Sticky: pins when entering view, pushed by next section */
+    position: sticky;
+    top: 56px;
+    /* 15px bottom gap so it never touches the card below */
+    align-self: flex-start;
+    margin-bottom: 15px;
   }
 }
 
