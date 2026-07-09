@@ -43,45 +43,41 @@ body { overflow-x: hidden; }
     padding-right: 60px;
   }
 
+  /* Outer: stacks section rows vertically */
   .gandb-outer {
+    display: block;
+    position: relative;
+  }
+
+  /* Each section row: content left, card right */
+  .gandb-section-row {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
   }
 
+  /* Left content column */
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
   }
 
-  /* Panel: right column - NO background, transparent so gaps show page */
-  .gandb-panel {
-    display: block;
+  /* Card sits alongside its section, natural height */
+  .gandb-card {
+    display: flex;
     flex: 0 0 42%;
     max-width: 42%;
-    position: relative;
-    background: transparent;
+    align-items: flex-start;
+    padding: 48px 0 48px 40px;
   }
 
-  /* Each card: navy background, margin top/bottom creates gap between cards */
-  .gandb-card {
-    display: block;
-    position: relative;
-    background: transparent;
-    margin: 40px 0;
-  }
-
-  .gandb-card:first-child {
-    margin-top: 48px;
-  }
-
-  /* Inner content: navy background, height driven by content */
   .gandb-card-inner {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 48px 40px;
+    justify-content: flex-start;
+    padding: 40px;
     background: var(--navy);
+    width: 100%;
   }
 }
 
@@ -95,12 +91,12 @@ body { overflow-x: hidden; }
     flex: 0 0 55%;
     max-width: 55%;
   }
-  .gandb-panel {
+  .gandb-card {
     flex: 0 0 45%;
     max-width: 45%;
   }
   .gandb-card-inner {
-    padding: 60px 48px;
+    padding: 48px;
   }
 }
 

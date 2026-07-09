@@ -486,10 +486,7 @@ export default function AerospacePage() {
       {/* Two-column layout for service sections */}
       <div className="gandb-outer">
 
-      {/* Content sections with timeline */}
-      <div className="gandb-left" style={{ position: 'relative', padding: '0 0 80px 0' }}>
-
-        {/* Vertical timeline line */}
+        {/* Vertical timeline line - spans full outer */}
         <div style={{
           position: 'absolute',
           left: '20px',
@@ -497,11 +494,15 @@ export default function AerospacePage() {
           bottom: 0,
           width: '2px',
           background: 'var(--navy)',
+          zIndex: 1,
         }} />
 
         {sections.filter(s => !s.isAbout).map((section, idx) => (
+          <div key={section.id} className="gandb-section-row">
+
+            {/* Left: section content */}
+            <div className="gandb-left" style={{ position: 'relative' }}>
           <div
-            key={section.id}
             id={section.id}
             style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '100px' }}
             data-section={section.id}
@@ -669,57 +670,30 @@ export default function AerospacePage() {
 
 
           </div>
-        ))}
-      </div>
+            </div>{/* end gandb-left */}
 
-      {/* Sticky cards - desktop only */}
-      <div className="gandb-panel">
-        {sections.filter(s => !s.isAbout).map((section) => {
-          const panel = panelContent[section.id]
-          if (!panel) return null
-          return (
-            <div key={section.id} className="gandb-card">
-              <div className="gandb-card-inner">
-                <p style={{
-                  color: 'var(--coral)',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
-                  fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  marginBottom: '12px',
-                  textTransform: 'uppercase',
-                }}>
-                  {panel.label}
-                </p>
-                <p style={{
-                  color: 'white',
-                  fontSize: '64px',
-                  fontWeight: 700,
-                  lineHeight: '1',
-                  fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  marginBottom: '24px',
-                  letterSpacing: '-0.02em',
-                }}>
-                  {panel.stat}
-                </p>
-                <div style={{ width: '40px', height: '2px', background: 'var(--coral)', marginBottom: '24px' }} />
-                <p style={{
-                  color: 'rgba(255,255,255,0.75)',
-                  fontSize: '16px',
-                  fontWeight: 400,
-                  lineHeight: '1.5',
-                  fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontStyle: 'italic',
-                }}>
-                  &ldquo;{panel.quote}&rdquo;
-                </p>
+            {/* Right: card alongside this section */}
+            {panelContent[section.id] && (
+              <div className="gandb-card">
+                <div className="gandb-card-inner">
+                  <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
+                    {panelContent[section.id].label}
+                  </p>
+                  <p style={{ color: 'white', fontSize: '64px', fontWeight: 700, lineHeight: '1', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '24px', letterSpacing: '-0.02em' }}>
+                    {panelContent[section.id].stat}
+                  </p>
+                  <div style={{ width: '40px', height: '2px', background: 'var(--coral)', marginBottom: '24px' }} />
+                  <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '16px', fontWeight: 400, lineHeight: '1.5', fontFamily: 'Plus Jakarta Sans, sans-serif', fontStyle: 'italic' }}>
+                    &ldquo;{panelContent[section.id].quote}&rdquo;
+                  </p>
+                </div>
               </div>
-            </div>
-          )
-        })}
-      </div>
+            )}
 
-      </div>{/* end gandb-outer */}
+          </div>
+        ))}
+
+      </div>
 
       {/* Enquire Section - ANT-style split layout */}
       <div style={{ position: 'relative' }}>
