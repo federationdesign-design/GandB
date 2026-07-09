@@ -465,7 +465,10 @@ export default function AerospacePage() {
           <div style={{ position: 'absolute', left: '28px', top: 0, bottom: 0, width: '1px', background: 'var(--navy)', opacity: 0.2 }} />
           {sections.filter(s => s.isAbout).map((section) => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
-              <div style={{ position: 'absolute', left: '21px', top: '44px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
+              {/* Horizontal connector */}
+              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '1px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
+              {/* Circle offset right */}
+              <div style={{ position: 'absolute', left: '34px', top: '43px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
               <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
                 <p style={{ fontSize: '24px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
@@ -489,7 +492,7 @@ export default function AerospacePage() {
         {/* Vertical timeline line */}
         <div style={{
           position: 'absolute',
-          left: '28px',
+          left: '20px',
           top: 0,
           bottom: 0,
           width: '1px',
@@ -504,10 +507,21 @@ export default function AerospacePage() {
             style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '100px' }}
           >
             {/* Timeline node */}
+            {/* Horizontal connector from vertical line to circle */}
             <div style={{
               position: 'absolute',
-              left: '21px',
-              top: idx === 0 ? '44px' : '52px',
+              left: '20px',
+              top: idx === 0 ? '50px' : '58px',
+              width: '14px',
+              height: '1px',
+              background: 'rgba(26,35,64,0.3)',
+              zIndex: 2,
+            }} />
+            {/* Circle - sits to the right of the connector */}
+            <div style={{
+              position: 'absolute',
+              left: '34px',
+              top: idx === 0 ? '43px' : '51px',
               width: '14px',
               height: '14px',
               borderRadius: '50%',
@@ -708,15 +722,18 @@ export default function AerospacePage() {
       {/* Enquire Section */}
       <div style={{ position: 'relative' }}>
         {/* Timeline node for enquire */}
+        {/* Horizontal connector */}
+        <div style={{ position: 'absolute', left: '20px', top: '59px', width: '14px', height: '1px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
+        {/* Circle offset right */}
         <div style={{
           position: 'absolute',
-          left: '20px',
+          left: '34px',
           top: '52px',
-          width: '16px',
-          height: '16px',
+          width: '14px',
+          height: '14px',
           borderRadius: '50%',
           border: '2px solid #FF7B7B',
-          background: 'var(--blush)',
+          background: 'white',
           zIndex: 2,
         }} />
         {/* Vertical line above */}
