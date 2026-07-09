@@ -359,7 +359,7 @@ export default function AerospacePage() {
 
           {/* Title - centred horizontally, mid hero */}
           <h1 style={{
-            color: 'white', fontSize: '36px', fontWeight: 700,
+            color: 'white', fontSize: '38px', fontWeight: 700,
             lineHeight: '1.15',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'center',
@@ -370,11 +370,12 @@ export default function AerospacePage() {
           {/* Body - right aligned, 80% width, larger font */}
           <p style={{
             color: 'rgba(255,255,255,0.9)',
-            fontSize: '16px', fontWeight: 400,
+            fontSize: '20px', fontWeight: 400,
             lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'right',
-            marginLeft: '20%',
+            width: '40%',
+            alignSelf: 'flex-end',
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
           </p>
@@ -500,17 +501,17 @@ export default function AerospacePage() {
                 ABOUT
               </p>
               <p style={{
-                fontSize: '24px',
+                fontSize: '26px',
                 fontWeight: 400,
                 lineHeight: '1.3',
                 color: 'var(--text-dark)',
                 marginBottom: '28px',
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
-                textAlign: 'right',
+                textAlign: 'left',
               }}>
                 {section.intro}
               </p>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '8px' }}>
                 <button style={{
                   border: '2px solid #FF7B7B',
                   background: '#ffffff',
@@ -544,11 +545,17 @@ export default function AerospacePage() {
 
       {/* Content sections with timeline */}
       <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
-        <style>{`@media (min-width: 1024px) { .content-inner { padding-left: 100px !important; padding-right: 60px !important; } }`}</style>
+        <style>{`
+          @media (min-width: 1024px) {
+            .content-inner { padding-left: 100px !important; padding-right: 60px !important; }
+            .timeline-node { left: 121px !important; }
+            .timeline-line { left: 128px !important; }
+          }
+        `}</style>
 
         <div className="content-inner">
         {/* Vertical timeline line */}
-        <div style={{
+        <div className="timeline-line" style={{
           position: 'absolute',
           left: '28px',
           top: 0,
@@ -565,7 +572,7 @@ export default function AerospacePage() {
             style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '100px' }}
           >
             {/* Timeline node */}
-            <div style={{
+            <div className="timeline-node" style={{
               position: 'absolute',
               left: '21px',
               top: idx === 0 ? '44px' : '52px',
@@ -738,9 +745,20 @@ export default function AerospacePage() {
           flexDirection: 'column',
           justifyContent: 'center',
           height: '100%',
+          transition: 'all 0.4s ease',
         }}>
-          {panelContent[activeSection] && (
-            <>
+          {Object.keys(panelContent).map(key => (
+            <div key={key} style={{
+              position: 'absolute',
+              inset: 0,
+              padding: '60px 48px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              opacity: activeSection === key ? 1 : 0,
+              transition: 'opacity 0.5s ease',
+              pointerEvents: activeSection === key ? 'auto' : 'none',
+            }}>
               <p style={{
                 color: 'var(--coral)',
                 fontSize: '11px',
@@ -750,7 +768,7 @@ export default function AerospacePage() {
                 marginBottom: '8px',
                 textTransform: 'uppercase',
               }}>
-                {panelContent[activeSection].label}
+                {panelContent[key].label}
               </p>
               <p style={{
                 color: 'white',
@@ -761,7 +779,7 @@ export default function AerospacePage() {
                 marginBottom: '32px',
                 letterSpacing: '-0.02em',
               }}>
-                {panelContent[activeSection].stat}
+                {panelContent[key].stat}
               </p>
               <div style={{
                 width: '48px',
@@ -777,10 +795,10 @@ export default function AerospacePage() {
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontStyle: 'italic',
               }}>
-                &ldquo;{panelContent[activeSection].quote}&rdquo;
+                &ldquo;{panelContent[key].quote}&rdquo;
               </p>
-            </>
-          )}
+            </div>
+          ))}
         </div>
       </div>
 
