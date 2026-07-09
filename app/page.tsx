@@ -767,14 +767,14 @@ export default function AerospacePage() {
                       left: stickyRect.left + 'px',
                       width: stickyRect.width + 'px',
                       zIndex: 1,
-                      boxShadow: '0 -16px 0 0 white',
+                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
                     } : frozenCards[section.id] ? {
                       position: 'fixed',
                       top: frozenCards[section.id].top + 'px',
                       left: frozenCards[section.id].left + 'px',
                       width: frozenCards[section.id].width + 'px',
                       zIndex: 1,
-                      boxShadow: '0 -16px 0 0 white',
+                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
                     } : {
                       position: 'relative',
                       zIndex: 2,
