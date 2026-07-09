@@ -718,136 +718,68 @@ export default function AerospacePage() {
 
       </div>{/* end gandb-outer */}
 
-      {/* Enquire Section */}
+      {/* Enquire Section - ANT-style split layout */}
       <div style={{ position: 'relative' }}>
-        {/* Timeline node for enquire */}
-        {/* Vertical line continuation into enquire section */}
-        <div style={{ position: 'absolute', left: '20px', top: 0, bottom: 0, width: '2px', background: 'var(--navy)' }} />
+        {/* Vertical line continuation */}
+        <div style={{ position: 'absolute', left: '20px', top: 0, height: '110px', width: '2px', background: 'var(--navy)', zIndex: 1 }} />
         {/* Horizontal connector */}
         <div style={{ position: 'absolute', left: '20px', top: '59px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
-        {/* Circle offset right */}
-        <div style={{
-          position: 'absolute',
-          left: '34px',
-          top: '52px',
-          width: '14px',
-          height: '14px',
-          borderRadius: '50%',
-          border: '2px solid #FF7B7B',
-          background: 'white',
-          zIndex: 2,
-        }} />
-        {/* Vertical line above */}
+        {/* Circle */}
+        <div style={{ position: 'absolute', left: '34px', top: '52px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid #FF7B7B', background: 'white', zIndex: 2 }} />
 
-
-        <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingTop: '48px', paddingBottom: '0' }}>
-          <p style={{
-            fontSize: '11px',
-            fontWeight: 600,
-            letterSpacing: '0.12em',
-            color: 'var(--coral)',
-            marginBottom: '0',
-            fontFamily: 'Plus Jakarta Sans, sans-serif',
-          }}>
+        <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingTop: '48px', paddingBottom: '20px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--coral)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
             ENQUIRE
           </p>
         </div>
 
-        {/* Form card */}
-        <div style={{
-          background: 'var(--coral)',
-          marginTop: '20px',
-          padding: '32px 24px 40px',
-        }}>
-          <h2 style={{
-            fontSize: '22px',
-            fontWeight: 700,
-            color: 'white',
-            marginBottom: '24px',
-            fontFamily: 'Plus Jakarta Sans, sans-serif',
-          }}>
-            Enquire here
-          </h2>
+        {/* Split: form left, image right */}
+        <div className="enquire-split">
+          {/* Form column */}
+          <div className="enquire-form" style={{ background: 'var(--coral)', padding: '32px 24px 40px' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: 700, color: 'white', marginBottom: '24px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+              Enquire here
+            </h2>
 
-          {/* Input fields */}
-          {['Name', 'Email', 'Mobile', 'Company', 'Domain', 'Postcode'].map((field) => (
-            <input
-              key={field}
-              type={field === 'Email' ? 'email' : field === 'Mobile' ? 'tel' : 'text'}
-              placeholder={field}
-              style={{
-                display: 'block',
-                width: '100%',
-                padding: '14px 20px',
-                marginBottom: '12px',
-                borderRadius: '100px',
-                border: '1.5px solid white',
-                background: 'transparent',
-                color: 'white',
-                fontSize: '14px',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontWeight: 400,
-                outline: 'none',
-                WebkitTextFillColor: 'white',
-              }}
+            {['Name', 'Email', 'Mobile', 'Company', 'Domain', 'Postcode'].map((field) => (
+              <input
+                key={field}
+                type={field === 'Email' ? 'email' : field === 'Mobile' ? 'tel' : 'text'}
+                placeholder={field}
+                style={{
+                  display: 'block', width: '100%', padding: '14px 20px', marginBottom: '12px',
+                  borderRadius: '100px', border: '1.5px solid white', background: 'transparent',
+                  color: 'white', fontSize: '14px', fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 400, outline: 'none', WebkitTextFillColor: 'white',
+                }}
+              />
+            ))}
+
+            <p style={{ color: 'white', fontSize: '13px', fontWeight: 600, marginBottom: '16px', marginTop: '8px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+              Ideal method of initial contact
+            </p>
+
+            {['Phone call', 'Mobile call', 'SMS/whatsapp', 'Email'].map((option) => (
+              <label key={option} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px', cursor: 'pointer' }}>
+                <span style={{ width: '28px', height: '28px', minWidth: '28px', borderRadius: '6px', border: '2px solid rgba(255,255,255,0.6)', background: 'transparent', display: 'inline-block' }} />
+                <span style={{ color: 'white', fontSize: '14px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{option}</span>
+              </label>
+            ))}
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
+              <button style={{ background: 'white', border: 'none', borderRadius: '100px', padding: '14px 36px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--coral)', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>
+                ENQUIRE
+              </button>
+            </div>
+          </div>
+
+          {/* Image column */}
+          <div className="enquire-image">
+            <img
+              src="/jetplane.jpg"
+              alt="Herbert & Ball"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
-          ))}
-
-          {/* Contact preference */}
-          <p style={{
-            color: 'white',
-            fontSize: '13px',
-            fontWeight: 600,
-            marginBottom: '16px',
-            marginTop: '8px',
-            fontFamily: 'Plus Jakarta Sans, sans-serif',
-          }}>
-            Ideal method of initial contact
-          </p>
-
-          {['Phone call', 'Mobile call', 'SMS/whatsapp', 'Email'].map((option) => (
-            <label key={option} style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '14px',
-              cursor: 'pointer',
-            }}>
-              <span style={{
-                width: '28px',
-                height: '28px',
-                minWidth: '28px',
-                borderRadius: '6px',
-                border: '2px solid rgba(255,255,255,0.6)',
-                background: 'transparent',
-                display: 'inline-block',
-              }} />
-              <span style={{
-                color: 'white',
-                fontSize: '14px',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-              }}>
-                {option}
-              </span>
-            </label>
-          ))}
-
-          {/* Submit button */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
-            <button style={{
-              background: 'white',
-              border: 'none',
-              borderRadius: '100px',
-              padding: '14px 36px',
-              fontSize: '13px',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              color: 'var(--coral)',
-              fontFamily: 'Plus Jakarta Sans, sans-serif',
-              cursor: 'pointer',
-            }}>
-              ENQUIRE
-            </button>
           </div>
         </div>
       </div>

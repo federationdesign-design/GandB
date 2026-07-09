@@ -102,3 +102,52 @@ body { overflow-x: hidden; }
     min-height: 380px;
   }
 }
+
+/* ── Enquire split layout ── */
+.enquire-split {
+  display: flex;
+  flex-direction: column;
+}
+
+.enquire-form {
+  width: 100%;
+}
+
+.enquire-image {
+  display: none;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .enquire-split {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 600px;
+  }
+
+  .enquire-form {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+
+  .enquire-image {
+    display: block;
+    flex: 0 0 55%;
+    max-width: 55%;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .enquire-form {
+    flex: 0 0 38%;
+    max-width: 38%;
+  }
+
+  .enquire-image {
+    flex: 0 0 62%;
+    max-width: 62%;
+  }
+}
