@@ -176,13 +176,10 @@ export default function AerospacePage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const framesRef = useRef<HTMLImageElement[]>([])
   const frameIndexRef = useRef(0)
-  const cardStatesRef = useRef<Record<string, { mode: string; top?: number; left?: number; width?: number }>>({})
+
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
-  const [cardStates, setCardStates] = useState<Record<string, {
-    mode: 'flow' | 'sticky' | 'tracking' | 'done',
-    top?: number, left?: number, width?: number
-  }>>({})
+
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -261,43 +258,53 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Card scroll handler
+  // Card scroll handler - direct DOM manipulation, no React state
   useEffect(() => {
     const baseRects: Record<string, { left: number; width: number }> = {}
 
     const onScroll = () => {
+      const nonAbout = sections.filter(s => !s.isAbout)
+
       if (window.innerWidth < 1024) {
-        setCardStates({})
+        nonAbout.forEach(section => {
+          const outerCard = document.querySelector(`[data-card="${section.id}"]`) as HTMLElement
+          if (outerCard) {
+            outerCard.style.position = ''
+            outerCard.style.top = ''
+            outerCard.style.left = ''
+            outerCard.style.width = ''
+            outerCard.style.padding = ''
+            outerCard.style.zIndex = ''
+          }
+        })
         return
       }
+
       const navH = 56
-      const nonAbout = sections.filter(s => !s.isAbout)
       const enquireEl = document.querySelector('.enquire-split')
       const enquireTop = enquireEl ? enquireEl.getBoundingClientRect().top : Infinity
-
-      const newStates: Record<string, { mode: 'flow' | 'sticky' | 'tracking' | 'done', top?: number, left?: number, width?: number }> = {}
 
       for (let i = 0; i < nonAbout.length; i++) {
         const section = nonAbout[i]
         const row = document.getElementById('row-' + section.id)
-        const cardEl = document.getElementById('card-' + section.id)
-        if (!row || !cardEl) continue
+        const outerCard = document.querySelector(`[data-card="${section.id}"]`) as HTMLElement
+        const cardInner = document.getElementById('card-' + section.id)
+        if (!row || !outerCard || !cardInner) continue
 
         const rowTop = row.getBoundingClientRect().top
-        const borderH = i === 0 ? 0 : 10
-        const cardH = cardEl.offsetHeight + borderH
 
-        // Capture base rect ONCE - only when row hasn't passed nav yet
-        const outerCard = document.querySelector(`[data-card="${section.id}"]`) as HTMLElement
-        if (!baseRects[section.id] && outerCard) {
+        // Capture base rect ONCE while card is in flow
+        if (!baseRects[section.id] && outerCard.style.position !== 'fixed') {
           const r = outerCard.getBoundingClientRect()
           if (r.width > 0) baseRects[section.id] = { left: r.left, width: r.width }
         }
 
         const base = baseRects[section.id]
-        if (!base) { newStates[section.id] = { mode: 'flow' }; continue }
+        if (!base) continue
 
-        // Get next boundary top
+        const borderH = i === 0 ? 0 : 10
+        const cardH = cardInner.offsetHeight + borderH
+
         const nextSection = nonAbout[i + 1]
         let nextBoundaryTop = enquireTop
         if (nextSection) {
@@ -306,48 +313,41 @@ export default function AerospacePage() {
         }
 
         if (rowTop > navH + 10) {
-          // Section not yet reached - card in normal flow
-          newStates[section.id] = { mode: 'flow' }
+          // In flow
+          if (outerCard.style.position === 'fixed') {
+            outerCard.style.position = ''
+            outerCard.style.top = ''
+            outerCard.style.left = ''
+            outerCard.style.width = ''
+            outerCard.style.padding = ''
+            outerCard.style.zIndex = ''
+          }
         } else {
-          // Section has passed nav - card should be fixed
-          // Calculate ideal top: navH + 16 (gap below nav)
-          // But clamp so it doesn't overlap next card: nextBoundaryTop - cardH - 15
+          // Fixed - calculate clamped top
           const idealTop = navH
           const maxTop = nextBoundaryTop - cardH - 15
           const top = Math.min(idealTop, maxTop)
 
-          newStates[section.id] = {
-            mode: 'sticky',
-            top,
-            left: base.left,
-            width: base.width,
-          }
+          outerCard.style.position = 'fixed'
+          outerCard.style.top = top + 'px'
+          outerCard.style.left = base.left + 'px'
+          outerCard.style.width = base.width + 'px'
+          outerCard.style.padding = '0'
+          outerCard.style.zIndex = String(i + 1)
+          outerCard.style.display = 'flex'
+          outerCard.style.flexDirection = 'column'
         }
-      }
-
-      // Only update state if something changed to prevent bounce from re-renders
-      const prev = cardStatesRef.current
-      let changed = false
-      for (const id of Object.keys(newStates)) {
-        const n = newStates[id]
-        const p = prev[id]
-        if (!p || p.mode !== n.mode || p.top !== n.top || p.left !== n.left || p.width !== n.width) {
-          changed = true
-          break
-        }
-      }
-      if (changed) {
-        cardStatesRef.current = newStates
-        setCardStates(newStates)
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll, { passive: true })
+    window.addEventListener('resize', () => {
+      Object.keys(baseRects).forEach(k => delete baseRects[k])
+      onScroll()
+    }, { passive: true })
     onScroll()
     return () => {
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
     }
   }, [])
 
@@ -757,16 +757,6 @@ export default function AerospacePage() {
               <div
                 className="gandb-card"
                 data-card={section.id}
-                style={cardStates[section.id]?.mode === 'sticky' ? {
-                  position: 'fixed',
-                  top: (cardStates[section.id].top ?? 56) + 'px',
-                  left: (cardStates[section.id].left ?? 0) + 'px',
-                  width: (cardStates[section.id].width ?? 400) + 'px',
-                  padding: 0,
-                  zIndex: idx + 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                } : {}}
               >
                 <div
                   id={'card-' + section.id}
