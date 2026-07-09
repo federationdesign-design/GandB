@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Nav from '../../components/Nav'
 import { Metadata } from 'next'
 
 export default function DataRequest() {
@@ -8,12 +9,9 @@ export default function DataRequest() {
 
   return (
     <div style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', color: '#1a2340', minHeight: '100vh' }}>
-      <nav style={{ background: '#1a2340', padding: '0 24px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100 }}>
-        <a href="/"><img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '14px' }} /></a>
-        <a href="/" style={{ color: 'white', fontSize: '12px', fontFamily: 'Plus Jakarta Sans, sans-serif', textDecoration: 'none', opacity: 0.7 }}>Back to site</a>
-      </nav>
+      <Nav />
 
-      <div style={{ maxWidth: '740px', margin: '0 auto', padding: '60px 24px 100px' }}>
+      <div style={{ maxWidth: '740px', margin: '0 auto', padding: '80px 24px 100px' }}>
         <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: '#FF7B7B', marginBottom: '16px' }}>LEGAL</p>
         <h1 style={{ fontSize: '36px', fontWeight: 700, lineHeight: '1.15', marginBottom: '16px' }}>Data Request</h1>
         <p style={{ fontSize: '15px', lineHeight: '1.7', opacity: 0.75, marginBottom: '48px' }}>

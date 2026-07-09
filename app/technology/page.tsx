@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Nav from '../components/Nav'
 
 const TOTAL_FRAMES = 23
 
@@ -171,12 +172,7 @@ export default function TechnologyPage() {
 
   return (
     <div style={{ background: 'white', minHeight: '100vh' }}>
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: '56px' }}>
-        <img src="/header-logo.svg" alt="Herbert & Ball" style={{ height: '14px', width: 'auto' }} />
-        <button onClick={() => setNavOpen(!navOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>{[0,1,2].map(i => <span key={i} style={{ display: 'block', width: '22px', height: '2px', background: 'white', borderRadius: '1px' }} />)}</div>
-        </button>
-      </nav>
+      <Nav />
 
       <div id="tech-hero" style={{ height: '180vh', position: 'relative' }}>
         <div style={{ position: 'sticky', top: 0, height: '80vh', overflow: 'hidden' }}>
