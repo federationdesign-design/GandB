@@ -32,14 +32,14 @@ body { overflow-x: hidden; }
 }
 
 .gandb-left { width: 100%; }
-
-/* Panel and cards hidden on mobile */
 .gandb-panel { display: none; }
 .gandb-card { display: none; }
 
 /* ── Desktop 1024px+ ── */
 @media (min-width: 1024px) {
-  .gandb-about-full > div {
+  /* About: pad only the inner text, NOT the position:relative wrapper
+     so absolutely-positioned nodes stay at correct left offset */
+  .gandb-about-full .gandb-about-inner {
     padding-left: 100px;
     padding-right: 60px;
   }
@@ -53,10 +53,14 @@ body { overflow-x: hidden; }
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
-    padding-left: 100px;
+    /* Pad left column content but not the absolute positioned timeline */
   }
 
-  /* Panel column sits alongside content */
+  /* Pad section content inside left col */
+  .gandb-left > div > div > div > div[style*="paddingLeft: '52px'"] {
+    padding-left: 100px !important;
+  }
+
   .gandb-panel {
     display: flex;
     flex-direction: column;
@@ -65,7 +69,6 @@ body { overflow-x: hidden; }
     background: var(--navy);
   }
 
-  /* Each card fills height naturally, matching section alongside it */
   .gandb-card {
     display: flex;
     flex-direction: column;
@@ -82,14 +85,13 @@ body { overflow-x: hidden; }
 
 /* ── Super wide 1440px+ ── */
 @media (min-width: 1440px) {
-  .gandb-about-full > div {
+  .gandb-about-full .gandb-about-inner {
     padding-left: 140px;
     padding-right: 80px;
   }
   .gandb-left {
     flex: 0 0 55%;
     max-width: 55%;
-    padding-left: 140px;
   }
   .gandb-panel {
     flex: 0 0 45%;

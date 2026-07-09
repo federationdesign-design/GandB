@@ -462,14 +462,14 @@ export default function AerospacePage() {
       {/* About section - full width, outside two-column layout */}
       <div className="gandb-about-full">
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', left: '28px', top: 0, bottom: 0, width: '1px', background: 'var(--navy)', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', left: '20px', top: 0, bottom: 0, width: '2px', background: 'var(--navy)', opacity: 0.2 }} />
           {sections.filter(s => s.isAbout).map((section) => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
-              {/* Horizontal connector */}
-              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '1px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
+              {/* Horizontal connector - 2px weight */}
+              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '2px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
               {/* Circle offset right */}
               <div style={{ position: 'absolute', left: '34px', top: '43px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
-              <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
+              <div className="gandb-about-inner" style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
                 <p style={{ fontSize: '24px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                   {section.intro}
@@ -495,7 +495,7 @@ export default function AerospacePage() {
           left: '20px',
           top: 0,
           bottom: 0,
-          width: '1px',
+          width: '2px',
           background: 'var(--navy)',
           opacity: 0.2,
         }} />
@@ -513,7 +513,7 @@ export default function AerospacePage() {
               left: '20px',
               top: idx === 0 ? '50px' : '58px',
               width: '14px',
-              height: '1px',
+              height: '2px',
               background: 'rgba(26,35,64,0.3)',
               zIndex: 2,
             }} />
