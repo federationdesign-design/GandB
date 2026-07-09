@@ -179,7 +179,7 @@ export default function AerospacePage() {
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const [stickyCard, setStickyCard] = useState<string | null>(null)
-  const [cardTop, setCardTop] = useState(56)
+  const [stickyRect, setStickyRect] = useState<{ top: number; left: number; width: number } | null>(null)
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -258,28 +258,42 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Sticky card handler
+  // Sticky card handler - measures exact pixel position to avoid jump
   useEffect(() => {
     const onScroll = () => {
       if (window.innerWidth < 1024) {
         setStickyCard(null)
+        setStickyRect(null)
         return
       }
       const navH = 56
       const nonAbout = sections.filter(s => !s.isAbout)
       let active: string | null = null
+      let rect: { top: number; left: number; width: number } | null = null
+
       for (const section of nonAbout) {
         const row = document.getElementById('row-' + section.id)
         if (!row) continue
-        const rect = row.getBoundingClientRect()
+        const rowRect = row.getBoundingClientRect()
         const cardEl = document.getElementById('card-' + section.id)
-        const cardH = cardEl ? cardEl.offsetHeight : 300
-        if (rect.top <= navH + 10 && rect.bottom > navH + cardH + 15) {
+        if (!cardEl) continue
+        const cardH = cardEl.offsetHeight
+        const cardRect = cardEl.getBoundingClientRect()
+
+        if (rowRect.top <= navH + 10 && rowRect.bottom > navH + cardH + 15) {
           active = section.id
+          // Capture exact position and width while still in flow
+          rect = {
+            top: navH,
+            left: cardRect.left,
+            width: cardRect.width,
+          }
           break
         }
       }
+
       setStickyCard(active)
+      setStickyRect(active ? rect : null)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll, { passive: true })
@@ -712,11 +726,11 @@ export default function AerospacePage() {
                 <div
                   id={'card-' + section.id}
                   className="gandb-card-inner"
-                  style={stickyCard === section.id ? {
+                  style={stickyCard === section.id && stickyRect ? {
                     position: 'fixed',
-                    top: '56px',
-                    right: 0,
-                    width: '42%',
+                    top: stickyRect.top + 'px',
+                    left: stickyRect.left + 'px',
+                    width: stickyRect.width + 'px',
                     zIndex: 10,
                   } : {}}
                 >
