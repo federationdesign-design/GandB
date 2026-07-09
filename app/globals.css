@@ -18,13 +18,13 @@ html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); ov
 body { overflow-x: hidden; }
 ::selection { background: var(--coral); color: white; }
 
-/* About: full width, solid coral, seamlessly connects to two-col area */
+/* About: full width solid coral */
 .gandb-about-full {
   width: 100%;
   background: #FF7B7B;
 }
 
-/* Two-col outer: gradient from coral to white */
+/* Two-col outer */
 .gandb-outer {
   width: 100%;
   background: linear-gradient(to bottom, #FF7B7B 0px, #ffcece 200px, #ffffff 600px);
@@ -32,7 +32,10 @@ body { overflow-x: hidden; }
 }
 
 .gandb-left { width: 100%; }
+
+/* Panel and cards hidden on mobile */
 .gandb-panel { display: none; }
+.gandb-card { display: none; }
 
 /* ── Desktop 1024px+ ── */
 @media (min-width: 1024px) {
@@ -41,7 +44,6 @@ body { overflow-x: hidden; }
     padding-right: 60px;
   }
 
-  /* KEY FIX: outer must be flex with no height constraint so sticky works */
   .gandb-outer {
     display: flex;
     flex-direction: row;
@@ -54,18 +56,27 @@ body { overflow-x: hidden; }
     padding-left: 100px;
   }
 
-  /* KEY FIX: sticky needs position:sticky, height, and parent must be taller */
+  /* Panel column sits alongside content */
   .gandb-panel {
-    display: block;
+    display: flex;
+    flex-direction: column;
     flex: 0 0 42%;
     max-width: 42%;
-    position: sticky;
-    top: 56px;
-    height: calc(100vh - 56px);
     background: var(--navy);
-    overflow: hidden;
-    /* align-self flex-start is CRITICAL for sticky to work in flex */
-    align-self: flex-start;
+  }
+
+  /* Each card fills height naturally, matching section alongside it */
+  .gandb-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    min-height: 320px;
+  }
+
+  .gandb-card:last-child {
+    border-bottom: none;
   }
 }
 
@@ -83,5 +94,9 @@ body { overflow-x: hidden; }
   .gandb-panel {
     flex: 0 0 45%;
     max-width: 45%;
+  }
+  .gandb-card {
+    padding: 60px 48px;
+    min-height: 380px;
   }
 }
