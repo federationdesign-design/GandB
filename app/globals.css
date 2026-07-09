@@ -18,24 +18,40 @@ html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); ov
 body { overflow-x: hidden; }
 ::selection { background: var(--coral); color: white; }
 
-/* ── Mobile base ── */
+/* Full-width about section with gradient that flows into two-column area */
+.gandb-about-full {
+  width: 100%;
+  background: #FF7B7B;
+  padding: 0;
+}
+
+/* Two-column outer: gradient continues from about */
 .gandb-outer {
   display: block;
   width: 100%;
-  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 350px, #ffffff 750px);
+  background: linear-gradient(to bottom, #ffcece 0px, #ffffff 400px);
   position: relative;
 }
 
-.gandb-left {
-  width: 100%;
-}
+/* Left content column */
+.gandb-left { width: 100%; }
 
-.gandb-panel {
-  display: none;
-}
+/* Sticky panel hidden on mobile */
+.gandb-panel { display: none; }
 
 /* ── Desktop: 1024px+ ── */
 @media (min-width: 1024px) {
+  .gandb-about-full {
+    padding-left: 0;
+  }
+  .gandb-about-full > div {
+    padding-left: 100px;
+  }
+  .gandb-about-full > div > div[id="about"] > div:last-child {
+    padding-left: 100px;
+    padding-right: 60px;
+  }
+
   .gandb-outer {
     display: flex;
     align-items: flex-start;
@@ -67,7 +83,6 @@ body { overflow-x: hidden; }
     max-width: 55%;
     padding-left: 140px;
   }
-
   .gandb-panel {
     flex: 0 0 45%;
     max-width: 45%;

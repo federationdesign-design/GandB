@@ -360,10 +360,11 @@ export default function AerospacePage() {
 
           {/* Title - centred horizontally, mid hero */}
           <h1 style={{
-            color: 'white', fontSize: '36px', fontWeight: 700,
-            lineHeight: '1.15',
+            color: 'white', fontSize: '42px', fontWeight: 700,
+            lineHeight: '1.1',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            textAlign: 'center',
+            textAlign: 'left',
+            maxWidth: '60%',
           }}>
             Aerospace, Aviation &amp; Defence
           </h1>
@@ -371,11 +372,12 @@ export default function AerospacePage() {
           {/* Body - right aligned, 80% width, larger font */}
           <p style={{
             color: 'rgba(255,255,255,0.9)',
-            fontSize: '16px', fontWeight: 400,
+            fontSize: '20px', fontWeight: 400,
             lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'right',
-            marginLeft: '20%',
+            width: '42%',
+            alignSelf: 'flex-end',
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
           </p>
@@ -458,6 +460,28 @@ export default function AerospacePage() {
       </div>
 
       {/* Desktop two-column layout */}
+      {/* About section - full width, outside two-column layout */}
+      <div className="gandb-about-full">
+        <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', left: '28px', top: 0, bottom: 0, width: '1px', background: 'var(--navy)', opacity: 0.2 }} />
+          {sections.filter(s => s.isAbout).map((section) => (
+            <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
+              <div style={{ position: 'absolute', left: '21px', top: '44px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
+              <div style={{ paddingLeft: '52px', paddingRight: '20px' }}>
+                <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
+                <p style={{ fontSize: '22px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+                  {section.intro}
+                </p>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '40px' }}>
+                  <button style={{ border: '2px solid #FF7B7B', background: '#ffffff', padding: '12px 32px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#1a2340', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>ENQUIRE</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Two-column layout for service sections */}
       <div className="gandb-outer">
 
       {/* Content sections with timeline */}
@@ -474,7 +498,7 @@ export default function AerospacePage() {
           opacity: 0.2,
         }} />
 
-        {sections.map((section, idx) => (
+        {sections.filter(s => !s.isAbout).map((section, idx) => (
           <div
             key={section.id}
             id={section.id}
