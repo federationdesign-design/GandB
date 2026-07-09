@@ -457,7 +457,7 @@ export default function AerospacePage() {
       </div>
 
       {/* About section - full width */}
-      <div style={{ background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', position: 'relative' }}>
+      <div style={{ background: '#FF7B7B', position: 'relative' }}>
         <style>{`@media (min-width: 1024px) { .about-inner { padding-left: 100px !important; padding-right: 100px !important; } }`}</style>
         <div className="about-inner">
         {/* Vertical timeline line */}
@@ -500,7 +500,7 @@ export default function AerospacePage() {
                 ABOUT
               </p>
               <p style={{
-                fontSize: '22px',
+                fontSize: '24px',
                 fontWeight: 400,
                 lineHeight: '1.3',
                 color: 'var(--text-dark)',
@@ -540,7 +540,7 @@ export default function AerospacePage() {
       </div>
 
       {/* Desktop two-column layout */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', width: '100%', background: 'white' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', width: '100%', background: 'linear-gradient(to bottom, #FF7B7B 0px, #ffcece 150px, #ffffff 500px)' }}>
 
       {/* Content sections with timeline */}
       <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
@@ -558,7 +558,7 @@ export default function AerospacePage() {
           opacity: 0.2,
         }} />
 
-        {sections.map((section, idx) => (
+        {sections.filter(s => !s.isAbout).map((section, idx) => (
           <div
             key={section.id}
             id={section.id}
