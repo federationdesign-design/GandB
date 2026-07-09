@@ -290,12 +290,25 @@ export default function AerospacePage() {
       }
 
       // Find active: most recent row whose top passed nav
+      // But stop if the enquire section is near the top
       let active: string | null = null
+      const enquireEl = document.querySelector('.enquire-split')
+      const enquireTop = enquireEl ? enquireEl.getBoundingClientRect().top : Infinity
+
       for (const section of nonAbout) {
         const row = document.getElementById('row-' + section.id)
         if (!row) continue
         if (row.getBoundingClientRect().top <= navH + 10) {
           active = section.id
+        }
+      }
+
+      // Stop sticky when enquire section is within 15px of card bottom
+      if (active && enquireEl) {
+        const cardEl = document.getElementById('card-' + active)
+        const cardH = cardEl ? cardEl.offsetHeight : 300
+        if (enquireTop <= navH + 16 + cardH + 15) {
+          active = null
         }
       }
 
@@ -731,7 +744,7 @@ export default function AerospacePage() {
                   className="gandb-card-inner"
                   style={stickyCard === section.id && stickyRect ? {
                     position: 'fixed',
-                    top: stickyRect.top + 'px',
+                    top: (stickyRect.top + 16) + 'px',
                     left: stickyRect.left + 'px',
                     width: stickyRect.width + 'px',
                     zIndex: 1,
@@ -739,8 +752,8 @@ export default function AerospacePage() {
                   } : {
                     position: 'relative',
                     zIndex: 2,
-                    boxShadow: '0 -16px 0 0 white',
-                    marginTop: '16px',
+                    boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
+                    marginTop: idx === 0 ? '0' : '16px',
                   }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
