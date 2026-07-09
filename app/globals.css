@@ -18,42 +18,33 @@ html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); ov
 body { overflow-x: hidden; }
 ::selection { background: var(--coral); color: white; }
 
-/* Full-width about section with gradient that flows into two-column area */
+/* About: full width, solid coral, seamlessly connects to two-col area */
 .gandb-about-full {
   width: 100%;
   background: #FF7B7B;
-  padding: 0;
 }
 
-/* Two-column outer: gradient continues from about */
+/* Two-col outer: gradient from coral to white */
 .gandb-outer {
-  display: block;
   width: 100%;
-  background: linear-gradient(to bottom, #ffcece 0px, #ffffff 400px);
+  background: linear-gradient(to bottom, #FF7B7B 0px, #ffcece 200px, #ffffff 600px);
   position: relative;
 }
 
-/* Left content column */
 .gandb-left { width: 100%; }
-
-/* Sticky panel hidden on mobile */
 .gandb-panel { display: none; }
 
-/* ── Desktop: 1024px+ ── */
+/* ── Desktop 1024px+ ── */
 @media (min-width: 1024px) {
-  .gandb-about-full {
-    padding-left: 0;
-  }
   .gandb-about-full > div {
-    padding-left: 100px;
-  }
-  .gandb-about-full > div > div[id="about"] > div:last-child {
     padding-left: 100px;
     padding-right: 60px;
   }
 
+  /* KEY FIX: outer must be flex with no height constraint so sticky works */
   .gandb-outer {
     display: flex;
+    flex-direction: row;
     align-items: flex-start;
   }
 
@@ -63,6 +54,7 @@ body { overflow-x: hidden; }
     padding-left: 100px;
   }
 
+  /* KEY FIX: sticky needs position:sticky, height, and parent must be taller */
   .gandb-panel {
     display: block;
     flex: 0 0 42%;
@@ -72,12 +64,17 @@ body { overflow-x: hidden; }
     height: calc(100vh - 56px);
     background: var(--navy);
     overflow: hidden;
+    /* align-self flex-start is CRITICAL for sticky to work in flex */
     align-self: flex-start;
   }
 }
 
-/* ── Super wide: 1440px+ ── */
+/* ── Super wide 1440px+ ── */
 @media (min-width: 1440px) {
+  .gandb-about-full > div {
+    padding-left: 140px;
+    padding-right: 80px;
+  }
   .gandb-left {
     flex: 0 0 55%;
     max-width: 55%;

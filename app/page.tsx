@@ -363,8 +363,7 @@ export default function AerospacePage() {
             color: 'white', fontSize: '42px', fontWeight: 700,
             lineHeight: '1.1',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
-            textAlign: 'left',
-            maxWidth: '60%',
+            textAlign: 'center',
           }}>
             Aerospace, Aviation &amp; Defence
           </h1>
@@ -467,12 +466,12 @@ export default function AerospacePage() {
           {sections.filter(s => s.isAbout).map((section) => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
               <div style={{ position: 'absolute', left: '21px', top: '44px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
-              <div style={{ paddingLeft: '52px', paddingRight: '20px' }}>
+              <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
                 <p style={{ fontSize: '22px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                   {section.intro}
                 </p>
-                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '40px' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '0px', paddingBottom: '0px' }}>
                   <button style={{ border: '2px solid #FF7B7B', background: '#ffffff', padding: '12px 32px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#1a2340', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>ENQUIRE</button>
                 </div>
               </div>
