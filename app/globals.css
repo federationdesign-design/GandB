@@ -14,8 +14,8 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); overflow-x: hidden; }
-body { overflow-x: hidden; }
+html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); }
+body { overflow-x: clip; }
 ::selection { background: var(--coral); color: white; }
 
 /* About: full width solid coral */
@@ -62,13 +62,13 @@ body { overflow-x: hidden; }
     max-width: 58%;
   }
 
-  /* Card column: same height as left content */
+  /* Card column: natural height, not stretched */
   .gandb-card {
     display: flex;
     flex: 0 0 42%;
     max-width: 42%;
     padding: 40px 0 40px 32px;
-    /* Must be position relative for sticky child to work */
+    align-self: flex-start;
     position: relative;
   }
 
