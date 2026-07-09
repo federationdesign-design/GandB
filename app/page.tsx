@@ -741,8 +741,8 @@ export default function AerospacePage() {
                     top: stickyRect.top + 'px',
                     left: stickyRect.left + 'px',
                     width: stickyRect.width + 'px',
-                    zIndex: 10,
-                  } : {}}
+                    zIndex: 0,
+                  } : { position: 'relative', zIndex: 1 }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
                     {panelContent[section.id].label}
