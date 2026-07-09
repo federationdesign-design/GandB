@@ -936,10 +936,15 @@ export default function AerospacePage() {
           width: '36px',
           minWidth: '36px',
         }}>
-          {['Cookies', 'Privacy Policy', 'Certification.', 'Data Request'].map((link, i) => (
+          {[
+            { label: 'Cookies', href: '/legal/cookies' },
+            { label: 'Privacy Policy', href: '/legal/privacy-policy' },
+            { label: 'Certification.', href: '/legal/certification' },
+            { label: 'Data Request', href: '/legal/data-request' },
+          ].map(({ label: link, href }, i) => (
             <a
               key={link}
-              href="#"
+              href={href}
               style={{
                 color: 'var(--navy)',
                 fontSize: '10px',
