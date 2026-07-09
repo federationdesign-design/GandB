@@ -462,11 +462,11 @@ export default function AerospacePage() {
       {/* About section - full width, outside two-column layout */}
       <div className="gandb-about-full">
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', left: '20px', top: 0, bottom: 0, width: '2px', background: 'var(--navy)', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', left: '20px', top: 0, bottom: 0, width: '2px', background: 'var(--navy)' }} />
           {sections.filter(s => s.isAbout).map((section) => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
               {/* Horizontal connector - 2px weight */}
-              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '2px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
+              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
               {/* Circle offset right */}
               <div style={{ position: 'absolute', left: '34px', top: '43px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
               <div className="gandb-about-inner" style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
@@ -497,7 +497,6 @@ export default function AerospacePage() {
           bottom: 0,
           width: '2px',
           background: 'var(--navy)',
-          opacity: 0.2,
         }} />
 
         {sections.filter(s => !s.isAbout).map((section, idx) => (
@@ -514,7 +513,7 @@ export default function AerospacePage() {
               top: idx === 0 ? '50px' : '58px',
               width: '14px',
               height: '2px',
-              background: 'rgba(26,35,64,0.3)',
+              background: 'var(--navy)',
               zIndex: 2,
             }} />
             {/* Circle - sits to the right of the connector */}
@@ -613,7 +612,7 @@ export default function AerospacePage() {
                         top: '50px',
                         width: '10px',
                         height: '1px',
-                        background: 'rgba(26,35,64,0.2)',
+                        background: 'var(--navy)',
                       }} />
                       <div style={{
                         position: 'absolute',
@@ -722,8 +721,10 @@ export default function AerospacePage() {
       {/* Enquire Section */}
       <div style={{ position: 'relative' }}>
         {/* Timeline node for enquire */}
+        {/* Vertical line continuation into enquire section */}
+        <div style={{ position: 'absolute', left: '20px', top: 0, bottom: 0, width: '2px', background: 'var(--navy)' }} />
         {/* Horizontal connector */}
-        <div style={{ position: 'absolute', left: '20px', top: '59px', width: '14px', height: '1px', background: 'rgba(26,35,64,0.3)', zIndex: 2 }} />
+        <div style={{ position: 'absolute', left: '20px', top: '59px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
         {/* Circle offset right */}
         <div style={{
           position: 'absolute',
@@ -737,15 +738,7 @@ export default function AerospacePage() {
           zIndex: 2,
         }} />
         {/* Vertical line above */}
-        <div style={{
-          position: 'absolute',
-          left: '28px',
-          top: 0,
-          height: '52px',
-          width: '1px',
-          background: 'var(--navy)',
-          opacity: 0.2,
-        }} />
+
 
         <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingTop: '48px', paddingBottom: '0' }}>
           <p style={{
