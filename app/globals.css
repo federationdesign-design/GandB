@@ -75,15 +75,12 @@ body { overflow-x: hidden; }
     margin-top: 48px;
   }
 
-  /* Inner content: navy background, sticky within its card boundary */
+  /* Inner content: navy background, height driven by content */
   .gandb-card-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 48px 40px;
-    position: sticky;
-    top: 56px;
-    height: calc(100vh - 56px);
     background: var(--navy);
   }
 }
