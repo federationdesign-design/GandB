@@ -283,11 +283,12 @@ export default function AerospacePage() {
         if (!row || !cardEl) continue
 
         const rowTop = row.getBoundingClientRect().top
-        const cardH = cardEl.offsetHeight
+        const borderH = i === 0 ? 0 : 10
+        const cardH = cardEl.offsetHeight + borderH
 
-        // Capture base rect from outer gandb-card div while in flow
+        // Capture base rect ONCE - only when row hasn't passed nav yet
         const outerCard = document.querySelector(`[data-card="${section.id}"]`) as HTMLElement
-        if (outerCard && outerCard.style.position !== 'fixed') {
+        if (!baseRects[section.id] && outerCard) {
           const r = outerCard.getBoundingClientRect()
           if (r.width > 0) baseRects[section.id] = { left: r.left, width: r.width }
         }
@@ -756,7 +757,7 @@ export default function AerospacePage() {
                   id={'card-' + section.id}
                   className="gandb-card-inner"
                   style={{
-                    borderTop: idx === 0 ? 'none' : '16px solid white',
+                    borderTop: idx === 0 ? 'none' : '10px solid white',
                     background: 'var(--navy)',
                     marginLeft: '32px',
                   }}
