@@ -599,6 +599,7 @@ export default function AerospacePage() {
                   marginBottom: '16px',
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
                   opacity: 1,
+                  paddingTop: idx === 0 ? '2px' : '10px',
                 }}>
                   {section.title}
                 </p>
