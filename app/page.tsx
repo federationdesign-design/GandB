@@ -345,12 +345,12 @@ export default function AerospacePage() {
           position: 'absolute', inset: 0,
           display: 'flex', flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '68px 24px 28px',
+          padding: 'clamp(56px, 8vw, 80px) clamp(24px, 7vw, 100px) 28px',
         }}>
           {/* Breadcrumb - tight below nav */}
           <p style={{
             color: 'rgba(255,255,255,0.6)',
-            fontSize: '11px', fontWeight: 400,
+            fontSize: '13px', fontWeight: 400,
             letterSpacing: '0.06em',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
           }}>
@@ -461,7 +461,9 @@ export default function AerospacePage() {
 
       {/* Content sections with timeline */}
       <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
+        <style>{`@media (min-width: 1024px) { .content-inner { padding-left: 100px !important; padding-right: 60px !important; } }`}</style>
 
+        <div className="content-inner">
         {/* Vertical timeline line */}
         <div style={{
           position: 'absolute',
@@ -632,6 +634,7 @@ export default function AerospacePage() {
 
           </div>
         ))}
+      </div>{/* end content-inner */}
       </div>
 
       {/* Sticky right panel - desktop only */}
