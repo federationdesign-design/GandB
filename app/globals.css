@@ -54,22 +54,28 @@ body { overflow-x: hidden; }
     max-width: 58%;
   }
 
-  /* Panel: right column, same height as left, no background of its own */
+  /* Panel: right column - NO background, transparent so gaps show page */
   .gandb-panel {
     display: block;
     flex: 0 0 42%;
     max-width: 42%;
     position: relative;
+    background: transparent;
   }
 
-  /* Each card occupies the full height of its section row */
+  /* Each card: navy background, margin top/bottom creates gap between cards */
   .gandb-card {
     display: block;
     position: relative;
-    background: var(--navy);
+    background: transparent;
+    margin: 40px 0;
   }
 
-  /* The inner content pins to viewport top while card is in view */
+  .gandb-card:first-child {
+    margin-top: 48px;
+  }
+
+  /* Inner content: navy background, sticky within its card boundary */
   .gandb-card-inner {
     display: flex;
     flex-direction: column;
