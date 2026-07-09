@@ -180,7 +180,7 @@ export default function AerospacePage() {
   const [navOpen, setNavOpen] = useState(false)
   const [stickyCard, setStickyCard] = useState<string | null>(null)
   const [stickyRect, setStickyRect] = useState<{ top: number; left: number; width: number } | null>(null)
-  const [finalCard, setFinalCard] = useState<{ id: string; top: number; left: number; width: number } | null>(null)
+  const [frozenCards, setFrozenCards] = useState<Record<string, { top: number; left: number; width: number }>>({})
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -303,19 +303,16 @@ export default function AerospacePage() {
         }
       }
 
-      // For each non-active card that has been passed, freeze it at its resting position
-      // Resting position = 15px above the top of the next card/section
-      let newFinalCard: { id: string; top: number; left: number; width: number } | null = null
+      // Build a map of all frozen cards
+      const newFrozen: Record<string, { top: number; left: number; width: number }> = {}
 
       for (let i = 0; i < nonAbout.length; i++) {
         const section = nonAbout[i]
-        if (section.id === active) continue
-
         const row = document.getElementById('row-' + section.id)
         if (!row) continue
         const rowRect = row.getBoundingClientRect()
 
-        // This section has scrolled past - check if next section is pushing it off
+        // Section has scrolled past nav
         if (rowRect.top <= navH + 10) {
           const cardEl = document.getElementById('card-' + section.id)
           const cardH = cardEl ? cardEl.offsetHeight : 300
@@ -327,30 +324,19 @@ export default function AerospacePage() {
             if (nextRow) nextTop = nextRow.getBoundingClientRect().top
           }
 
-          // When next section's top is close enough, freeze this card
+          // If the next boundary is close enough, freeze this card at rest
           if (nextTop <= navH + 16 + cardH + 15) {
             const frozenTop = nextTop - cardH - 15
             if (knownRects[section.id]) {
-              newFinalCard = { id: section.id, top: frozenTop, left: knownRects[section.id].left, width: knownRects[section.id].width }
+              newFrozen[section.id] = { top: frozenTop, left: knownRects[section.id].left, width: knownRects[section.id].width }
             }
+            // If this was the active card, release it
+            if (section.id === active) active = null
           }
         }
       }
 
-      // Also handle final card being frozen by enquire section
-      if (active && enquireEl) {
-        const cardEl = document.getElementById('card-' + active)
-        const cardH = cardEl ? cardEl.offsetHeight : 300
-        if (enquireTop <= navH + 16 + cardH + 15) {
-          const frozenTop = enquireTop - cardH - 15
-          if (knownRects[active]) {
-            newFinalCard = { id: active, top: frozenTop, left: knownRects[active].left, width: knownRects[active].width }
-          }
-          active = null
-        }
-      }
-
-      setFinalCard(newFinalCard)
+      setFrozenCards(newFrozen)
       setStickyCard(active)
       if (active && knownRects[active]) {
         setStickyRect({ ...knownRects[active] })
@@ -789,12 +775,13 @@ export default function AerospacePage() {
                       width: stickyRect.width + 'px',
                       zIndex: 1,
                       boxShadow: '0 -16px 0 0 white',
-                    } : finalCard && finalCard.id === section.id ? {
+                    } : frozenCards[section.id] ? {
                       position: 'fixed',
-                      top: finalCard.top + 'px',
-                      left: finalCard.left + 'px',
-                      width: finalCard.width + 'px',
+                      top: frozenCards[section.id].top + 'px',
+                      left: frozenCards[section.id].left + 'px',
+                      width: frozenCards[section.id].width + 'px',
                       zIndex: 1,
+                      boxShadow: '0 -16px 0 0 white',
                     } : {
                       position: 'relative',
                       zIndex: 2,
