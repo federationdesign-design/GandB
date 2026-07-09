@@ -324,8 +324,8 @@ export default function AerospacePage() {
           }
         } else {
           // Fixed - calculate clamped top
-          const idealTop = navH
-          const maxTop = nextBoundaryTop - cardH - 15
+          const idealTop = navH + 10
+          const maxTop = nextBoundaryTop - cardH - 10
           const top = Math.min(idealTop, maxTop)
 
           outerCard.style.position = 'fixed'
