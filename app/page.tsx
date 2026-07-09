@@ -258,6 +258,38 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Sticky card handler
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerWidth < 1024) {
+        setStickyCard(null)
+        return
+      }
+      const navH = 56
+      const nonAbout = sections.filter(s => !s.isAbout)
+      let active: string | null = null
+      for (const section of nonAbout) {
+        const row = document.getElementById('row-' + section.id)
+        if (!row) continue
+        const rect = row.getBoundingClientRect()
+        const cardEl = document.getElementById('card-' + section.id)
+        const cardH = cardEl ? cardEl.offsetHeight : 300
+        if (rect.top <= navH + 10 && rect.bottom > navH + cardH + 15) {
+          active = section.id
+          break
+        }
+      }
+      setStickyCard(active)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    onScroll()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
   const scrollToSection = (id: string) => {
     setNavOpen(false)
     const el = document.getElementById(id)
