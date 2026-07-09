@@ -291,7 +291,6 @@ export default function AerospacePage() {
       }
 
       // Find active: most recent row whose top passed nav
-      // But stop if the enquire section is near the top
       let active: string | null = null
       const enquireEl = document.querySelector('.enquire-split')
       const enquireTop = enquireEl ? enquireEl.getBoundingClientRect().top : Infinity
@@ -304,24 +303,54 @@ export default function AerospacePage() {
         }
       }
 
-      // When enquire section arrives, freeze last card at its final position
+      // For each non-active card that has been passed, freeze it at its resting position
+      // Resting position = 15px above the top of the next card/section
+      let newFinalCard: { id: string; top: number; left: number; width: number } | null = null
+
+      for (let i = 0; i < nonAbout.length; i++) {
+        const section = nonAbout[i]
+        if (section.id === active) continue
+
+        const row = document.getElementById('row-' + section.id)
+        if (!row) continue
+        const rowRect = row.getBoundingClientRect()
+
+        // This section has scrolled past - check if next section is pushing it off
+        if (rowRect.top <= navH + 10) {
+          const cardEl = document.getElementById('card-' + section.id)
+          const cardH = cardEl ? cardEl.offsetHeight : 300
+          const nextSection = nonAbout[i + 1]
+          let nextTop = enquireTop
+
+          if (nextSection) {
+            const nextRow = document.getElementById('row-' + nextSection.id)
+            if (nextRow) nextTop = nextRow.getBoundingClientRect().top
+          }
+
+          // When next section's top is close enough, freeze this card
+          if (nextTop <= navH + 16 + cardH + 15) {
+            const frozenTop = nextTop - cardH - 15
+            if (knownRects[section.id]) {
+              newFinalCard = { id: section.id, top: frozenTop, left: knownRects[section.id].left, width: knownRects[section.id].width }
+            }
+          }
+        }
+      }
+
+      // Also handle final card being frozen by enquire section
       if (active && enquireEl) {
         const cardEl = document.getElementById('card-' + active)
         const cardH = cardEl ? cardEl.offsetHeight : 300
         if (enquireTop <= navH + 16 + cardH + 15) {
-          // Freeze at resting position - 15px above enquire
           const frozenTop = enquireTop - cardH - 15
           if (knownRects[active]) {
-            setFinalCard({ id: active, top: frozenTop, left: knownRects[active].left, width: knownRects[active].width })
+            newFinalCard = { id: active, top: frozenTop, left: knownRects[active].left, width: knownRects[active].width }
           }
           active = null
-        } else {
-          setFinalCard(null)
         }
-      } else if (!active) {
-        setFinalCard(null)
       }
 
+      setFinalCard(newFinalCard)
       setStickyCard(active)
       if (active && knownRects[active]) {
         setStickyRect({ ...knownRects[active] })
