@@ -285,10 +285,10 @@ export default function AerospacePage() {
         const rowTop = row.getBoundingClientRect().top
         const cardH = cardEl.offsetHeight
 
-        // Capture base rect while in flow
-        const currentMode = cardEl.style.position
-        if (currentMode !== 'fixed') {
-          const r = cardEl.getBoundingClientRect()
+        // Capture base rect from outer gandb-card div while in flow
+        const outerCard = document.querySelector(`[data-card="${section.id}"]`) as HTMLElement
+        if (outerCard && outerCard.style.position !== 'fixed') {
+          const r = outerCard.getBoundingClientRect()
           if (r.width > 0) baseRects[section.id] = { left: r.left, width: r.width }
         }
 
@@ -738,25 +738,27 @@ export default function AerospacePage() {
 
             {/* Right: card alongside this section */}
             {panelContent[section.id] && (
-              <div className="gandb-card">
+              <div
+                className="gandb-card"
+                data-card={section.id}
+                style={cardStates[section.id]?.mode === 'sticky' ? {
+                  position: 'fixed',
+                  top: (cardStates[section.id].top ?? 56) + 'px',
+                  left: (cardStates[section.id].left ?? 0) + 'px',
+                  width: (cardStates[section.id].width ?? 400) + 'px',
+                  padding: 0,
+                  zIndex: idx + 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                } : {}}
+              >
                 <div
                   id={'card-' + section.id}
                   className="gandb-card-inner"
-                  style={
-                    cardStates[section.id]?.mode === 'sticky' ? {
-                      position: 'fixed',
-                      top: (cardStates[section.id].top ?? 72) + 'px',
-                      left: (cardStates[section.id].left ?? 0) + 'px',
-                      width: (cardStates[section.id].width ?? 400) + 'px',
-                      zIndex: idx + 1,
-                      borderTop: idx === 0 ? 'none' : '16px solid white',
-                      background: 'var(--navy)',
-                    } : {
-                      position: 'relative',
-                      zIndex: 2,
-                      borderTop: idx === 0 ? 'none' : '16px solid white',
-                      background: 'var(--navy)',
-                    }}
+                  style={{
+                    borderTop: idx === 0 ? 'none' : '16px solid white',
+                    background: 'var(--navy)',
+                  }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>
                     {panelContent[section.id].label}
