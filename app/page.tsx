@@ -469,7 +469,7 @@ export default function AerospacePage() {
               <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
               {/* Circle offset right */}
               <div style={{ position: 'absolute', left: '34px', top: '43px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
-              <div className="gandb-about-inner" style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
+              <div className="gandb-about-inner" style={{ paddingLeft: '56px', paddingRight: '20px', paddingBottom: '32px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
                 <p style={{ fontSize: '26px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif', maxWidth: '90%' }}>
                   {section.intro}
@@ -504,6 +504,7 @@ export default function AerospacePage() {
             key={section.id}
             id={section.id}
             style={{ position: 'relative', paddingTop: idx === 0 ? '40px' : '48px', scrollSnapAlign: 'start', scrollMarginTop: '100px' }}
+            data-section={section.id}
           >
             {/* Timeline node */}
             {/* Horizontal connector from vertical line to circle */}
@@ -671,46 +672,48 @@ export default function AerospacePage() {
         ))}
       </div>
 
-      {/* Stacked stat cards - desktop only, one per section */}
+      {/* Sticky cards - desktop only */}
       <div className="gandb-panel">
         {sections.filter(s => !s.isAbout).map((section) => {
           const panel = panelContent[section.id]
           if (!panel) return null
           return (
             <div key={section.id} className="gandb-card">
-              <p style={{
-                color: 'var(--coral)',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.15em',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                marginBottom: '12px',
-                textTransform: 'uppercase',
-              }}>
-                {panel.label}
-              </p>
-              <p style={{
-                color: 'white',
-                fontSize: '64px',
-                fontWeight: 700,
-                lineHeight: '1',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                marginBottom: '24px',
-                letterSpacing: '-0.02em',
-              }}>
-                {panel.stat}
-              </p>
-              <div style={{ width: '40px', height: '2px', background: 'var(--coral)', marginBottom: '24px' }} />
-              <p style={{
-                color: 'rgba(255,255,255,0.75)',
-                fontSize: '16px',
-                fontWeight: 400,
-                lineHeight: '1.5',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontStyle: 'italic',
-              }}>
-                &ldquo;{panel.quote}&rdquo;
-              </p>
+              <div className="gandb-card-inner">
+                <p style={{
+                  color: 'var(--coral)',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  letterSpacing: '0.15em',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  marginBottom: '12px',
+                  textTransform: 'uppercase',
+                }}>
+                  {panel.label}
+                </p>
+                <p style={{
+                  color: 'white',
+                  fontSize: '64px',
+                  fontWeight: 700,
+                  lineHeight: '1',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  marginBottom: '24px',
+                  letterSpacing: '-0.02em',
+                }}>
+                  {panel.stat}
+                </p>
+                <div style={{ width: '40px', height: '2px', background: 'var(--coral)', marginBottom: '24px' }} />
+                <p style={{
+                  color: 'rgba(255,255,255,0.75)',
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  lineHeight: '1.5',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontStyle: 'italic',
+                }}>
+                  &ldquo;{panel.quote}&rdquo;
+                </p>
+              </div>
             </div>
           )
         })}

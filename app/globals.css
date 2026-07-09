@@ -34,11 +34,10 @@ body { overflow-x: hidden; }
 .gandb-left { width: 100%; }
 .gandb-panel { display: none; }
 .gandb-card { display: none; }
+.gandb-card-inner { display: none; }
 
 /* ── Desktop 1024px+ ── */
 @media (min-width: 1024px) {
-  /* About: pad only the inner text, NOT the position:relative wrapper
-     so absolutely-positioned nodes stay at correct left offset */
   .gandb-about-full .gandb-about-inner {
     padding-left: 100px;
     padding-right: 60px;
@@ -53,33 +52,33 @@ body { overflow-x: hidden; }
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
-    /* Pad left column content but not the absolute positioned timeline */
   }
 
-  /* Pad section content inside left col */
-  .gandb-left > div > div > div > div[style*="paddingLeft: '52px'"] {
-    padding-left: 100px !important;
-  }
-
+  /* Panel: right column, same height as left, no background of its own */
   .gandb-panel {
-    display: flex;
-    flex-direction: column;
+    display: block;
     flex: 0 0 42%;
     max-width: 42%;
+    position: relative;
+  }
+
+  /* Each card occupies the full height of its section row */
+  .gandb-card {
+    display: block;
+    position: relative;
     background: var(--navy);
   }
 
-  .gandb-card {
+  /* The inner content pins to viewport top while card is in view */
+  .gandb-card-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 48px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    min-height: 320px;
-  }
-
-  .gandb-card:last-child {
-    border-bottom: none;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    background: var(--navy);
   }
 }
 
@@ -97,9 +96,8 @@ body { overflow-x: hidden; }
     flex: 0 0 45%;
     max-width: 45%;
   }
-  .gandb-card {
+  .gandb-card-inner {
     padding: 60px 48px;
-    min-height: 380px;
   }
 }
 
@@ -108,15 +106,8 @@ body { overflow-x: hidden; }
   display: flex;
   flex-direction: column;
 }
-
-.enquire-form {
-  width: 100%;
-}
-
-.enquire-image {
-  display: none;
-  width: 100%;
-}
+.enquire-form { width: 100%; }
+.enquire-image { display: none; }
 
 @media (min-width: 768px) {
   .enquire-split {
@@ -124,17 +115,14 @@ body { overflow-x: hidden; }
     align-items: stretch;
     min-height: 600px;
   }
-
   .enquire-form {
     flex: 0 0 45%;
     max-width: 45%;
   }
-
   .enquire-image {
     display: block;
     flex: 0 0 55%;
     max-width: 55%;
-    position: relative;
     overflow: hidden;
     min-height: 500px;
   }
@@ -145,7 +133,6 @@ body { overflow-x: hidden; }
     flex: 0 0 38%;
     max-width: 38%;
   }
-
   .enquire-image {
     flex: 0 0 62%;
     max-width: 62%;
