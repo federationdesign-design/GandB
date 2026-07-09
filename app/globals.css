@@ -9,7 +9,6 @@
   --coral: #FF7B7B;
   --coral-light: #ff9a9a;
   --blush: #FF7B7B;
-  --off-white: #faf7f5;
   --text-dark: #1a2340;
   --text-body: #2d3348;
 }
@@ -19,76 +18,42 @@ html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); ov
 body { overflow-x: hidden; }
 ::selection { background: var(--coral); color: white; }
 
-/* ── Outer wrapper: full-width gradient + continuous timeline line ── */
+/* ── Mobile base ── */
 .gandb-outer {
-  position: relative;
+  display: block;
+  width: 100%;
   background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 350px, #ffffff 750px);
+  position: relative;
+}
+
+.gandb-left {
   width: 100%;
 }
 
-/* Continuous vertical timeline line */
-.gandb-outer::before {
-  content: '';
-  position: absolute;
-  left: 28px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--navy);
-  opacity: 0.2;
-  z-index: 1;
-  pointer-events: none;
+.gandb-panel {
+  display: none;
 }
 
-/* About section */
-.gandb-about-wrap { position: relative; }
-.gandb-about-inner {
-  padding-left: 52px;
-  padding-right: 20px;
-}
-
-/* Two-column area */
-.gandb-cols { display: block; width: 100%; }
-.gandb-left { width: 100%; }
-
-/* Sticky panel hidden on mobile */
-.gandb-panel { display: none; }
-
-/* ── Tablet: 768px – 1023px ── */
-@media (min-width: 768px) {
-  .gandb-about-inner {
-    padding-left: 80px;
-    padding-right: 60px;
-  }
-}
-
-/* ── Desktop: 1024px – 1439px ── */
+/* ── Desktop: 1024px+ ── */
 @media (min-width: 1024px) {
-  .gandb-outer::before {
-    left: 128px;
-  }
-  .gandb-cols {
+  .gandb-outer {
     display: flex;
     align-items: flex-start;
-    width: 100%;
   }
+
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
     padding-left: 100px;
-    padding-right: 40px;
   }
-  .gandb-about-inner {
-    padding-left: 100px;
-    padding-right: 60px;
-  }
+
   .gandb-panel {
     display: block;
+    flex: 0 0 42%;
+    max-width: 42%;
     position: sticky;
     top: 56px;
     height: calc(100vh - 56px);
-    flex: 0 0 42%;
-    max-width: 42%;
     background: var(--navy);
     overflow: hidden;
     align-self: flex-start;
@@ -97,18 +62,12 @@ body { overflow-x: hidden; }
 
 /* ── Super wide: 1440px+ ── */
 @media (min-width: 1440px) {
-  .gandb-outer::before {
-    left: 168px;
-  }
   .gandb-left {
     flex: 0 0 55%;
     max-width: 55%;
     padding-left: 140px;
   }
-  .gandb-about-inner {
-    padding-left: 140px;
-    padding-right: 80px;
-  }
+
   .gandb-panel {
     flex: 0 0 45%;
     max-width: 45%;

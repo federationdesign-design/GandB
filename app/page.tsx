@@ -178,8 +178,7 @@ export default function AerospacePage() {
   const frameIndexRef = useRef(0)
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('defence')
-
+  const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
   // Preload all frames
@@ -238,38 +237,19 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [framesLoaded])
 
-  // Intersection Observer for active section detection
+  // Scroll-based panel update
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    sections.forEach(section => {
-      const el = document.getElementById(section.id)
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(section.id)
-        },
-        { threshold: 0.3 }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-    return () => observers.forEach(o => o.disconnect())
-  }, [])
-
-  // Scroll-based active section detection for sticky panel
-  useEffect(() => {
+    const nonAbout = sections.filter(s => !s.isAbout)
     const handleScroll = () => {
-      const nonAbout = sections.filter(s => !s.isAbout)
       for (let i = nonAbout.length - 1; i >= 0; i--) {
         const el = document.getElementById(nonAbout[i].id)
         if (!el) continue
-        const rect = el.getBoundingClientRect()
-        if (rect.top <= window.innerHeight * 0.5) {
+        if (el.getBoundingClientRect().top <= window.innerHeight * 0.6) {
           setActiveSection(nonAbout[i].id)
           return
         }
       }
-      if (nonAbout[0]) setActiveSection(nonAbout[0].id)
+      setActiveSection(nonAbout[0]?.id ?? 'defence')
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
@@ -280,39 +260,6 @@ export default function AerospacePage() {
     setNavOpen(false)
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const panelContent: Record<string, { stat: string; label: string; quote: string }> = {
-    defence: {
-      stat: '£340bn+',
-      label: 'Global defence procurement market',
-      quote: 'Military and government contracts demand counsel who understands classification, export controls, and the full weight of sovereign liability.',
-    },
-    safety: {
-      stat: '94%',
-      label: 'Of aviation incidents involve regulatory non-compliance',
-      quote: 'Safety law in aerospace carries criminal as well as civil exposure. The distinction matters enormously.',
-    },
-    regulatory: {
-      stat: '4 bodies',
-      label: 'CAA · EASA · FAA · ICAO',
-      quote: 'Compliance is not a destination. It is a continuous process across every jurisdiction you operate in.',
-    },
-    ip: {
-      stat: '$1.2tn',
-      label: 'Estimated value of aerospace IP globally',
-      quote: 'Proprietary technology is your competitive advantage. Protecting it across international borders requires more than a standard NDA.',
-    },
-    arbitration: {
-      stat: 'ICC · LCIA · UNCITRAL',
-      label: 'Tribunals where we have represented clients',
-      quote: 'Aerospace disputes rarely stay within a single jurisdiction. Your counsel should not either.',
-    },
-    crossborder: {
-      stat: '63%',
-      label: 'Of large aerospace programmes involve 3+ national partners',
-      quote: 'The legal architecture of a consortium determines what happens when things go wrong. Get it right from day one.',
-    },
   }
 
   return (
@@ -511,42 +458,23 @@ export default function AerospacePage() {
       </div>
 
       {/* Desktop two-column layout */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', maxWidth: '1400px', margin: '0 auto' }}>
-
-      {/* ── Responsive two-column wrapper (desktop only) ── */}
       <div className="gandb-outer">
 
-        {/* ── About: full width on all breakpoints ── */}
-        <div className="gandb-about-wrap" style={{ position: 'relative' }}>
-          {sections.filter(s => s.isAbout).map(section => (
-            <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
-              <div style={{ position: 'absolute', left: '21px', top: '44px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
-              <div className="gandb-about-inner">
-                <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', opacity: 1, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
-                <p style={{ fontSize: '22px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-                  {section.intro}
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '8px' }}>
-                  <button style={{ border: '2px solid #FF7B7B', background: '#ffffff', padding: '12px 32px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#1a2340', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>ENQUIRE</button>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
-
-        {/* ── Two-column area: content left, sticky panel right ── */}
-        <div className="gandb-cols">
-
-          {/* Left: service sections */}
-          <div className="gandb-left">
-
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
+      <div className="gandb-left" style={{ position: 'relative', padding: '0 0 80px 0' }}>
 
+        {/* Vertical timeline line */}
+        <div style={{
+          position: 'absolute',
+          left: '28px',
+          top: 0,
+          bottom: 0,
+          width: '1px',
+          background: 'var(--navy)',
+          opacity: 0.2,
+        }} />
 
-
-        {sections.filter(s => !s.isAbout).map((section, idx) => (
+        {sections.map((section, idx) => (
           <div
             key={section.id}
             id={section.id}
@@ -707,99 +635,57 @@ export default function AerospacePage() {
         ))}
       </div>
 
+      {/* Sticky right panel - inside flex, desktop only */}
+      <div className="gandb-panel">
+        {Object.keys(panelContent).map(key => (
+          <div key={key} style={{
+            position: 'absolute',
+            inset: 0,
+            padding: '60px 48px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            opacity: activeSection === key ? 1 : 0,
+            transition: 'opacity 0.5s ease',
+            pointerEvents: activeSection === key ? 'auto' : 'none',
+          }}>
+            <p style={{
+              color: 'var(--coral)',
+              fontSize: '11px',
+              fontWeight: 600,
+              letterSpacing: '0.15em',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              marginBottom: '8px',
+              textTransform: 'uppercase',
+            }}>
+              {panelContent[key].label}
+            </p>
+            <p style={{
+              color: 'white',
+              fontSize: '72px',
+              fontWeight: 700,
+              lineHeight: '1',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              marginBottom: '32px',
+              letterSpacing: '-0.02em',
+            }}>
+              {panelContent[key].stat}
+            </p>
+            <div style={{ width: '48px', height: '2px', background: 'var(--coral)', marginBottom: '32px' }} />
+            <p style={{
+              color: 'rgba(255,255,255,0.75)',
+              fontSize: '18px',
+              fontWeight: 400,
+              lineHeight: '1.5',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              fontStyle: 'italic',
+            }}>
+              &ldquo;{panelContent[key].quote}&rdquo;
+            </p>
+          </div>
+        ))}
       </div>
 
-      {/* Sticky right panel - desktop only */}
-      <div style={{
-        flex: '0 0 45%',
-        maxWidth: '45%',
-        display: 'none',
-        position: 'sticky',
-        top: '80px',
-        height: 'calc(100vh - 80px)',
-        background: 'var(--navy)',
-        alignSelf: 'flex-start',
-      }} className="desktop-panel">
-        <div style={{
-          padding: '60px 48px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: '100%',
-        }}>
-          {panelContent[activeSection] && (
-            <>
-              <p style={{
-                color: 'var(--coral)',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.15em',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                marginBottom: '8px',
-                textTransform: 'uppercase',
-              }}>
-                {panelContent[activeSection].label}
-              </p>
-              <p style={{
-                color: 'white',
-                fontSize: '72px',
-                fontWeight: 700,
-                lineHeight: '1',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                marginBottom: '32px',
-                letterSpacing: '-0.02em',
-              }}>
-                {panelContent[activeSection].stat}
-              </p>
-              <div style={{
-                width: '48px',
-                height: '2px',
-                background: 'var(--coral)',
-                marginBottom: '32px',
-              }} />
-              <p style={{
-                color: 'rgba(255,255,255,0.75)',
-                fontSize: '18px',
-                fontWeight: 400,
-                lineHeight: '1.5',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontStyle: 'italic',
-              }}>
-                &ldquo;{panelContent[activeSection].quote}&rdquo;
-              </p>
-            </>
-          )}
-        </div>
-      </div>
-
-          </div>{/* end gandb-left */}
-
-          {/* Right: sticky panel – hidden on mobile/tablet */}
-          <div className="gandb-panel">
-            {Object.keys(panelContent).map(key => (
-              <div key={key} style={{
-                position: 'absolute', inset: 0,
-                padding: '60px 48px',
-                display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                opacity: activeSection === key ? 1 : 0,
-                transition: 'opacity 0.5s ease',
-                pointerEvents: activeSection === key ? 'auto' : 'none',
-              }}>
-                <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '8px', textTransform: 'uppercase' }}>
-                  {panelContent[key].label}
-                </p>
-                <p style={{ color: 'white', fontSize: '72px', fontWeight: 700, lineHeight: '1', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '32px', letterSpacing: '-0.02em' }}>
-                  {panelContent[key].stat}
-                </p>
-                <div style={{ width: '48px', height: '2px', background: 'var(--coral)', marginBottom: '32px' }} />
-                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '18px', fontWeight: 400, lineHeight: '1.5', fontFamily: 'Plus Jakarta Sans, sans-serif', fontStyle: 'italic' }}>
-                  &ldquo;{panelContent[key].quote}&rdquo;
-                </p>
-              </div>
-            ))}
-          </div>{/* end gandb-panel */}
-
-        </div>{/* end gandb-cols */}
       </div>{/* end gandb-outer */}
 
       {/* Enquire Section */}
