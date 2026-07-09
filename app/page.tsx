@@ -256,20 +256,24 @@ export default function AerospacePage() {
     return () => observers.forEach(o => o.disconnect())
   }, [])
 
-  // Intersection Observer – desktop sticky panel
+  // Scroll-based active section detection for sticky panel
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    sections.filter(s => !s.isAbout).forEach(section => {
-      const el = document.getElementById(section.id)
-      if (!el) return
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(section.id) },
-        { threshold: 0.1, rootMargin: '-10% 0px -50% 0px' }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-    return () => observers.forEach(o => o.disconnect())
+    const handleScroll = () => {
+      const nonAbout = sections.filter(s => !s.isAbout)
+      for (let i = nonAbout.length - 1; i >= 0; i--) {
+        const el = document.getElementById(nonAbout[i].id)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= window.innerHeight * 0.5) {
+          setActiveSection(nonAbout[i].id)
+          return
+        }
+      }
+      if (nonAbout[0]) setActiveSection(nonAbout[0].id)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -538,11 +542,11 @@ export default function AerospacePage() {
           <div className="gandb-left">
 
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', flex: '0 0 55%', maxWidth: '55%' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', flex: '0 0 55%', maxWidth: '55%' }}>
 
 
 
-        {sections.map((section, idx) => (
+        {sections.filter(s => !s.isAbout).map((section, idx) => (
           <div
             key={section.id}
             id={section.id}
