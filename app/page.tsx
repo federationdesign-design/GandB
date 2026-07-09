@@ -864,7 +864,7 @@ export default function AerospacePage() {
       {/* Footer */}
       <footer style={{
         background: 'white',
-        padding: '40px 0 40px 24px',
+        padding: '40px 0 56px 24px',
         position: 'relative',
         display: 'flex',
         alignItems: 'flex-start',
@@ -910,15 +910,6 @@ export default function AerospacePage() {
             Call: 020 3897 0445
           </p>
 
-          {/* Copyright */}
-          <p style={{
-            color: 'var(--navy)',
-            fontSize: '12px',
-            opacity: 0.4,
-            fontFamily: 'Plus Jakarta Sans, sans-serif',
-          }}>
-            &copy; 2026 Herbert &amp; Ball LLP 2026
-          </p>
         </div>
 
         {/* Vertical legal links on right edge */}
@@ -960,6 +951,19 @@ export default function AerospacePage() {
             </a>
           ))}
         </div>
+        {/* Copyright - pinned to bottom */}
+        <p style={{
+          position: 'absolute',
+          bottom: '16px',
+          left: '24px',
+          color: 'var(--navy)',
+          fontSize: '12px',
+          opacity: 0.4,
+          fontFamily: 'Plus Jakarta Sans, sans-serif',
+          margin: 0,
+        }}>
+          &copy; 2026 Herbert &amp; Ball LLP
+        </p>
       </footer>
     </div>
   )
