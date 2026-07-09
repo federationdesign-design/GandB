@@ -43,3 +43,15 @@ html {
 section, [data-snap] {
   scroll-snap-align: start;
 }
+
+@media (min-width: 1024px) {
+  .desktop-panel {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .desktop-panel {
+    display: none !important;
+  }
+}

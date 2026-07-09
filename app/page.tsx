@@ -134,12 +134,51 @@ const sections = [
   },
 ]
 
+const panelContent: Record<string, { stat: string; label: string; quote: string }> = {
+  about: {
+    stat: 'Mayfair, London',
+    label: 'Operating since 1998',
+    quote: 'Not every legal matter requires a specialist. Yours does.',
+  },
+  defence: {
+    stat: '£340bn+',
+    label: 'Global defence procurement market',
+    quote: 'Military and government contracts demand counsel who understands classification, export controls, and the full weight of sovereign liability.',
+  },
+  safety: {
+    stat: '94%',
+    label: 'Of aviation incidents involve regulatory non-compliance',
+    quote: 'Safety law in aerospace carries criminal as well as civil exposure. The distinction matters enormously.',
+  },
+  regulatory: {
+    stat: '4 bodies',
+    label: 'CAA · EASA · FAA · ICAO',
+    quote: 'Compliance is not a destination. It is a continuous process across every jurisdiction you operate in.',
+  },
+  ip: {
+    stat: '$1.2tn',
+    label: 'Estimated value of aerospace IP globally',
+    quote: 'Proprietary technology is your competitive advantage. Protecting it across international borders requires more than a standard NDA.',
+  },
+  arbitration: {
+    stat: 'ICC · LCIA · UNCITRAL',
+    label: 'Tribunals where we have represented clients',
+    quote: 'Aerospace disputes rarely stay within a single jurisdiction. Your counsel should not either.',
+  },
+  crossborder: {
+    stat: '63%',
+    label: 'Of large aerospace programmes involve 3+ national partners',
+    quote: 'The legal architecture of a consortium determines what happens when things go wrong. Get it right from day one.',
+  },
+}
+
 export default function AerospacePage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const framesRef = useRef<HTMLImageElement[]>([])
   const frameIndexRef = useRef(0)
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
   // Preload all frames
@@ -197,6 +236,24 @@ export default function AerospacePage() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [framesLoaded])
+
+  // Intersection Observer for active section detection
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    sections.forEach(section => {
+      const el = document.getElementById(section.id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(section.id)
+        },
+        { threshold: 0.3 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
 
   const scrollToSection = (id: string) => {
     setNavOpen(false)
@@ -399,8 +456,11 @@ export default function AerospacePage() {
           </div>
       </div>
 
+      {/* Desktop two-column layout */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', maxWidth: '1400px', margin: '0 auto' }}>
+
       {/* Content sections with timeline */}
-      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)' }}>
+      <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', flex: '0 0 55%', maxWidth: '55%' }}>
 
         {/* Vertical timeline line */}
         <div style={{
@@ -572,6 +632,71 @@ export default function AerospacePage() {
 
           </div>
         ))}
+      </div>
+
+      </div>
+
+      {/* Sticky right panel - desktop only */}
+      <div style={{
+        flex: '0 0 45%',
+        maxWidth: '45%',
+        display: 'none',
+        position: 'sticky',
+        top: '80px',
+        height: 'calc(100vh - 80px)',
+        background: 'var(--navy)',
+        alignSelf: 'flex-start',
+      }} className="desktop-panel">
+        <div style={{
+          padding: '60px 48px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '100%',
+        }}>
+          {panelContent[activeSection] && (
+            <>
+              <p style={{
+                color: 'var(--coral)',
+                fontSize: '11px',
+                fontWeight: 600,
+                letterSpacing: '0.15em',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                marginBottom: '8px',
+                textTransform: 'uppercase',
+              }}>
+                {panelContent[activeSection].label}
+              </p>
+              <p style={{
+                color: 'white',
+                fontSize: '72px',
+                fontWeight: 700,
+                lineHeight: '1',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                marginBottom: '32px',
+                letterSpacing: '-0.02em',
+              }}>
+                {panelContent[activeSection].stat}
+              </p>
+              <div style={{
+                width: '48px',
+                height: '2px',
+                background: 'var(--coral)',
+                marginBottom: '32px',
+              }} />
+              <p style={{
+                color: 'rgba(255,255,255,0.75)',
+                fontSize: '18px',
+                fontWeight: 400,
+                lineHeight: '1.5',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                fontStyle: 'italic',
+              }}>
+                &ldquo;{panelContent[activeSection].quote}&rdquo;
+              </p>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Enquire Section */}
