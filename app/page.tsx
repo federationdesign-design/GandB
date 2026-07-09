@@ -705,14 +705,6 @@ export default function AerospacePage() {
                         height: '1px',
                         background: 'var(--navy)',
                       }} />
-                      <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: '156px',
-                        width: '50%',
-                        height: '1px',
-                        background: '#FF7B7B',
-                      }} />
                       {/* Thumbnail */}
                       <div style={{
                         width: '160px',
@@ -737,19 +729,20 @@ export default function AerospacePage() {
                           }}
                         />
                       </div>
-                      {/* Text */}
+                      {/* Text column with pink line at top */}
+                      <div style={{ flex: 1, paddingTop: '0' }}>
+                        <div style={{ height: '1px', background: '#FF7B7B', marginBottom: '10px' }} />
                       <p style={{
                         fontSize: '13px',
                         lineHeight: '1.3',
                         color: 'var(--text-body)',
                         fontFamily: 'Plus Jakarta Sans, sans-serif',
                         fontWeight: 400,
-                        paddingTop: '15px',
-                        flex: 1,
-                        maxWidth: '55%',
+                        paddingTop: '4px',
                       }}>
                         {bullet.text}
                       </p>
+                      </div>
                     </div>
                     </div>
                   ))}
