@@ -151,3 +151,32 @@ section, [data-snap] {
     font-size: 30px !important;
   }
 }
+
+/* Continuous vertical timeline line spanning full content area */
+.gandb-outer {
+  position: relative;
+}
+.gandb-outer::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--navy);
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .gandb-outer::before {
+    left: 128px; /* 100px padding + 28px */
+  }
+}
+
+@media (min-width: 1440px) {
+  .gandb-outer::before {
+    left: 168px; /* 140px padding + 28px */
+  }
+}

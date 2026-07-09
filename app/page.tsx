@@ -514,7 +514,6 @@ export default function AerospacePage() {
 
         {/* ── About: full width on all breakpoints ── */}
         <div className="gandb-about-wrap" style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', left: '28px', top: 0, bottom: 0, width: '1px', background: 'var(--navy)', opacity: 0.2 }} />
           {sections.filter(s => s.isAbout).map(section => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
               <div style={{ position: 'absolute', left: '21px', top: '44px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
@@ -527,7 +526,7 @@ export default function AerospacePage() {
                   <button style={{ border: '2px solid #FF7B7B', background: '#ffffff', padding: '12px 32px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#1a2340', fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer' }}>ENQUIRE</button>
                 </div>
               </div>
-              <div style={{ marginLeft: '52px', marginRight: '20px', marginTop: '40px', height: '1px', background: 'rgba(26,35,64,0.12)' }} />
+
             </div>
           ))}
         </div>
@@ -541,16 +540,7 @@ export default function AerospacePage() {
       {/* Content sections with timeline */}
       <div style={{ position: 'relative', padding: '0 0 80px 0', background: 'linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 250px, #ffffff 550px)', flex: '0 0 55%', maxWidth: '55%' }}>
 
-        {/* Vertical timeline line */}
-        <div style={{
-          position: 'absolute',
-          left: '28px',
-          top: 0,
-          bottom: 0,
-          width: '1px',
-          background: 'var(--navy)',
-          opacity: 0.2,
-        }} />
+
 
         {sections.map((section, idx) => (
           <div
