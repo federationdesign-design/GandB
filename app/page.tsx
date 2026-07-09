@@ -178,9 +178,10 @@ export default function AerospacePage() {
   const frameIndexRef = useRef(0)
   const [framesLoaded, setFramesLoaded] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
-  const [stickyCard, setStickyCard] = useState<string | null>(null)
-  const [stickyRect, setStickyRect] = useState<{ top: number; left: number; width: number } | null>(null)
-  const [frozenCards, setFrozenCards] = useState<Record<string, { top: number; left: number; width: number }>>({})
+  const [cardStates, setCardStates] = useState<Record<string, {
+    mode: 'flow' | 'sticky' | 'tracking' | 'done',
+    top?: number, left?: number, width?: number
+  }>>({})
   const [activeSection, setActiveSection] = useState('about')
   const heroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -259,91 +260,72 @@ export default function AerospacePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Sticky card handler - cards stack on top of each other
+  // Card scroll handler
   useEffect(() => {
-    const knownRects: Record<string, { top: number; left: number; width: number }> = {}
+    const baseRects: Record<string, { left: number; width: number }> = {}
 
     const onScroll = () => {
       if (window.innerWidth < 1024) {
-        setStickyCard(null)
-        setStickyRect(null)
+        setCardStates({})
         return
       }
       const navH = 56
       const nonAbout = sections.filter(s => !s.isAbout)
-
-      // Capture rects for all cards while in flow
-      for (const section of nonAbout) {
-        const cardEl = document.getElementById('card-' + section.id)
-        if (!cardEl) continue
-        // Only capture when not currently fixed
-        const isFixed = cardEl.style.position === 'fixed'
-        if (!isFixed) {
-          const cardRect = cardEl.getBoundingClientRect()
-          if (cardRect.width > 0) {
-            knownRects[section.id] = {
-              top: navH,
-              left: cardRect.left,
-              width: cardRect.width,
-            }
-          }
-        }
-      }
-
-      // Find active: most recent row whose top passed nav
-      let active: string | null = null
       const enquireEl = document.querySelector('.enquire-split')
       const enquireTop = enquireEl ? enquireEl.getBoundingClientRect().top : Infinity
 
-      for (const section of nonAbout) {
-        const row = document.getElementById('row-' + section.id)
-        if (!row) continue
-        if (row.getBoundingClientRect().top <= navH + 10) {
-          active = section.id
-        }
-      }
-
-      // Build a map of all frozen cards
-      const newFrozen: Record<string, { top: number; left: number; width: number }> = {}
+      const newStates: Record<string, { mode: 'flow' | 'sticky' | 'tracking' | 'done', top?: number, left?: number, width?: number }> = {}
 
       for (let i = 0; i < nonAbout.length; i++) {
         const section = nonAbout[i]
         const row = document.getElementById('row-' + section.id)
-        if (!row) continue
-        const rowRect = row.getBoundingClientRect()
+        const cardEl = document.getElementById('card-' + section.id)
+        if (!row || !cardEl) continue
 
-        // Section has scrolled past nav
-        if (rowRect.top <= navH + 10) {
-          const cardEl = document.getElementById('card-' + section.id)
-          const cardH = cardEl ? cardEl.offsetHeight : 300
-          const nextSection = nonAbout[i + 1]
-          let nextTop = enquireTop
+        const rowTop = row.getBoundingClientRect().top
+        const cardH = cardEl.offsetHeight
 
-          if (nextSection) {
-            const nextRow = document.getElementById('row-' + nextSection.id)
-            if (nextRow) nextTop = nextRow.getBoundingClientRect().top
-          }
+        // Capture base rect while in flow
+        const currentMode = cardEl.style.position
+        if (currentMode !== 'fixed') {
+          const r = cardEl.getBoundingClientRect()
+          if (r.width > 0) baseRects[section.id] = { left: r.left, width: r.width }
+        }
 
-          // If the next boundary is close enough, freeze this card at rest
-          if (nextTop <= navH + 16 + cardH + 15) {
-            const frozenTop = nextTop - cardH - 15
-            if (knownRects[section.id]) {
-              newFrozen[section.id] = { top: frozenTop, left: knownRects[section.id].left, width: knownRects[section.id].width }
-            }
-            // If this was the active card, release it
-            if (section.id === active) active = null
+        const base = baseRects[section.id]
+        if (!base) { newStates[section.id] = { mode: 'flow' }; continue }
+
+        // Get next boundary top
+        const nextSection = nonAbout[i + 1]
+        let nextBoundaryTop = enquireTop
+        if (nextSection) {
+          const nextRow = document.getElementById('row-' + nextSection.id)
+          if (nextRow) nextBoundaryTop = nextRow.getBoundingClientRect().top
+        }
+
+        if (rowTop > navH + 10) {
+          // Section not yet reached - card in normal flow
+          newStates[section.id] = { mode: 'flow' }
+        } else {
+          // Section has passed nav - card should be fixed
+          // Calculate ideal top: navH + 16 (gap below nav)
+          // But clamp so it doesn't overlap next card: nextBoundaryTop - cardH - 15
+          const idealTop = navH + 16
+          const maxTop = nextBoundaryTop - cardH - 15
+          const top = Math.min(idealTop, maxTop)
+
+          newStates[section.id] = {
+            mode: 'sticky',
+            top,
+            left: base.left,
+            width: base.width,
           }
         }
       }
 
-      setFrozenCards(newFrozen)
-      setStickyCard(active)
-      if (active && knownRects[active]) {
-        setStickyRect({ ...knownRects[active] })
-      } else if (!active) {
-        setStickyRect(null)
-      }
+      setCardStates(newStates)
     }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll, { passive: true })
     onScroll()
@@ -761,19 +743,12 @@ export default function AerospacePage() {
                   id={'card-' + section.id}
                   className="gandb-card-inner"
                   style={
-                    stickyCard === section.id && stickyRect ? {
+                    cardStates[section.id]?.mode === 'sticky' ? {
                       position: 'fixed',
-                      top: (stickyRect.top + 16) + 'px',
-                      left: stickyRect.left + 'px',
-                      width: stickyRect.width + 'px',
-                      zIndex: 1,
-                      boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
-                    } : frozenCards[section.id] ? {
-                      position: 'fixed',
-                      top: frozenCards[section.id].top + 'px',
-                      left: frozenCards[section.id].left + 'px',
-                      width: frozenCards[section.id].width + 'px',
-                      zIndex: 1,
+                      top: (cardStates[section.id].top ?? 72) + 'px',
+                      left: (cardStates[section.id].left ?? 0) + 'px',
+                      width: (cardStates[section.id].width ?? 400) + 'px',
+                      zIndex: idx + 1,
                       boxShadow: idx === 0 ? 'none' : '0 -16px 0 0 white',
                     } : {
                       position: 'relative',
