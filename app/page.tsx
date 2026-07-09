@@ -758,6 +758,7 @@ export default function AerospacePage() {
                   style={{
                     borderTop: idx === 0 ? 'none' : '16px solid white',
                     background: 'var(--navy)',
+                    marginLeft: '32px',
                   }}
                 >
                   <p style={{ color: 'var(--coral)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.15em', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '12px', textTransform: 'uppercase' }}>

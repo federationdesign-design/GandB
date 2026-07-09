@@ -64,10 +64,10 @@ body { overflow-x: clip; }
 
   /* Card column: natural height, not stretched */
   .gandb-card {
-    display: flex;
+    display: block;
     flex: 0 0 42%;
     max-width: 42%;
-    padding: 40px 0 40px 32px;
+    padding: 0;
     align-self: flex-start;
     position: relative;
   }
@@ -80,6 +80,7 @@ body { overflow-x: clip; }
     padding: 40px;
     background: var(--navy);
     width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -96,6 +97,7 @@ body { overflow-x: clip; }
   .gandb-card {
     flex: 0 0 45%;
     max-width: 45%;
+    padding: 0;
   }
   .gandb-card-inner {
     padding: 48px;
