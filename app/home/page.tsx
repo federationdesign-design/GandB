@@ -221,12 +221,8 @@ export default function HomePage() {
       {isMobile === false && (
         <div style={{ paddingTop: 56, position: 'relative', overflow: 'hidden' }}>
 
-          {/* Split panels + elaboration — slide left when corporate chosen */}
-          <div style={{
-            transform: choice === 'corporate' ? 'translateX(100%)' : 'translateX(0)',
-            transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
-            willChange: 'transform',
-          }}>
+          {/* Split panels + elaboration — always visible underneath */}
+          <div>
             {/* Split panels */}
             <div style={{ position: 'relative', minHeight: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
               {/* Spine */}
@@ -296,13 +292,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Services rail — slides in from right as panels slide left */}
+          {/* Services rail — slides in from right over the top */}
           <div style={{
             position: 'absolute',
-            top: 0, left: 0, right: 0,
-            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(-100%)',
+            top: 0, left: 0, right: 0, bottom: 0,
+            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
             willChange: 'transform',
+            zIndex: 10,
+            background: '#1a2340',
           }}>
             <ServicesRail />
           </div>
