@@ -336,11 +336,11 @@ export default function CommercialPage() {
       <Nav />
 
       {/* Hero scroll-scrub section */}
-      <div ref={heroSectionRef} style={{ height: '80vh', position: 'relative', overflow: 'hidden', scrollSnapAlign: 'start' }}>
+      <div ref={heroSectionRef} style={{ height: '75vw', position: 'relative', overflow: 'hidden', scrollSnapAlign: 'start' }}>
         <div style={{
           position: 'sticky',
           top: 0,
-          height: '80vh',
+          height: '75vw',
           overflow: 'hidden',
         }}>
         {/* Layer 1: Solid blue base */}
