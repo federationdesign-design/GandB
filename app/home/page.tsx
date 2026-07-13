@@ -421,7 +421,7 @@ export default function HomePage() {
             <button onClick={() => navigate('private')}
               style={{ position: 'absolute', top: 0, left: 0, width: 'calc(50% - 25px)', height: '100%', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', background: '#1a2340' }}>
               <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-              <HeroPanel frameDir="/regulated-frames" frameCount={31} canvasW={1920} canvasH={1080} />
+              <HeroPanel frameDir="/private-frames" frameCount={38} canvasW={834} canvasH={1112} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-end', fontFamily: f }}>
@@ -504,7 +504,7 @@ export default function HomePage() {
                     <img src="/commercial-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
                   </div>
                   <div style={{ position: 'relative', width: '100vw', height: '100%', flexShrink: 0 }}>
-                    <img src="/regulated-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
+                    <img src="/private-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
                   </div>
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.2) 0%, rgba(6,39,93,0.45) 50%, rgba(6,39,93,0.82) 100%)', zIndex: 2, pointerEvents: 'none' }} />
