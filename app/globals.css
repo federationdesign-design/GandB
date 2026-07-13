@@ -46,7 +46,7 @@ body { overflow-x: clip; }
 
 /* ── About section ───────────────────────────────────────────── */
 .gandb-about-full {
-  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 200px, #ffffff 600px);
+  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 300px, #ffffff 900px);
   position: relative;
 }
 .gandb-about-inner { padding-left: 20px; }

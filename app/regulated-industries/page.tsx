@@ -314,7 +314,7 @@ export default function RegulatedIndustriesPage() {
   }
 
   return (
-    <div style={{ background: 'white', minHeight: '100vh' }}>
+    <div style={{ background: 'white', minHeight: '100vh', overflowX: 'clip' }}>
 
       <Nav />
 
@@ -477,9 +477,9 @@ export default function RegulatedIndustriesPage() {
           {sections.filter(s => s.isAbout).map((section) => (
             <div key={section.id} id={section.id} style={{ position: 'relative', paddingTop: '40px' }}>
               {/* Horizontal connector - 2px weight */}
-              <div style={{ position: 'absolute', left: '20px', top: '50px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
+              <div style={{ position: 'absolute', left: '20px', top: '45px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
               {/* Circle offset right */}
-              <div style={{ position: 'absolute', left: '34px', top: '43px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
+              <div style={{ position: 'absolute', left: '34px', top: '39px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid var(--coral)', background: 'white', zIndex: 2 }} />
               <div className="gandb-about-inner" style={{ paddingLeft: '52px', paddingRight: '20px', paddingBottom: '32px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--navy)', marginBottom: '16px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>ABOUT</p>
                 <p style={{ fontSize: '26px', fontWeight: 400, lineHeight: '1.3', color: 'var(--text-dark)', marginBottom: '28px', fontFamily: 'Plus Jakarta Sans, sans-serif', maxWidth: '90%' }}>
@@ -523,7 +523,7 @@ export default function RegulatedIndustriesPage() {
             <div style={{
               position: 'absolute',
               left: '20px',
-              top: idx === 0 ? '50px' : '58px',
+              top: idx === 0 ? '46px' : '62px',
               width: '14px',
               height: '2px',
               background: 'var(--navy)',
@@ -533,7 +533,7 @@ export default function RegulatedIndustriesPage() {
             <div style={{
               position: 'absolute',
               left: '34px',
-              top: idx === 0 ? '43px' : '51px',
+              top: idx === 0 ? '40px' : '57px',
               width: '14px',
               height: '14px',
               borderRadius: '50%',

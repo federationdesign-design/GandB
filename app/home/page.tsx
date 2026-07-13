@@ -376,18 +376,18 @@ function ServicesDropdown({ f }: { f: string }) {
         </svg>
       </button>
       {open && (
-        <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: 4, background: '#0f1a2e', border: '1px solid rgba(255,255,255,0.12)', minWidth: 320, zIndex: 50 }}>
+        <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: 4, background: '#FF7B7B', border: 'none', minWidth: 320, zIndex: 50 }}>
           {specialisms.map((s, i) => (
             <a
               key={s.href}
               href={s.href}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', color: '#fff', textDecoration: 'none', fontFamily: f, fontSize: '0.85rem', fontWeight: 400, letterSpacing: '0.04em', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', transition: 'background 0.15s' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', color: 'var(--navy)', textDecoration: 'none', fontFamily: f, fontSize: '0.85rem', fontWeight: 500, letterSpacing: '0.04em', borderTop: i > 0 ? '1px solid rgba(26,35,64,0.1)' : 'none', transition: 'background 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(26,35,64,0.08)' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
             >
               {s.label}
-              <svg viewBox="0 0 24 24" fill="none" style={{ width: 12, height: 12, opacity: 0.4 }}>
-                <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg viewBox="0 0 24 24" fill="none" style={{ width: 12, height: 12, opacity: 0.5 }}>
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="var(--navy)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
           ))}
