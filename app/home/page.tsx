@@ -80,11 +80,11 @@ function ServicesRail() {
             const grayscale = isHovered || dist === 0 ? 0 : 100
             return (
               <div key={s.slug} onMouseEnter={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(null)}
-                style={{ flexShrink: 0, width: `${CARD_WIDTH_VW}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid #000', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
+                style={{ flexShrink: 0, width: `${CARD_WIDTH_VW}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
                 <div style={{ position: 'absolute', inset: 0, transform: `scale(${dist === 0 ? 1.03 : 1})`, transition: 'transform 0.6s ease', background: s.color }}>
                   <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(6,39,93,0.95) 0%, rgba(11,78,186,0.2) 55%, transparent 100%)' }} />
                 <div style={{ position: 'absolute', top: 90, left: 0, right: 0, textAlign: 'center', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
                   {String(i + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
                 </div>
@@ -130,7 +130,7 @@ function MobileServicesCarousel() {
   }, [index, goTo])
 
   return (
-    <div ref={wrapperRef} style={{ position: 'relative', height: 'calc(100dvh - 56px)', overflow: 'hidden', background: '#000' }}>
+    <div ref={wrapperRef} style={{ position: 'relative', height: 'calc(100dvh - 56px)', overflow: 'hidden', background: 'var(--navy)' }}>
       <div style={{ display: 'flex', height: '100%', width: `${services.length * 100}vw`, transform: `translateX(-${index * 100}vw)`, transition: 'transform 0.4s ease' }}
         onTouchStart={e => { startX.current = e.touches[0].clientX }}
         onTouchEnd={e => { const dx = startX.current - e.changedTouches[0].clientX; if (Math.abs(dx) > 40) goTo(index + (dx > 0 ? 1 : -1)) }}>
@@ -212,7 +212,7 @@ export default function HomePage() {
   }
 
   return (
-    <div style={{ background: '#000', minHeight: '100vh', fontFamily: f }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', fontFamily: f }}>
       <Nav />
 
       {/* ── DESKTOP ─────────────────────────────────────────── */}
@@ -227,7 +227,7 @@ export default function HomePage() {
                 <button onClick={() => navigate('corporate')} onMouseEnter={() => setHoverLeft(true)} onMouseLeave={() => setHoverLeft(false)}
                   style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
                   <img src="/commercial-frames/frame_0001.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: hoverLeft ? 'grayscale(0%)' : 'grayscale(100%)', transition: 'filter 0.4s ease', viewTransitionName: 'hero-image' } as React.CSSProperties} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%)', zIndex: 1 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.3) 0%, rgba(6,39,93,0.75) 100%)', zIndex: 1 }} />
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
                     <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Corporations &amp; Institutions</h2>
                     <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch', textAlign: 'right' }}>Specialist legal counsel for businesses operating in complex, high-stakes environments</p>
@@ -241,7 +241,7 @@ export default function HomePage() {
                 <button onClick={() => navigate('private')} onMouseEnter={() => setHoverRight(true)} onMouseLeave={() => setHoverRight(false)}
                   style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
                   <img src="/regulated-frames/frame_0001.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: hoverRight ? 'grayscale(0%)' : 'grayscale(100%)', transition: 'filter 0.4s ease' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%)', zIndex: 1 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.3) 0%, rgba(6,39,93,0.75) 100%)', zIndex: 1 }} />
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Private Client &amp; Pro Bono</h2>
                     <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch' }}>Individual representation and pro bono work for those who need specialist counsel most</p>
@@ -252,7 +252,7 @@ export default function HomePage() {
               </div>
 
               {/* Elaboration */}
-              <div style={{ padding: '80px 60px 60px', background: '#000' }}>
+              <div style={{ padding: '80px 60px 60px', background: 'var(--navy)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 1fr', maxWidth: 1600, margin: '0 auto' }}>
                   <div style={{ paddingRight: 50, textAlign: 'right' }}>
                     <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
@@ -288,7 +288,7 @@ export default function HomePage() {
       {isMobile === true && (
         <>
           {choice === null ? (
-            <div ref={mobileSectionRef} style={{ position: 'relative', height: '250dvh', background: '#000' }}>
+            <div ref={mobileSectionRef} style={{ position: 'relative', height: '250dvh', background: 'var(--navy)' }}>
               <div style={{ position: 'sticky', top: 0, height: '100dvh', overflow: 'hidden' }}>
                 <div ref={mobileTrackRef} style={{ position: 'absolute', inset: 0, width: '200vw', display: 'flex', willChange: 'transform' }}>
                   <div ref={mobilePrivateRef} style={{ position: 'relative', width: '100vw', height: '100%', flexShrink: 0 }}>
@@ -298,7 +298,7 @@ export default function HomePage() {
                     <img src="/regulated-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
                   </div>
                 </div>
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.7) 100%)', zIndex: 2, pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.2) 0%, rgba(6,39,93,0.45) 50%, rgba(6,39,93,0.82) 100%)', zIndex: 2, pointerEvents: 'none' }} />
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 3, padding: '0 24px 40px', color: '#fff' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1px 1fr', gap: 16, marginBottom: 24 }}>
                     <div ref={mobilePrivateTextRef} style={{ textAlign: 'right', paddingRight: 16, transition: 'opacity 0.1s linear' }}>
@@ -334,7 +334,7 @@ export default function HomePage() {
       {isMobile === null && <div style={{ height: '100vh' }} />}
 
       {/* ── Logo strip ──────────────────────────────────────── */}
-      <section style={{ padding: '48px 0', background: '#000', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <section style={{ padding: '48px 0', background: 'var(--navy)', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 32, fontFamily: f }}>Trusted by leading organisations</p>
         <div style={{ overflow: 'hidden' }}>
           <div style={{ display: 'flex', gap: 60, width: 'max-content', animation: 'gandb-marquee 25s linear infinite', alignItems: 'center' }}>
@@ -348,11 +348,11 @@ export default function HomePage() {
       </section>
 
       {/* ── Testimonials ────────────────────────────────────── */}
-      <section style={{ padding: '80px 24px', background: '#000', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <section style={{ padding: '80px 24px', background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 48, fontFamily: f }}>What our clients say</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 1200, margin: '0 auto' }}>
           {testimonials.map((t, i) => (
-            <div key={i} style={{ border: '1px solid rgba(255,255,255,0.12)', padding: '40px 48px' }}>
+            <div key={i} style={{ border: '1px solid rgba(255,255,255,0.12)', padding: '40px 32px' }}>
               <div style={{ fontSize: '3rem', color: '#FF7B7B', lineHeight: 1, marginBottom: 16, fontWeight: 300, fontFamily: f }}>&ldquo;</div>
               <p style={{ fontSize: '1.15rem', fontWeight: 300, color: '#fff', lineHeight: 1.6, marginBottom: 24, opacity: 0.9, fontFamily: f }}>{t.quote}</p>
               <p style={{ fontSize: '0.78rem', fontWeight: 600, color: '#FF7B7B', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4, fontFamily: f }}>{t.name}</p>
@@ -362,13 +362,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Footer ──────────────────────────────────────────── */}
-      <footer style={{ background: '#000', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '48px 24px 32px' }}>
-        <img src="/footer-logo.svg" alt="Herbert & Ball" style={{ height: 48, width: 'auto', marginBottom: 24, filter: 'brightness(0) invert(1)' }} />
-        <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 8, fontFamily: f }}>International House, 142 Cromwell Road, London SW7 4EF</p>
-        <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginBottom: 32, fontFamily: f }}>020 3897 0445</p>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.1)', marginBottom: 24 }} />
-        <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.25)', fontFamily: f }}>&copy; 2026 Herbert &amp; Ball LLP</p>
+      {/* Footer - matching service pages */}
+      <footer style={{ background: 'white', padding: '40px 0 56px 24px', position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1, paddingRight: '48px' }}>
+          <img src="/footer-logo.svg" alt="Herbert & Ball" style={{ height: '60px', width: 'auto', marginBottom: '16px' }} />
+          <p style={{ color: 'var(--navy)', fontSize: '13px', lineHeight: '1.3', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '24px', opacity: 0.7 }}>
+            Aviation, Commercial, Corporate, Data Protection, Employment, Franchising, Information Technology, and Intellectual Property
+          </p>
+          <p style={{ color: 'var(--navy)', fontSize: '13px', lineHeight: '1.3', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '20px' }}>
+            International House,<br />142 Cromwell Rd,<br />London<br />SW7 4EF
+          </p>
+          <p style={{ color: 'var(--navy)', fontSize: '13px', fontFamily: 'Plus Jakarta Sans, sans-serif', marginBottom: '20px' }}>Call: 020 3897 0445</p>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', background: 'white', padding: '24px 8px', width: '36px', minWidth: '36px' }}>
+          {[{ label: 'Cookies', href: '/legal/cookies' }, { label: 'Privacy Policy', href: '/legal/privacy-policy' }, { label: 'Certification.', href: '/legal/certification' }, { label: 'Data Request', href: '/legal/data-request' }].map(({ label: link, href }, i) => (
+            <a key={link} href={href} style={{ color: 'var(--navy)', fontSize: '10px', fontFamily: 'Plus Jakarta Sans, sans-serif', textDecoration: 'none', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.06em', padding: '8px 0', borderTop: i > 0 ? '1px solid rgba(26,35,64,0.1)' : 'none', display: 'block', width: '100%', textAlign: 'center' }}>
+              {link}
+            </a>
+          ))}
+        </div>
+        <p style={{ position: 'absolute', bottom: '16px', left: '24px', color: 'var(--navy)', fontSize: '12px', opacity: 0.4, fontFamily: 'Plus Jakarta Sans, sans-serif', margin: 0 }}>
+          &copy; 2026 Herbert &amp; Ball LLP
+        </p>
       </footer>
 
       <style>{`

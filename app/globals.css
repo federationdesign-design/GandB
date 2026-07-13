@@ -1,3 +1,6 @@
+/* ── Google Fonts ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 /* ── View Transitions ─────────────────────────────────────────── */
 @supports (view-transition-name: none) {
   ::view-transition-old(root),
@@ -15,14 +18,8 @@
     animation-timing-function: cubic-bezier(0.32, 0.85, 0, 1);
     animation-name: vt-fade-in;
   }
-  @keyframes vt-fade-out {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-  }
-  @keyframes vt-fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  @keyframes vt-fade-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes vt-fade-in  { from { opacity: 0; } to { opacity: 1; } }
 }
 
 /* ── CSS Variables ───────────────────────────────────────────── */
@@ -37,29 +34,14 @@ html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); }
 body { overflow-x: clip; }
 
 /* ── Enquire split layout ───────────────────────────────────── */
-.enquire-split {
-  display: flex;
-  flex-direction: column;
-}
-.enquire-form { flex: 1; }
+.enquire-split { display: flex; flex-direction: column; }
+.enquire-form  { flex: 1; }
 .enquire-image { display: none; min-height: 300px; }
 
 @media (min-width: 768px) {
-  .enquire-split {
-    flex-direction: row;
-    min-height: 600px;
-  }
-  .enquire-form {
-    flex: 0 0 38%;
-    max-width: 38%;
-  }
-  .enquire-image {
-    display: block;
-    flex: 0 0 62%;
-    max-width: 62%;
-    overflow: hidden;
-    min-height: 500px;
-  }
+  .enquire-split  { flex-direction: row; min-height: 600px; }
+  .enquire-form   { flex: 0 0 38%; max-width: 38%; }
+  .enquire-image  { display: block; flex: 0 0 62%; max-width: 62%; overflow: hidden; min-height: 500px; }
 }
 
 /* ── About section ───────────────────────────────────────────── */
@@ -70,82 +52,29 @@ body { overflow-x: clip; }
 .gandb-about-inner { padding-left: 20px; }
 
 /* ── Two-column service layout ──────────────────────────────── */
-.gandb-outer {
-  display: block;
-  position: relative;
-}
-.gandb-section-row {
-  display: flex;
-  flex-direction: column;
-}
-.gandb-left { width: 100%; }
-.gandb-card { display: none; }
-.gandb-card-inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 40px;
-  background: var(--navy);
-  width: 100%;
-  box-sizing: border-box;
+.gandb-outer        { display: block; position: relative; }
+.gandb-section-row  { display: flex; flex-direction: column; }
+.gandb-left         { width: 100%; }
+.gandb-card         { display: none; }
+.gandb-card-inner   {
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 40px; background: var(--navy); width: 100%; box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
-  .gandb-about-inner {
-    padding-left: 60px;
-    padding-right: 40px;
-  }
+  .gandb-about-inner { padding-left: 60px; padding-right: 40px; }
 }
 
 @media (min-width: 1024px) {
-  .gandb-about-full .gandb-about-inner {
-    padding-left: 100px;
-    padding-right: 60px;
-  }
-  .gandb-outer {
-    display: block;
-    position: relative;
-  }
-  .gandb-section-row {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-  }
-  .gandb-left {
-    flex: 0 0 58%;
-    max-width: 58%;
-  }
-  .gandb-card {
-    display: flex;
-    flex: 0 0 42%;
-    max-width: 42%;
-    padding: 0;
-    align-self: flex-start;
-    position: relative;
-  }
-  .gandb-card-inner {
-    padding: 40px;
-    background: var(--navy);
-    width: 100%;
-    box-sizing: border-box;
-  }
+  .gandb-about-full .gandb-about-inner { padding-left: 100px; padding-right: 60px; }
+  .gandb-section-row { display: flex; flex-direction: row; align-items: stretch; }
+  .gandb-left        { flex: 0 0 58%; max-width: 58%; }
+  .gandb-card        { display: flex; flex: 0 0 42%; max-width: 42%; padding: 0; align-self: flex-start; position: relative; }
 }
 
 @media (min-width: 1440px) {
-  .gandb-about-full .gandb-about-inner {
-    padding-left: 140px;
-    padding-right: 80px;
-  }
-  .gandb-left {
-    flex: 0 0 55%;
-    max-width: 55%;
-  }
-  .gandb-card {
-    flex: 0 0 45%;
-    max-width: 45%;
-    padding: 0;
-  }
-  .gandb-card-inner {
-    padding: 48px;
-  }
+  .gandb-about-full .gandb-about-inner { padding-left: 140px; padding-right: 80px; }
+  .gandb-left { flex: 0 0 55%; max-width: 55%; }
+  .gandb-card { flex: 0 0 45%; max-width: 45%; padding: 0; }
+  .gandb-card-inner { padding: 48px; }
 }
