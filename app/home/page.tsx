@@ -168,9 +168,7 @@ export default function HomePage() {
   const router = useRouter()
   const isMobile = useIsMobile()
   const [choice, setChoice] = useState<'corporate' | null>(null)
-  const [hoverLeft, setHoverLeft] = useState(false)
-  const [hoverRight, setHoverRight] = useState(false)
-  const mobileSectionRef = useRef<HTMLDivElement>(null)
+    const mobileSectionRef = useRef<HTMLDivElement>(null)
   const mobileTrackRef = useRef<HTMLDivElement>(null)
   const mobilePrivateRef = useRef<HTMLDivElement>(null)
   const mobilePrivateTextRef = useRef<HTMLDivElement>(null)
@@ -202,7 +200,11 @@ export default function HomePage() {
   }, [isMobile])
 
   const navigate = (side: 'corporate' | 'private') => {
-    if (side === 'corporate') { setChoice('corporate'); return }
+    if (side === 'corporate') {
+      setChoice('corporate')
+      return
+    }
+    // Private - view transition to contact page
     const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown }
     if (typeof doc.startViewTransition === 'function') {
       doc.startViewTransition(() => { router.push('/contact') })
@@ -217,70 +219,94 @@ export default function HomePage() {
 
       {/* ── DESKTOP ─────────────────────────────────────────── */}
       {isMobile === false && (
-        <div style={{ paddingTop: 56 }}>
-          {choice === null ? (
-            <>
-              {/* Split panels */}
-              <div style={{ position: 'relative', minHeight: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
-                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
+        <div style={{ paddingTop: 56, position: 'relative', overflow: 'hidden' }}>
 
-                <button onClick={() => navigate('corporate')} onMouseEnter={() => setHoverLeft(true)} onMouseLeave={() => setHoverLeft(false)}
-                  style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
-                  <img src="/commercial-frames/frame_0001.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: hoverLeft ? 'grayscale(0%)' : 'grayscale(100%)', transition: 'filter 0.4s ease', viewTransitionName: 'hero-image' } as React.CSSProperties} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.3) 0%, rgba(6,39,93,0.75) 100%)', zIndex: 1 }} />
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-                    <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Corporations &amp; Institutions</h2>
-                    <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch', textAlign: 'right' }}>Specialist legal counsel for businesses operating in complex, high-stakes environments</p>
-                    <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
-                    <div style={{ fontSize: '0.78rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff' }}>&lt;&lt;&nbsp;Corporate</div>
-                  </div>
-                </button>
+          {/* Split panels + elaboration — slide left when corporate chosen */}
+          <div style={{
+            transform: choice === 'corporate' ? 'translateX(-100%)' : 'translateX(0)',
+            transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
+            willChange: 'transform',
+          }}>
+            {/* Split panels */}
+            <div style={{ position: 'relative', minHeight: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
+              {/* Spine */}
+              <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
 
-                <div style={{ background: 'var(--navy)', minHeight: '78vh' }} />
+              {/* Corporate panel */}
+              <button onClick={() => navigate('corporate')}
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
+                <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
+                <img src="/commercial-frames/frame_0001.jpg" alt=""
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                  <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Corporations &amp; Institutions</h2>
+                  <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch', textAlign: 'right' }}>Specialist legal counsel for businesses operating in complex, high-stakes environments</p>
+                  <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
+                  <div style={{ fontSize: '0.78rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff' }}>&lt;&lt;&nbsp;Corporate</div>
+                </div>
+              </button>
 
-                <button onClick={() => navigate('private')} onMouseEnter={() => setHoverRight(true)} onMouseLeave={() => setHoverRight(false)}
-                  style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
-                  <img src="/regulated-frames/frame_0001.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: hoverRight ? 'grayscale(0%)' : 'grayscale(100%)', transition: 'filter 0.4s ease' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.3) 0%, rgba(6,39,93,0.75) 100%)', zIndex: 1 }} />
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Private Client &amp; Pro Bono</h2>
-                    <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch' }}>Individual representation and pro bono work for those who need specialist counsel most</p>
-                    <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
-                    <div style={{ fontSize: '0.78rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff' }}>Private&nbsp;&gt;&gt;</div>
-                  </div>
-                </button>
-              </div>
+              {/* Gutter */}
+              <div style={{ background: '#1a2340', minHeight: '78vh' }} />
 
-              {/* Elaboration */}
-              <div style={{ padding: '80px 60px 60px', background: '#1a2340' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 1fr', maxWidth: 1600, margin: '0 auto' }}>
-                  <div style={{ paddingRight: 50, textAlign: 'right' }}>
-                    <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
-                      &lt;&lt; Corporations &amp; Institutions
-                    </button>
-                    <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em' }}>Specialist counsel for businesses where legal complexity is a constant.</p>
-                    <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32 }}>From aerospace procurement to FinTech regulation, from media rights to commercial restructuring, we provide expert legal advice to institutions that cannot afford generalist counsel.</p>
-                    <button onClick={() => navigate('corporate')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
-                      View our services
-                    </button>
-                  </div>
-                  <div style={{ background: 'rgba(255,255,255,0.1)', width: 1, margin: '0 auto' }} />
-                  <div style={{ paddingLeft: 50 }}>
-                    <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12 }}>
-                      Private Client &amp; Pro Bono &gt;&gt;
-                    </button>
-                    <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em' }}>Expert legal representation for individuals and those who need it most.</p>
-                    <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32 }}>We take on a limited number of private client matters each year, and we reserve capacity for pro bono work for individuals facing complex legal challenges without the means to meet them.</p>
-                    <button onClick={() => navigate('private')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
-                      Get in touch
-                    </button>
-                  </div>
+              {/* Private panel */}
+              <button onClick={() => navigate('private')}
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
+                <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
+                <img src="/regulated-frames/frame_0001.jpg" alt=""
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '80px 60px 70px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15 }}>Private Client &amp; Pro Bono</h2>
+                  <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch' }}>Individual representation and pro bono work for those who need specialist counsel most</p>
+                  <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
+                  <div style={{ fontSize: '0.78rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff' }}>Private&nbsp;&gt;&gt;</div>
+                </div>
+              </button>
+            </div>
+
+            {/* Elaboration */}
+            <div style={{ padding: '80px 60px 60px', background: '#1a2340' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 1fr', maxWidth: 1600, margin: '0 auto' }}>
+                <div style={{ paddingRight: 50, textAlign: 'right' }}>
+                  <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
+                    &lt;&lt; Corporations &amp; Institutions
+                  </button>
+                  <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em' }}>Specialist counsel for businesses where legal complexity is a constant.</p>
+                  <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32 }}>From aerospace procurement to FinTech regulation, from media rights to commercial restructuring, we provide expert legal advice to institutions that cannot afford generalist counsel.</p>
+                  <button onClick={() => navigate('corporate')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
+                    View our services
+                  </button>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.1)', width: 1, margin: '0 auto' }} />
+                <div style={{ paddingLeft: 50 }}>
+                  <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12 }}>
+                    Private Client &amp; Pro Bono &gt;&gt;
+                  </button>
+                  <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em' }}>Expert legal representation for individuals and those who need it most.</p>
+                  <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32 }}>We take on a limited number of private client matters each year, and we reserve capacity for pro bono work for individuals facing complex legal challenges without the means to meet them.</p>
+                  <button onClick={() => navigate('private')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
+                    Get in touch
+                  </button>
                 </div>
               </div>
-            </>
-          ) : (
+            </div>
+          </div>
+
+          {/* Services rail — slides in from right as panels slide left */}
+          <div style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
+            willChange: 'transform',
+          }}>
             <ServicesRail />
-          )}
+          </div>
+
         </div>
       )}
 
