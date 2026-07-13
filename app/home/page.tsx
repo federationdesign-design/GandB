@@ -71,7 +71,7 @@ function ServicesRail() {
 
   return (
     <div ref={sectionRef} style={{ height: `${services.length * 110}vh`, position: 'relative' }}>
-      <div style={{ position: 'sticky', top: 56, height: 'calc(100vh - 56px)', overflow: 'hidden' }}>
+      <div style={{ position: 'sticky', top: 56, height: '78vh', overflow: 'hidden' }}>
         <div ref={trackRef} style={{ display: 'flex', height: '100%', willChange: 'transform' }}>
           {services.map((s, i) => {
             const dist = Math.abs(i - activeIndex)
@@ -295,12 +295,14 @@ export default function HomePage() {
           {/* Services rail — slides in from right over the top */}
           <div style={{
             position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
+            top: 0, left: 0, right: 0,
+            height: '78vh',
             transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
             willChange: 'transform',
             zIndex: 10,
             background: '#1a2340',
+            overflow: 'hidden',
           }}>
             <ServicesRail />
           </div>
