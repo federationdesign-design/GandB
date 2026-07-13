@@ -297,7 +297,7 @@ export default function HomePage() {
             right: 0,
             width: 'calc(50% - 25px)',
             height: '78vh',
-            transform: choice === 'corporate' ? 'translateY(0)' : 'translateY(-100%)',
+            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
             willChange: 'transform',
             zIndex: 10,
