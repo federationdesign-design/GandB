@@ -188,8 +188,8 @@ export default function Nav() {
                 </div>
               ) : item.label === 'Contact' ? (
                 <a
-                  href="#"
-                  onClick={handleContact}
+                  href="/contact"
+                  onClick={() => setOpen(false)}
                   style={{
                     display: 'block',
                     color: '#FF7B7B',
