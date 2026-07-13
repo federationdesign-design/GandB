@@ -290,17 +290,17 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Services rail — slides in from left half only */}
+          {/* Services rail — slides down into right half (corporate side) */}
           <div style={{
             position: 'absolute',
-            top: 0, left: 0,
+            top: 0,
+            right: 0,
             width: 'calc(50% - 25px)',
             height: '78vh',
-            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(-100%)',
+            transform: choice === 'corporate' ? 'translateY(0)' : 'translateY(-100%)',
             transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
             willChange: 'transform',
             zIndex: 10,
-            background: '#1a2340',
             overflow: 'hidden',
           }}>
             <ServicesRail cardVw={48} />
