@@ -260,18 +260,17 @@ export default function HomePage() {
 
       {/* ── DESKTOP ─────────────────────────────────────────── */}
       {isMobile === false && (
-        <div style={{ paddingTop: 56, position: 'relative', overflow: 'hidden' }}>
+        <div style={{ paddingTop: 56 }}>
+          <div style={{ position: 'relative', height: '78vh', overflow: 'hidden' }}>
 
-          {/* Split panels + elaboration — always visible underneath */}
-          <div>
-            {/* Split panels */}
-            <div style={{ position: 'relative', height: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
+          {/* Split panels */}
+          <div style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
               {/* Spine */}
               <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
 
               {/* Private panel - left */}
               <button onClick={() => navigate('private')}
-                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '78vh', background: '#1a2340', display: 'block' }}>
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '100%', background: '#1a2340', display: 'block' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
                 <img src="/regulated-frames/frame_0001.jpg" alt=""
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
@@ -286,11 +285,11 @@ export default function HomePage() {
               </button>
 
               {/* Gutter */}
-              <div style={{ background: '#1a2340', height: '78vh' }} />
+              <div style={{ background: '#1a2340', height: '100%' }} />
 
               {/* Corporate panel - right */}
               <button onClick={() => navigate('corporate')}
-                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '78vh', background: '#1a2340', display: 'block' }}>
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '100%', background: '#1a2340', display: 'block' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
                 <img src="/commercial-frames/frame_0001.jpg" alt=""
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
