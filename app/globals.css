@@ -1,82 +1,129 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+/* ── View Transitions ─────────────────────────────────────────── */
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 1000ms;
+    animation-timing-function: cubic-bezier(0.62, 0.92, 0, 1);
+  }
+  ::view-transition-old(hero-image) {
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.32, 0.85, 0, 1);
+    animation-name: vt-fade-out;
+  }
+  ::view-transition-new(hero-image) {
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.32, 0.85, 0, 1);
+    animation-name: vt-fade-in;
+  }
+  @keyframes vt-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  @keyframes vt-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+/* ── CSS Variables ───────────────────────────────────────────── */
 :root {
   --navy: #1a2340;
   --coral: #FF7B7B;
-  --coral-light: #ff9a9a;
-  --blush: #FF7B7B;
   --text-dark: #1a2340;
-  --text-body: #2d3348;
+  --text-body: #3a3a4a;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); }
 body { overflow-x: clip; }
-::selection { background: var(--coral); color: white; }
 
-/* About: full width solid coral */
-.gandb-about-full {
-  width: 100%;
-  background: #FF7B7B;
+/* ── Enquire split layout ───────────────────────────────────── */
+.enquire-split {
+  display: flex;
+  flex-direction: column;
+}
+.enquire-form { flex: 1; }
+.enquire-image { display: none; min-height: 300px; }
+
+@media (min-width: 768px) {
+  .enquire-split {
+    flex-direction: row;
+    min-height: 600px;
+  }
+  .enquire-form {
+    flex: 0 0 38%;
+    max-width: 38%;
+  }
+  .enquire-image {
+    display: block;
+    flex: 0 0 62%;
+    max-width: 62%;
+    overflow: hidden;
+    min-height: 500px;
+  }
 }
 
-/* Two-col outer */
-.gandb-outer {
-  width: 100%;
-  background: linear-gradient(to bottom, #FF7B7B 0px, #ffcece 200px, #ffffff 600px);
+/* ── About section ───────────────────────────────────────────── */
+.gandb-about-full {
+  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 200px, #ffffff 600px);
   position: relative;
 }
+.gandb-about-inner { padding-left: 20px; }
 
+/* ── Two-column service layout ──────────────────────────────── */
+.gandb-outer {
+  display: block;
+  position: relative;
+}
+.gandb-section-row {
+  display: flex;
+  flex-direction: column;
+}
 .gandb-left { width: 100%; }
-.gandb-panel { display: none; }
 .gandb-card { display: none; }
-.gandb-card-inner { display: none; }
+.gandb-card-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px;
+  background: var(--navy);
+  width: 100%;
+  box-sizing: border-box;
+}
 
-/* ── Desktop 1024px+ ── */
+@media (min-width: 768px) {
+  .gandb-about-inner {
+    padding-left: 60px;
+    padding-right: 40px;
+  }
+}
+
 @media (min-width: 1024px) {
   .gandb-about-full .gandb-about-inner {
     padding-left: 100px;
     padding-right: 60px;
   }
-
-  /* Outer: stacks section rows vertically */
   .gandb-outer {
     display: block;
     position: relative;
   }
-
-  /* Each section row: content left, card right, equal height */
   .gandb-section-row {
     display: flex;
     flex-direction: row;
     align-items: stretch;
   }
-
-  /* Left content column - drives the row height */
   .gandb-left {
     flex: 0 0 58%;
     max-width: 58%;
   }
-
-  /* Card column: natural height, not stretched */
   .gandb-card {
-    display: block;
+    display: flex;
     flex: 0 0 42%;
     max-width: 42%;
     padding: 0;
     align-self: flex-start;
     position: relative;
   }
-
-  /* Card inner: default position, JS overrides to fixed when sticky */
   .gandb-card-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     padding: 40px;
     background: var(--navy);
     width: 100%;
@@ -84,7 +131,6 @@ body { overflow-x: clip; }
   }
 }
 
-/* ── Super wide 1440px+ ── */
 @media (min-width: 1440px) {
   .gandb-about-full .gandb-about-inner {
     padding-left: 140px;
@@ -101,43 +147,5 @@ body { overflow-x: clip; }
   }
   .gandb-card-inner {
     padding: 48px;
-  }
-}
-
-/* ── Enquire split layout ── */
-.enquire-split {
-  display: flex;
-  flex-direction: column;
-}
-.enquire-form { width: 100%; }
-.enquire-image { display: none; }
-
-@media (min-width: 768px) {
-  .enquire-split {
-    flex-direction: row;
-    align-items: stretch;
-    min-height: 600px;
-  }
-  .enquire-form {
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
-  .enquire-image {
-    display: block;
-    flex: 0 0 55%;
-    max-width: 55%;
-    overflow: hidden;
-    min-height: 500px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .enquire-form {
-    flex: 0 0 38%;
-    max-width: 38%;
-  }
-  .enquire-image {
-    flex: 0 0 62%;
-    max-width: 62%;
   }
 }
