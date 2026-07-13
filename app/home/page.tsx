@@ -299,9 +299,25 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
 function MobileServicesCarousel() {
   const [index, setIndex] = useState(0)
   const startX = useRef(0)
+  const startY = useRef(0)
   const wheelLockRef = useRef(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const goTo = useCallback((i: number) => setIndex(Math.max(0, Math.min(services.length - 1, i))), [])
+  const goTo = useCallback((i: number) => {
+    const clamped = Math.max(0, Math.min(services.length - 1, i))
+    setIndex(clamped)
+    // Release body scroll when on last card
+    if (clamped === services.length - 1) {
+      setTimeout(() => { document.body.style.overflow = '' }, 400)
+    } else {
+      document.body.style.overflow = 'hidden'
+    }
+  }, [])
+
+  useEffect(() => {
+    // Lock scroll on mount
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -309,6 +325,10 @@ function MobileServicesCarousel() {
     const handleWheel = (e: WheelEvent) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
       if (Math.abs(delta) < 5) return
+      // At last card scrolling down — let page scroll
+      if (index === services.length - 1 && delta > 0) return
+      // At first card scrolling up — let page scroll
+      if (index === 0 && delta < 0) return
       e.preventDefault()
       if (wheelLockRef.current) return
       wheelLockRef.current = true
@@ -542,34 +562,34 @@ export default function HomePage() {
               <div style={{ position: 'sticky', top: 0, height: '100dvh', overflow: 'hidden' }}>
                 <div ref={mobileTrackRef} style={{ position: 'absolute', inset: 0, width: '200vw', display: 'flex', willChange: 'transform' }}>
                   <div ref={mobilePrivateRef} style={{ position: 'relative', width: '100vw', height: '100%', flexShrink: 0 }}>
-                    <img src="/commercial-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
+                    <img src="/private-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
                   </div>
                   <div style={{ position: 'relative', width: '100vw', height: '100%', flexShrink: 0 }}>
-                    <img src="/private-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
+                    <img src="/commercial-frames/frame_0001.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
                   </div>
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(11,78,186,0.2) 0%, rgba(6,39,93,0.45) 50%, rgba(6,39,93,0.82) 100%)', zIndex: 2, pointerEvents: 'none' }} />
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 3, padding: '0 24px 40px', color: '#fff' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1px 1fr', gap: 16, marginBottom: 24 }}>
                     <div ref={mobilePrivateTextRef} style={{ textAlign: 'right', paddingRight: 16, transition: 'opacity 0.1s linear' }}>
-                      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '0 0 8px', lineHeight: 1.15 }}>Corporations &amp; Institutions</h2>
-                      <p style={{ fontSize: '0.9rem', fontWeight: 300, margin: 0, lineHeight: 1.45, opacity: 0.92 }}>Specialist legal counsel</p>
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '0 0 8px', lineHeight: 1.15 }}>Private Client &amp; Pro Bono</h2>
+                      <p style={{ fontSize: '0.9rem', fontWeight: 300, margin: 0, lineHeight: 1.45, opacity: 0.92 }}>Individual representation</p>
                     </div>
                     <div style={{ background: '#fff', alignSelf: 'stretch' }} />
                     <div ref={mobileCorporateTextRef} style={{ paddingLeft: 16, opacity: 0.7, transition: 'opacity 0.1s linear' }}>
-                      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '0 0 8px', lineHeight: 1.15 }}>Private Client &amp; Pro Bono</h2>
-                      <p style={{ fontSize: '0.9rem', fontWeight: 300, margin: 0, lineHeight: 1.45, opacity: 0.92 }}>Individual representation</p>
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '0 0 8px', lineHeight: 1.15 }}>Corporations &amp; Institutions</h2>
+                      <p style={{ fontSize: '0.9rem', fontWeight: 300, margin: 0, lineHeight: 1.45, opacity: 0.92 }}>Specialist legal counsel</p>
                     </div>
                   </div>
                   <div style={{ height: 1, background: 'rgba(255,255,255,0.7)', marginBottom: 14 }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', fontFamily: f, fontSize: '0.85rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', cursor: 'pointer', padding: 0 }}>&lt;&lt; Corporate</button>
-                    <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', fontFamily: f, fontSize: '0.85rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', cursor: 'pointer', padding: 0 }}>Private &gt;&gt;</button>
+                    <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', fontFamily: f, fontSize: '0.85rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', cursor: 'pointer', padding: 0 }}>&lt;&lt; Private</button>
+                    <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', fontFamily: f, fontSize: '0.85rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', cursor: 'pointer', padding: 0 }}>Corporate &gt;&gt;</button>
                   </div>
                 </div>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 4, display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                  <button onClick={() => navigate('corporate')} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }} aria-label="Corporate" />
                   <button onClick={() => navigate('private')} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }} aria-label="Private" />
+                  <button onClick={() => navigate('corporate')} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }} aria-label="Corporate" />
                 </div>
               </div>
             </div>

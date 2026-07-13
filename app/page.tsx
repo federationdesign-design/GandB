@@ -359,7 +359,7 @@ export default function AerospacePage() {
   }
 
   return (
-    <div style={{ background: 'white', minHeight: '100vh' }}>
+    <div style={{ background: 'white', minHeight: '100vh', overflowX: 'clip' }}>
 
       <Nav />
 
@@ -439,7 +439,7 @@ export default function AerospacePage() {
             lineHeight: '1.3',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
             textAlign: 'right',
-            width: '42%',
+            width: 'clamp(65%, 42%, 42%)',
             alignSelf: 'flex-end',
           }}>
             Operating from <strong>Mayfair</strong> and retained by multinationals across three continents, we bring decades of frontline experience to matters where the commercial and legal consequences are measured in the hundreds of millions.
@@ -761,9 +761,9 @@ export default function AerospacePage() {
         {/* Vertical line continuation */}
         <div style={{ position: 'absolute', left: '20px', top: 0, height: '110px', width: '2px', background: 'var(--navy)', zIndex: 1 }} />
         {/* Horizontal connector */}
-        <div style={{ position: 'absolute', left: '20px', top: '59px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
+        <div style={{ position: 'absolute', left: '20px', top: '54px', width: '14px', height: '2px', background: 'var(--navy)', zIndex: 2 }} />
         {/* Circle */}
-        <div style={{ position: 'absolute', left: '34px', top: '52px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid #FF7B7B', background: 'white', zIndex: 2 }} />
+        <div style={{ position: 'absolute', left: '34px', top: '47px', width: '14px', height: '14px', borderRadius: '50%', border: '2px solid #FF7B7B', background: 'white', zIndex: 2 }} />
 
         <div style={{ paddingLeft: '52px', paddingRight: '20px', paddingTop: '48px', paddingBottom: '20px' }}>
           <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--coral)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>

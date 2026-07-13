@@ -14,7 +14,7 @@ const navItems = [
   { label: 'Home', href: '/home' },
   { label: 'Services', href: null, children: services },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#enquire' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Nav() {
