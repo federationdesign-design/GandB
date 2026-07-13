@@ -36,47 +36,47 @@ const BtnArrow = () => (
   </svg>
 )
 
-function ServiceCard({ s, i, activeIndex, cardVw, embedded, onClick }: {
-  s: typeof services[0]; i: number; activeIndex: number; cardVw: number; embedded: boolean; onClick: () => void
+function ServiceCard({ s, i, activeIndex, cardVw, embedded, onClick, scrollProgress }: {
+  s: typeof services[0]; i: number; activeIndex: number; cardVw: number; embedded: boolean; onClick: () => void; scrollProgress: number
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const framesRef = useRef<HTMLImageElement[]>([])
   const loadedRef = useRef(false)
   const prevFrameRef = useRef(-1)
+  const isActive = i === activeIndex
 
   useEffect(() => {
     if (loadedRef.current) return
     loadedRef.current = true
     const imgs: HTMLImageElement[] = []
-    let loaded = 0
     for (let n = 1; n <= s.frameCount; n++) {
       const img = new Image()
       img.src = `${s.frameDir}/frame_${String(n).padStart(4, '0')}.jpg`
-      img.onload = () => {
-        loaded++
-        if (loaded === s.frameCount) framesRef.current = imgs
-      }
+      img.onload = () => { framesRef.current = imgs }
       imgs.push(img)
     }
   }, [s])
 
-  // Draw frame based on distance from active
+  // Active card: play frames driven by scroll progress
+  // Inactive cards: show first frame
   useEffect(() => {
     const canvas = canvasRef.current
     const frames = framesRef.current
     if (!canvas || !frames.length) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    const dist = i - activeIndex
-    // Map distance to frame index: centre = middle frame, further = earlier/later frames
-    const mid = Math.floor(s.frameCount / 2)
-    const frameIdx = Math.max(0, Math.min(s.frameCount - 1, mid + Math.round(dist * 4)))
+    let frameIdx: number
+    if (isActive) {
+      frameIdx = Math.max(0, Math.min(s.frameCount - 1, Math.round(scrollProgress * (s.frameCount - 1))))
+    } else {
+      frameIdx = 0
+    }
     if (frameIdx === prevFrameRef.current) return
     prevFrameRef.current = frameIdx
     const frame = frames[frameIdx]
     if (!frame?.complete) return
     ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-  }, [activeIndex, i, s])
+  }, [isActive, scrollProgress, s])
 
   return (
     <div
@@ -106,6 +106,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
   const targetXRef = useRef(0)
   const rafRef = useRef<number>(0)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const activeIndexRef = useRef(0)
 
   useEffect(() => {
@@ -135,19 +136,36 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
 
       let snapTimer: ReturnType<typeof setTimeout>
 
+      // Track scroll within active card for frame playback
+      let cardScrollAccum = 0
+      const SCROLL_PER_CARD = 300 // px of wheel delta to play through all frames
+
       const handleWheel = (e: WheelEvent) => {
         const cardPx = (cardVw / 100) * window.innerWidth
         const maxX = (services.length - 1) * cardPx
         const atEnd = targetXRef.current >= maxX - 1
         const atStart = targetXRef.current <= 1
 
-        // At end scrolling down or at start scrolling up — let page scroll
         if ((atEnd && e.deltaY > 0) || (atStart && e.deltaY < 0)) return
 
         e.preventDefault()
-        targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + e.deltaY))
 
-        // Snap after scroll stops
+        // Accumulate scroll for frame playback on active card
+        cardScrollAccum += e.deltaY
+        const p = Math.max(0, Math.min(1, cardScrollAccum / SCROLL_PER_CARD))
+        setScrollProgress(p)
+
+        // Once fully scrolled through frames, advance to next card
+        if (cardScrollAccum >= SCROLL_PER_CARD) {
+          cardScrollAccum = 0
+          targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + cardPx))
+          setScrollProgress(0)
+        } else if (cardScrollAccum <= 0) {
+          cardScrollAccum = 0
+          targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current - cardPx))
+          setScrollProgress(0)
+        }
+
         clearTimeout(snapTimer)
         snapTimer = setTimeout(snapToNearest, 60)
       }
@@ -165,6 +183,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
       const handleScroll = () => {
         const p = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / (section.offsetHeight - window.innerHeight)))
         targetXRef.current = p * (track.scrollWidth - window.innerWidth)
+        setScrollProgress(p)
       }
       window.addEventListener('scroll', handleScroll, { passive: true })
       return () => { window.removeEventListener('scroll', handleScroll); cancelAnimationFrame(rafRef.current) }
@@ -185,6 +204,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
               activeIndex={activeIndex}
               cardVw={cardVw}
               embedded={embedded}
+              scrollProgress={i === activeIndex ? scrollProgress : 0}
               onClick={() => {
                 if (embedded) {
                   const cardPx = (cardVw / 100) * window.innerWidth
