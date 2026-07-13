@@ -212,7 +212,7 @@ export default function HomePage() {
   }
 
   return (
-    <div style={{ background: 'var(--navy)', minHeight: '100vh', fontFamily: f }}>
+    <div style={{ background: '#1a2340', minHeight: '100vh', fontFamily: f }}>
       <Nav />
 
       {/* ── DESKTOP ─────────────────────────────────────────── */}
@@ -222,7 +222,7 @@ export default function HomePage() {
             <>
               {/* Split panels */}
               <div style={{ position: 'relative', minHeight: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
-                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 2, background: '#fff', opacity: 0.7, transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
 
                 <button onClick={() => navigate('corporate')} onMouseEnter={() => setHoverLeft(true)} onMouseLeave={() => setHoverLeft(false)}
                   style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
@@ -236,7 +236,7 @@ export default function HomePage() {
                   </div>
                 </button>
 
-                <div style={{ background: '#000', minHeight: '78vh' }} />
+                <div style={{ background: 'var(--navy)', minHeight: '78vh' }} />
 
                 <button onClick={() => navigate('private')} onMouseEnter={() => setHoverRight(true)} onMouseLeave={() => setHoverRight(false)}
                   style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
@@ -252,7 +252,7 @@ export default function HomePage() {
               </div>
 
               {/* Elaboration */}
-              <div style={{ padding: '80px 60px 60px', background: 'var(--navy)' }}>
+              <div style={{ padding: '80px 60px 60px', background: '#1a2340' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 1fr', maxWidth: 1600, margin: '0 auto' }}>
                   <div style={{ paddingRight: 50, textAlign: 'right' }}>
                     <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
@@ -288,7 +288,7 @@ export default function HomePage() {
       {isMobile === true && (
         <>
           {choice === null ? (
-            <div ref={mobileSectionRef} style={{ position: 'relative', height: '250dvh', background: 'var(--navy)' }}>
+            <div ref={mobileSectionRef} style={{ position: 'relative', height: '250dvh', background: '#1a2340' }}>
               <div style={{ position: 'sticky', top: 0, height: '100dvh', overflow: 'hidden' }}>
                 <div ref={mobileTrackRef} style={{ position: 'absolute', inset: 0, width: '200vw', display: 'flex', willChange: 'transform' }}>
                   <div ref={mobilePrivateRef} style={{ position: 'relative', width: '100vw', height: '100%', flexShrink: 0 }}>
@@ -334,13 +334,13 @@ export default function HomePage() {
       {isMobile === null && <div style={{ height: '100vh' }} />}
 
       {/* ── Logo strip ──────────────────────────────────────── */}
-      <section style={{ padding: '48px 0', background: 'var(--navy)', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <section style={{ padding: '48px 0', background: '#1a2340', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 32, fontFamily: f }}>Trusted by leading organisations</p>
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ display: 'flex', gap: 60, width: 'max-content', animation: 'gandb-marquee 25s linear infinite', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 120, width: 'max-content', animation: 'gandb-marquee 30s linear infinite', alignItems: 'center' }}>
             {[...logos, ...logos].map((logo, i) => (
               <div key={i} style={{ flexShrink: 0, height: 50, display: 'flex', alignItems: 'center' }}>
-                <img src={logo.src} alt={logo.name} style={{ maxHeight: 36, maxWidth: 120, objectFit: 'contain', opacity: 0.5, filter: 'brightness(0) invert(1)' }} />
+                <img src={logo.src} alt={logo.name} style={{ maxHeight: 40, maxWidth: 140, objectFit: 'contain', opacity: 1, filter: 'brightness(0) invert(1)' }} />
               </div>
             ))}
           </div>
@@ -348,7 +348,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Testimonials ────────────────────────────────────── */}
-      <section style={{ padding: '80px 24px', background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <section style={{ padding: '80px 24px', background: '#1a2340', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 48, fontFamily: f }}>What our clients say</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 1200, margin: '0 auto' }}>
           {testimonials.map((t, i) => (
