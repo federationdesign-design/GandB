@@ -224,11 +224,18 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
         const p = Math.max(0, Math.min(1, cardScrollAccum / SCROLL_PER_CARD))
         setScrollProgress(p)
 
-        // Once fully scrolled through frames, advance to next card
+        // Once fully scrolled through frames, advance to next card (unless last)
         if (cardScrollAccum >= SCROLL_PER_CARD) {
-          cardScrollAccum = 0
-          targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + cardPx))
-          setScrollProgress(0)
+          const isLast = activeIndexRef.current >= services.length - 1
+          if (!isLast) {
+            cardScrollAccum = 0
+            targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + cardPx))
+            setScrollProgress(0)
+          } else {
+            // On last card — clamp accumulator so progress stays at 1
+            cardScrollAccum = SCROLL_PER_CARD
+            setScrollProgress(1)
+          }
         } else if (cardScrollAccum <= 0) {
           cardScrollAccum = 0
           targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current - cardPx))
