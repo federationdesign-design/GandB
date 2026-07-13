@@ -10,169 +10,124 @@ const sections = [
     id: 'about',
     label: 'About',
     title: null,
-    intro: 'When aerospace businesses face high-stakes regulatory disputes, procurement negotiations, or cross-border liability exposure, the difference between a solicitor and specialist counsel is the difference between process and strategy.',
+    intro: 'When technology businesses face complex regulatory landscapes, intellectual property disputes, or the challenges of rapid digital transformation, the difference between a generalist and specialist counsel is the difference between risk and opportunity.',
     isAbout: true,
-  },
-  {
-    id: 'defence',
-    label: 'Defence & Procurement',
-    title: 'DEFENCE & PROCUREMENT CONTRACTS',
-    intro: 'Military and government aerospace contracts operate under entirely different legal frameworks to commercial work. Specialist counsel navigates procurement law, security classifications, export controls, and the unique dispute resolution mechanisms that govern defence relationships.',
-    bullets: [
-      {
-        img: '/images/Defence%20%26%20Procurement%20Contracts%201.png',
-        text: 'Drafting and negotiating complex government and military procurement agreements under defence-specific legal frameworks',
-      },
-      {
-        img: '/images/Defence%20%26%20Procurement%20Contracts%202.png',
-        text: 'Advising on export controls, security classifications, and ITAR compliance for clients operating across allied nations',
-      },
-      {
-        img: '/images/Defence%20%26%20Procurement%20Contracts%203.png',
-        text: 'Managing disputes within the specialist resolution mechanisms that govern defence and public sector contracts',
-      },
-    ],
-  },
-  {
-    id: 'safety',
-    label: 'Safety Legislation',
-    title: 'SAFETY LEGISLATION & LIABILITY',
-    intro: 'From airworthiness directives to accident investigation protocols, safety law in aerospace carries criminal as well as civil exposure. Having counsel who understands the technical language of safety management systems means legal advice that is grounded in operational reality, not just statute.',
-    bullets: [
-      {
-        img: '/images/Safety%20Legislation%20%26%20Liability%201.png',
-        text: 'Advising on airworthiness obligations, safety management systems, and operator liability frameworks',
-      },
-      {
-        img: '/images/Safety%20Legislation%20%26%20Liability%202.png',
-        text: 'Representing clients during accident investigations and inquests where criminal or civil exposure exists',
-      },
-      {
-        img: '/images/Safety%20Legislation%20%26%20Liability%203.png',
-        text: 'Structuring contracts to allocate safety liability appropriately between manufacturers, operators, and maintainers',
-      },
-    ],
-  },
-  {
-    id: 'regulatory',
-    label: 'Regulatory & Compliance',
-    title: 'REGULATORY & COMPLIANCE',
-    intro: 'Aerospace is one of the most heavily regulated industries on earth, governed by bodies including the CAA, EASA, FAA, and ICAO. Specialist counsel understands how these frameworks interact across jurisdictions, ensuring clients remain compliant whether they operate domestically or across multiple territories.',
-    bullets: [
-      {
-        img: '/images/Regulatory%20%26%20Compliance%201.png',
-        text: 'Navigating the overlapping requirements of the CAA, EASA, FAA, and ICAO across multiple operating territories',
-      },
-      {
-        img: '/images/Regulatory%20%26%20Compliance%202.png',
-        text: 'Advising on regulatory change and ensuring business structures remain compliant as legislation evolves',
-      },
-      {
-        img: '/images/Regulatory%20%26%20Compliance%203.png',
-        text: 'Representing clients in enforcement proceedings and licence applications before aviation authorities',
-      },
-    ],
   },
   {
     id: 'ip',
     label: 'Intellectual Property',
-    title: 'INTELLECTUAL PROPERTY & TRADE SECRETS',
-    intro: 'Aerospace is driven by proprietary technology. Protecting patents, licensing agreements, and trade secrets across international borders requires counsel who understands both IP law and the sector\'s competitive dynamics.',
+    title: 'INTELLECTUAL PROPERTY',
+    intro: 'In the technology sector, intellectual property is the primary asset. Protecting it demands counsel who understands both the legal frameworks and the technical realities of software, hardware, and data.',
     bullets: [
-      {
-        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%201.png',
-        text: 'Protecting proprietary technology through patent strategy, licensing agreements, and trade secret protocols',
-      },
-      {
-        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%202.png',
-        text: 'Advising on IP ownership structures within consortium and joint development arrangements',
-      },
-      {
-        img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%201.png',
-        text: 'Pursuing and defending infringement claims across international jurisdictions where aerospace IP is most at risk',
-      },
+      { img: '/images/Defence%20%26%20Procurement%20Contracts%201.png', text: 'Drafting and negotiating software licensing agreements, open source compliance frameworks, and IP ownership structures' },
+      { img: '/images/Defence%20%26%20Procurement%20Contracts%202.png', text: 'Advising on patent strategy, trade mark protection, and the enforcement of IP rights across international jurisdictions' },
+      { img: '/images/Defence%20%26%20Procurement%20Contracts%203.png', text: 'Protecting trade secrets and confidential information in an environment where talent moves quickly and data travels faster' },
     ],
   },
   {
-    id: 'arbitration',
-    label: 'Arbitration & Disputes',
-    title: 'INTERNATIONAL ARBITRATION & DISPUTE RESOLUTION',
-    intro: 'Aerospace disputes rarely stay within a single jurisdiction. Specialist counsel with experience in international arbitration ensures clients are represented effectively when commercial relationships break down across borders.',
+    id: 'software',
+    label: 'Software Licensing',
+    title: 'SOFTWARE LICENSING & IT LAW',
+    intro: 'Technology contracts carry risk that general commercial lawyers routinely underestimate. Specialist counsel understands the technical specifics that determine whether a contract protects or exposes.',
     bullets: [
-      {
-        img: '/images/Arbitration%20%26%20Dispute%20Resolution%201.png',
-        text: 'Representing clients before international arbitration tribunals including the ICC, LCIA, and UNCITRAL panels',
-      },
-      {
-        img: '/images/Arbitration%20%26%20Dispute%20Resolution%202.png',
-        text: 'Advising on jurisdiction strategy and governing law clauses at the contract stage to protect clients before disputes arise',
-      },
-      {
-        img: '/images/Arbitration%20%26%20Dispute%20Resolution%203.png',
-        text: 'Managing multi-party disputes involving manufacturers, insurers, governments, and operators across different legal systems',
-      },
+      { img: '/images/Safety%20Legislation%20%26%20Liability%201.png', text: 'Advising on SaaS agreements, platform terms, and enterprise software contracts where liability and service levels are commercially critical' },
+      { img: '/images/Safety%20Legislation%20%26%20Liability%202.png', text: 'Structuring IT outsourcing and managed service agreements with appropriate performance benchmarks and exit provisions' },
+      { img: '/images/Safety%20Legislation%20%26%20Liability%203.png', text: 'Advising on technology procurement, systems integration contracts, and dispute resolution where technical failure has commercial consequences' },
     ],
   },
   {
-    id: 'crossborder',
-    label: 'Cross-Border Structuring',
-    title: 'JOINT VENTURES & CROSS-BORDER STRUCTURING',
-    intro: 'Large aerospace programmes frequently involve consortium arrangements between manufacturers, governments, and suppliers across multiple countries. Getting the legal architecture right from the outset protects all parties when complexity increases.',
+    id: 'fintech',
+    label: 'Financial Technology',
+    title: 'FINANCIAL TECHNOLOGY (FINTECH)',
+    intro: 'FinTech operates at the intersection of financial services regulation and technology law. Businesses in this space require counsel who can navigate both with equal authority.',
     bullets: [
-      {
-        img: '/images/Cross-Border%20Structuring%201.png',
-        text: 'Structuring consortium and joint venture agreements between international partners on large-scale aerospace programmes',
-      },
-      {
-        img: '/images/Cross-Border%20Structuring%202.png',
-        text: 'Advising on the regulatory approvals, competition law considerations, and governance frameworks required at formation',
-      },
-      {
-        img: '/images/Cross-Border%20Structuring%203.png',
-        text: 'Protecting client interests when joint arrangements are restructured, wound down, or subject to dispute',
-      },
+      { img: '/images/Regulatory%20%26%20Compliance%201.png', text: 'Advising on FCA authorisation, e-money licensing, and payment services regulation for businesses entering or scaling in regulated markets' },
+      { img: '/images/Regulatory%20%26%20Compliance%202.png', text: 'Structuring partnerships between FinTech businesses and established financial institutions, including API access agreements and data sharing arrangements' },
+      { img: '/images/Regulatory%20%26%20Compliance%203.png', text: 'Advising on open banking compliance, PSD2 obligations, and the evolving regulatory framework for digital assets and cryptocurrency' },
+    ],
+  },
+  {
+    id: 'dataprotection',
+    label: 'Data Protection & GDPR',
+    title: 'DATA PROTECTION & GDPR',
+    intro: 'Data is the currency of the digital economy. The regulatory obligations surrounding its collection, processing, and transfer carry significant civil and criminal exposure for technology businesses.',
+    bullets: [
+      { img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%201.png', text: 'Advising on GDPR compliance programmes, data processing agreements, and the lawful basis for processing personal data across complex technology architectures' },
+      { img: '/images/Intellectual%20Property%20%26%20Trade%20Secrets%202.png', text: 'Representing clients in ICO investigations, regulatory inquiries, and data breach response where speed and precision are operationally critical' },
+      { img: '/images/Regulatory%20%26%20Compliance%201.png', text: 'Advising on cross-border data transfers, standard contractual clauses, and the implications of international data sovereignty requirements' },
+    ],
+  },
+  {
+    id: 'connected',
+    label: 'Connected Technologies',
+    title: 'CONNECTED TECHNOLOGIES & SMART INFRASTRUCTURE',
+    intro: 'The proliferation of connected devices and smart infrastructure creates legal complexity that spans product liability, data law, cybersecurity regulation, and commercial contract law simultaneously.',
+    bullets: [
+      { img: '/images/Arbitration%20%26%20Dispute%20Resolution%201.png', text: 'Advising on IoT product liability, software update obligations, and the regulatory framework governing connected devices in consumer and industrial contexts' },
+      { img: '/images/Arbitration%20%26%20Dispute%20Resolution%202.png', text: 'Structuring smart city and infrastructure contracts between technology providers, public authorities, and private operators' },
+      { img: '/images/Arbitration%20%26%20Dispute%20Resolution%203.png', text: 'Advising on cybersecurity obligations, incident response frameworks, and the legal consequences of infrastructure vulnerability' },
+    ],
+  },
+  {
+    id: 'telecom',
+    label: 'Telecommunications',
+    title: 'TELECOMMUNICATIONS',
+    intro: 'Telecommunications businesses operate under some of the most complex regulatory frameworks in any sector. Specialist counsel provides the strategic guidance needed to operate, grow, and compete effectively.',
+    bullets: [
+      { img: '/images/Cross-Border%20Structuring%201.png', text: 'Advising on Ofcom licensing, spectrum rights, and the regulatory obligations affecting fixed line, mobile, and satellite operators' },
+      { img: '/images/Cross-Border%20Structuring%202.png', text: 'Structuring infrastructure sharing agreements, roaming arrangements, and wholesale access contracts between network operators' },
+      { img: '/images/Cross-Border%20Structuring%203.png', text: 'Advising on merger control and competition law in a sector where consolidation is commercially driven but regulatorily constrained' },
+    ],
+  },
+  {
+    id: 'ev',
+    label: 'Electric Vehicles',
+    title: 'ELECTRIC VEHICLES & CHARGING INFRASTRUCTURE',
+    intro: 'The transition to electric mobility creates an entirely new legal landscape spanning energy regulation, planning law, consumer contracts, and technology licensing in a market moving faster than most regulatory frameworks.',
+    bullets: [
+      { img: '/images/Defence%20%26%20Procurement%20Contracts%201.png', text: 'Advising on charging network development, grid connection agreements, and the regulatory framework governing public EV infrastructure' },
+      { img: '/images/Safety%20Legislation%20%26%20Liability%201.png', text: 'Structuring vehicle-to-grid agreements, energy storage contracts, and the commercial arrangements underpinning smart charging technology' },
+      { img: '/images/Regulatory%20%26%20Compliance%201.png', text: 'Advising on product liability, software update obligations, and consumer rights in the context of connected and autonomous vehicle technology' },
     ],
   },
 ]
-
 const panelContent: Record<string, { stat: string; label: string; quote: string }> = {
-  about: {
-    stat: 'Mayfair, London',
-    label: 'Operating since 1998',
-    quote: 'Not every legal matter requires a specialist. Yours does.',
-  },
-  defence: {
-    stat: '£340bn+',
-    label: 'Global defence procurement market',
-    quote: 'Military and government contracts demand counsel who understands classification, export controls, and the full weight of sovereign liability.',
-  },
-  safety: {
-    stat: '94%',
-    label: 'Of aviation incidents involve regulatory non-compliance',
-    quote: 'Safety law in aerospace carries criminal as well as civil exposure. The distinction matters enormously.',
-  },
-  regulatory: {
-    stat: '4 bodies',
-    label: 'CAA · EASA · FAA · ICAO',
-    quote: 'Compliance is not a destination. It is a continuous process across every jurisdiction you operate in.',
-  },
   ip: {
-    stat: '$1.2tn',
-    label: 'Estimated value of aerospace IP globally',
-    quote: 'Proprietary technology is your competitive advantage. Protecting it across international borders requires more than a standard NDA.',
+    stat: '$8.5tn',
+    label: 'Global IP value in tech sector',
+    quote: 'In technology, your IP is your company. Protecting it requires counsel who understands what they are protecting.',
   },
-  arbitration: {
-    stat: 'ICC · LCIA · UNCITRAL',
-    label: 'Tribunals where we have represented clients',
-    quote: 'Aerospace disputes rarely stay within a single jurisdiction. Your counsel should not either.',
+  software: {
+    stat: '73%',
+    label: 'Of enterprise software disputes involve unclear licensing terms',
+    quote: 'A poorly drafted software contract is not a starting point for negotiation. It is a liability waiting to be triggered.',
   },
-  crossborder: {
-    stat: '63%',
-    label: 'Of large aerospace programmes involve 3+ national partners',
-    quote: 'The legal architecture of a consortium determines what happens when things go wrong. Get it right from day one.',
+  fintech: {
+    stat: '£164bn',
+    label: 'UK FinTech sector value',
+    quote: 'FinTech moves at the speed of technology and is regulated at the pace of financial services. Navigating both requires specialist counsel.',
+  },
+  dataprotection: {
+    stat: '£17.5m',
+    label: 'Maximum GDPR fine under UK law',
+    quote: 'Data protection is not a compliance checkbox. It is a commercial risk that requires strategic legal management.',
+  },
+  connected: {
+    stat: '75bn',
+    label: 'Connected devices expected globally by 2025',
+    quote: 'Every connected device is a potential liability. The legal architecture around IoT must be as sophisticated as the technology itself.',
+  },
+  telecom: {
+    stat: '£40bn+',
+    label: 'UK telecommunications market value',
+    quote: 'Telecommunications regulation is among the most technically complex in any sector. Generalist advice is not sufficient.',
+  },
+  ev: {
+    stat: '300%',
+    label: 'Growth in UK EV charging infrastructure 2020-2024',
+    quote: 'The EV transition is creating legal complexity at a pace that most businesses are not yet equipped to manage.',
   },
 }
-
 export default function TechnologyPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const framesRef = useRef<HTMLImageElement[]>([])
