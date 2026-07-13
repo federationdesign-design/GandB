@@ -61,16 +61,41 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
     rafRef.current = requestAnimationFrame(animate)
 
     if (embedded) {
-      // Wheel-driven when embedded in homepage
       const container = sectionRef.current
       if (!container) return
-      const handleWheel = (e: WheelEvent) => {
-        e.preventDefault()
-        const maxX = track.scrollWidth - container.offsetWidth
-        targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + e.deltaY))
+
+      // Snap to nearest card
+      const snapToNearest = () => {
+        const cardPx = (cardVw / 100) * window.innerWidth
+        const nearest = Math.round(targetXRef.current / cardPx)
+        targetXRef.current = Math.max(0, Math.min(services.length - 1, nearest)) * cardPx
       }
+
+      let snapTimer: ReturnType<typeof setTimeout>
+
+      const handleWheel = (e: WheelEvent) => {
+        const cardPx = (cardVw / 100) * window.innerWidth
+        const maxX = (services.length - 1) * cardPx
+        const atEnd = targetXRef.current >= maxX - 1
+        const atStart = targetXRef.current <= 1
+
+        // At end scrolling down or at start scrolling up — let page scroll
+        if ((atEnd && e.deltaY > 0) || (atStart && e.deltaY < 0)) return
+
+        e.preventDefault()
+        targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + e.deltaY))
+
+        // Snap after scroll stops
+        clearTimeout(snapTimer)
+        snapTimer = setTimeout(snapToNearest, 180)
+      }
+
       container.addEventListener('wheel', handleWheel, { passive: false })
-      return () => { container.removeEventListener('wheel', handleWheel); cancelAnimationFrame(rafRef.current) }
+      return () => {
+        container.removeEventListener('wheel', handleWheel)
+        clearTimeout(snapTimer)
+        cancelAnimationFrame(rafRef.current)
+      }
     } else {
       // Scroll-driven when standalone
       const section = sectionRef.current
@@ -105,7 +130,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px 48px 50px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '24px 40px 36px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.title}</h3>
                   <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.tagline}</p>
                   <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
