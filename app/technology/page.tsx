@@ -377,7 +377,7 @@ export default function TechnologyPage() {
         {/* Layer 2: Video canvas at 58% opacity */}
         {!framesLoaded && (
           <img
-            src="/jetplane.jpg"
+            src="/tech-hero-static.jpg"
             alt="Aerospace"
             style={{
               position: 'absolute', inset: 0,
@@ -822,7 +822,7 @@ export default function TechnologyPage() {
           {/* Image column */}
           <div className="enquire-image">
             <img
-              src="/jetplane.jpg"
+              src="/tech-hero-static.jpg"
               alt="Herbert & Ball"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
