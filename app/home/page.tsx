@@ -262,8 +262,8 @@ export default function HomePage() {
       {isMobile === false && (
         <div>
 
-          {/* ── Hero container — sits below fixed nav, fills visual area ── */}
-          <div style={{ position: 'relative', height: 'calc(78vh + 56px)', marginTop: 56, overflow: 'hidden' }}>
+          {/* ── Hero container ── */}
+          <div style={{ position: 'relative', height: '80dvh', marginTop: 56, overflow: 'hidden' }}>
 
             {/* Spine */}
             <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
