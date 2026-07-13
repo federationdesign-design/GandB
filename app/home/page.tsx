@@ -113,7 +113,14 @@ function HeroPanel({ frameDir, frameCount, canvasW, canvasH }: {
     for (let n = 1; n <= frameCount; n++) {
       const img = new Image()
       img.src = `${frameDir}/frame_${String(n).padStart(4, '0')}.jpg`
-      img.onload = () => { framesRef.current = imgs }
+      img.onload = () => {
+        framesRef.current = imgs
+        // Draw first frame as soon as it loads
+        if (n === 1) {
+          const c = canvasRef.current
+          if (c) { const ctx2 = c.getContext('2d'); if (ctx2) ctx2.drawImage(img, 0, 0, c.width, c.height) }
+        }
+      }
       imgs.push(img)
     }
 
