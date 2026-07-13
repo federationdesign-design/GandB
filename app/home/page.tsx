@@ -125,7 +125,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
               <div key={s.slug} onMouseEnter={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(null)}
                 style={{ flexShrink: 0, width: `${cardVw}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-                <div style={{ position: 'absolute', inset: 0, transform: `scale(${dist === 0 ? 1.03 : 1})`, transition: 'transform 0.6s ease' }}>
+                <div style={{ position: 'absolute', inset: '-10%', transform: `scale(${dist === 0 ? 1.03 : 1}) translateY(${(i - activeIndex) * 8}%)`, transition: 'transform 0.6s ease' }}>
                   <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.58 }} />
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
@@ -265,13 +265,13 @@ export default function HomePage() {
           {/* Split panels + elaboration — always visible underneath */}
           <div>
             {/* Split panels */}
-            <div style={{ position: 'relative', minHeight: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
+            <div style={{ position: 'relative', height: '78vh', display: 'grid', gridTemplateColumns: '1fr 50px 1fr' }}>
               {/* Spine */}
               <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
 
               {/* Private panel - left */}
               <button onClick={() => navigate('private')}
-                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '78vh', background: '#1a2340', display: 'block' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
                 <img src="/regulated-frames/frame_0001.jpg" alt=""
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
@@ -286,11 +286,11 @@ export default function HomePage() {
               </button>
 
               {/* Gutter */}
-              <div style={{ background: '#1a2340', minHeight: '78vh' }} />
+              <div style={{ background: '#1a2340', height: '78vh' }} />
 
               {/* Corporate panel - right */}
               <button onClick={() => navigate('corporate')}
-                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', minHeight: '78vh', background: '#1a2340', display: 'block' }}>
+                style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', height: '78vh', background: '#1a2340', display: 'block' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
                 <img src="/commercial-frames/frame_0001.jpg" alt=""
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
