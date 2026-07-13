@@ -8,7 +8,7 @@ const LERP = 0.12
 const CARD_WIDTH_VW = 38
 
 const services = [
-  { slug: 'aerospace', title: 'Aerospace, Aviation & Defence', tagline: 'Specialist counsel for one of the most heavily regulated and commercially complex sectors on earth.', frameDir: '/frames', frameCount: 30, href: '/', color: '#1a2340' },
+  { slug: 'aerospace', title: 'Aerospace, Aviation & Defence', tagline: 'Specialist counsel for one of the most heavily regulated and commercially complex sectors on earth.', frameDir: '/frames', frameCount: 30, href: '/aerospace', color: '#1a2340' },
   { slug: 'technology', title: 'Technology & Innovation', tagline: 'From IP protection to FinTech regulation, specialist counsel for businesses operating at the speed of the digital economy.', frameDir: '/tech-frames', frameCount: 23, href: '/technology', color: '#1a2340' },
   { slug: 'media', title: 'Media, Entertainment & Creative Industries', tagline: 'Rights, production, talent and disputes — specialist counsel where creative ambition meets commercial reality.', frameDir: '/media-frames', frameCount: 21, href: '/media', color: '#1a2340' },
   { slug: 'regulated', title: 'Regulated Industries', tagline: 'Financial services, energy, healthcare and beyond — specialist counsel for businesses operating under the most demanding frameworks.', frameDir: '/regulated-frames', frameCount: 31, href: '/regulated-industries', color: '#1a2340' },
@@ -467,24 +467,24 @@ export default function HomePage() {
           <div style={{ padding: '80px 60px 60px', background: '#1a2340' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 90px 1fr', maxWidth: 1600, margin: '0 auto' }}>
               <div style={{ paddingRight: 50, textAlign: 'right' }}>
-                <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
-                  &lt;&lt; Corporations &amp; Institutions
-                </button>
-                <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em', fontFamily: f }}>Specialist counsel for businesses where legal complexity is a constant.</p>
-                <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32, fontFamily: f }}>From aerospace procurement to FinTech regulation, from media rights to commercial restructuring, we provide expert legal advice to institutions that cannot afford generalist counsel.</p>
-                <button onClick={() => navigate('corporate')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
-                  View our services
-                </button>
-              </div>
-              <div style={{ background: 'rgba(255,255,255,0.1)', width: 1, margin: '0 auto' }} />
-              <div style={{ paddingLeft: 50 }}>
-                <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12 }}>
-                  Private Client &amp; Pro Bono &gt;&gt;
+                <button onClick={() => navigate('private')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
+                  &lt;&lt; Private Client &amp; Pro Bono
                 </button>
                 <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em', fontFamily: f }}>Expert legal representation for individuals and those who need it most.</p>
                 <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32, fontFamily: f }}>We take on a limited number of private client matters each year, and we reserve capacity for pro bono work for individuals facing complex legal challenges without the means to meet them.</p>
                 <button onClick={() => navigate('private')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
                   Get in touch
+                </button>
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.1)', width: 1, margin: '0 auto' }} />
+              <div style={{ paddingLeft: 50 }}>
+                <button onClick={() => navigate('corporate')} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: f, fontSize: '1.5rem', marginBottom: 40, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 12 }}>
+                  Corporations &amp; Institutions &gt;&gt;
+                </button>
+                <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em', fontFamily: f }}>Specialist counsel for businesses where legal complexity is a constant.</p>
+                <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32, fontFamily: f }}>From aerospace procurement to FinTech regulation, from media rights to commercial restructuring, we provide expert legal advice to institutions that cannot afford generalist counsel.</p>
+                <button onClick={() => navigate('corporate')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
+                  View our services
                 </button>
               </div>
             </div>
@@ -546,7 +546,7 @@ export default function HomePage() {
       <section style={{ padding: '48px 0', background: '#1a2340', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 32, fontFamily: f }}>Trusted by leading organisations</p>
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ display: 'flex', gap: 120, width: 'max-content', animation: 'gandb-marquee 30s linear infinite', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 160, width: 'max-content', animation: 'gandb-marquee 35s linear infinite', alignItems: 'center', padding: '0 80px' }}>
             {[...logos, ...logos].map((logo, i) => (
               <div key={i} style={{ flexShrink: 0, height: 50, display: 'flex', alignItems: 'center' }}>
                 <img src={logo.src} alt={logo.name} style={{ maxHeight: 40, maxWidth: 140, objectFit: 'contain', opacity: 1, filter: 'brightness(0) invert(1)' }} />
@@ -562,8 +562,8 @@ export default function HomePage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 1200, margin: '0 auto' }}>
           {testimonials.map((t, i) => (
             <div key={i} style={{ border: '1px solid rgba(255,255,255,0.12)', padding: '40px 32px' }}>
-              <div style={{ fontSize: '3rem', color: '#FF7B7B', lineHeight: 1, marginBottom: 16, fontWeight: 300, fontFamily: f }}>&ldquo;</div>
-              <p style={{ fontSize: '1.15rem', fontWeight: 300, color: '#fff', lineHeight: 1.6, marginBottom: 24, opacity: 0.9, fontFamily: f }}>{t.quote}</p>
+              <div style={{ fontSize: '12rem', color: '#FF7B7B', lineHeight: 0.8, marginBottom: -24, fontWeight: 300, fontFamily: f }}>&ldquo;</div>
+              <p style={{ fontSize: '1.15rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, marginBottom: 24, opacity: 0.9, fontFamily: f }}>{t.quote}</p>
               <p style={{ fontSize: '0.78rem', fontWeight: 600, color: '#FF7B7B', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4, fontFamily: f }}>{t.name}</p>
               <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', fontFamily: f }}>{t.role}</p>
             </div>

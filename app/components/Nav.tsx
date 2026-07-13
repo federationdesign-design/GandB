@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 const services = [
-  { label: 'Aerospace, Aviation & Defence', href: '/' },
+  { label: 'Aerospace, Aviation & Defence', href: '/aerospace' },
   { label: 'Technology & Innovation', href: '/technology' },
   { label: 'Regulated Industries', href: '/regulated-industries' },
   { label: 'Media, Entertainment & Creative Industries', href: '/media' },
@@ -11,7 +11,7 @@ const services = [
 ]
 
 const navItems = [
-  { label: 'Home', href: '/' },
+  { label: 'Home', href: '/home' },
   { label: 'Services', href: null, children: services },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '#enquire' },
