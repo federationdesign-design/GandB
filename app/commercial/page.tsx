@@ -168,7 +168,24 @@ export default function CommercialPage() {
     const frameList = imgs || framesRef.current
     const frame = frameList[index]
     if (!frame) return
-    ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+    // Draw frame maintaining aspect ratio (cover - crop to fill, no distortion)
+    const fw = frame.naturalWidth || frame.width
+    const fh = frame.naturalHeight || frame.height
+    const cw = canvas.width
+    const ch = canvas.height
+    const frameRatio = fw / fh
+    const canvasRatio = cw / ch
+    let sx = 0, sy = 0, sw = fw, sh = fh
+    if (frameRatio > canvasRatio) {
+      // Frame wider than canvas - crop sides
+      sw = fh * canvasRatio
+      sx = (fw - sw) / 2
+    } else {
+      // Frame taller than canvas - crop top/bottom
+      sh = fw / canvasRatio
+      sy = (fh - sh) / 2
+    }
+    ctx.drawImage(frame, sx, sy, sw, sh, 0, 0, cw, ch)
   }
 
   // Scroll scrub
