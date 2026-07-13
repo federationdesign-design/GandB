@@ -36,7 +36,7 @@ const BtnArrow = () => (
   </svg>
 )
 
-function ServicesRail({ cardVw = CARD_WIDTH_VW, railHeight = 'calc(100vh - 56px)' }: { cardVw?: number; railHeight?: string }) {
+function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: number; embedded?: boolean }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const currentXRef = useRef(0)
@@ -47,31 +47,49 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, railHeight = 'calc(100vh - 56px)
   const activeIndexRef = useRef(0)
 
   useEffect(() => {
-    const section = sectionRef.current
     const track = trackRef.current
-    if (!section || !track) return
+    if (!track) return
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t
     const animate = () => {
       currentXRef.current = lerp(currentXRef.current, targetXRef.current, LERP)
-      if (track) track.style.transform = `translateX(-${currentXRef.current}px)`
+      track.style.transform = `translateX(-${currentXRef.current}px)`
       const cardPx = (cardVw / 100) * window.innerWidth
       const current = Math.min(Math.round(currentXRef.current / cardPx), services.length - 1)
       if (current !== activeIndexRef.current) { activeIndexRef.current = current; setActiveIndex(current) }
       rafRef.current = requestAnimationFrame(animate)
     }
     rafRef.current = requestAnimationFrame(animate)
-    const handleScroll = () => {
-      const sectionTop = section.offsetTop
-      const p = Math.max(0, Math.min(1, (window.scrollY - sectionTop) / (section.offsetHeight - window.innerHeight)))
-      targetXRef.current = p * (track.scrollWidth - window.innerWidth)
+
+    if (embedded) {
+      // Wheel-driven when embedded in homepage
+      const container = sectionRef.current
+      if (!container) return
+      const handleWheel = (e: WheelEvent) => {
+        e.preventDefault()
+        const maxX = track.scrollWidth - container.offsetWidth
+        targetXRef.current = Math.max(0, Math.min(maxX, targetXRef.current + e.deltaY))
+      }
+      container.addEventListener('wheel', handleWheel, { passive: false })
+      return () => { container.removeEventListener('wheel', handleWheel); cancelAnimationFrame(rafRef.current) }
+    } else {
+      // Scroll-driven when standalone
+      const section = sectionRef.current
+      if (!section) return
+      const handleScroll = () => {
+        const p = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / (section.offsetHeight - window.innerHeight)))
+        targetXRef.current = p * (track.scrollWidth - window.innerWidth)
+      }
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => { window.removeEventListener('scroll', handleScroll); cancelAnimationFrame(rafRef.current) }
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => { window.removeEventListener('scroll', handleScroll); cancelAnimationFrame(rafRef.current) }
-  }, [])
+  }, [embedded])
+
+  const height = embedded ? '78vh' : 'calc(100vh - 56px)'
+  const top = embedded ? 0 : 56
 
   return (
-    <div ref={sectionRef} style={{ height: `${services.length * 110}vh`, position: 'relative' }}>
-      <div style={{ position: 'sticky', top: 56, height: railHeight, overflow: 'hidden' }}>
+    <div ref={sectionRef} style={ embedded ? { height: '78vh', position: 'relative', overflow: 'hidden' } : { height: `${services.length * 110}vh`, position: 'relative' }}>
+      <div style={{ position: embedded ? 'relative' : 'sticky', top, height, overflow: 'hidden' }}>
         <div ref={trackRef} style={{ display: 'flex', height: '100%', willChange: 'transform' }}>
           {services.map((s, i) => {
             const dist = Math.abs(i - activeIndex)
@@ -166,17 +184,7 @@ export default function HomePage() {
   const router = useRouter()
   const isMobile = useIsMobile()
   const [choice, setChoice] = useState<'corporate' | null>(null)
-    // Lock body scroll when rail is open
-  useEffect(() => {
-    if (choice === 'corporate') {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [choice])
-
-  const mobileSectionRef = useRef<HTMLDivElement>(null)
+    const mobileSectionRef = useRef<HTMLDivElement>(null)
   const mobileTrackRef = useRef<HTMLDivElement>(null)
   const mobilePrivateRef = useRef<HTMLDivElement>(null)
   const mobilePrivateTextRef = useRef<HTMLDivElement>(null)
@@ -313,7 +321,7 @@ export default function HomePage() {
             zIndex: 10,
             overflow: 'hidden',
           }}>
-            <ServicesRail cardVw={48} />
+            <ServicesRail cardVw={48} embedded={true} />
           </div>
 
         </div>
