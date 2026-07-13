@@ -125,7 +125,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
               <div key={s.slug} onMouseEnter={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(null)}
                 style={{ flexShrink: 0, width: `${cardVw}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
                 <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-                <div style={{ position: 'absolute', inset: '-10%', transform: `scale(${dist === 0 ? 1.03 : 1}) translateY(${(i - activeIndex) * 8}%)`, transition: 'transform 0.6s ease' }}>
+                <div style={{ position: 'absolute', inset: '-10%', transition: 'transform 0.6s ease' }}>
                   <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.58 }} />
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
