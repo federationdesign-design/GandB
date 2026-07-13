@@ -130,7 +130,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '24px 40px 36px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.title}</h3>
                   <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.tagline}</p>
                   <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
@@ -276,7 +276,7 @@ export default function HomePage() {
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', fontFamily: f }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-end', fontFamily: f }}>
                 <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15, fontFamily: f }}>Private Client &amp; Pro Bono</h2>
                 <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch', textAlign: 'right', fontFamily: f }}>Individual representation and pro bono work for those who need specialist counsel most</p>
                 <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
@@ -295,7 +295,7 @@ export default function HomePage() {
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: f }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', fontFamily: f }}>
                 <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', margin: '0 0 14px', lineHeight: 1.15, fontFamily: f }}>Corporations &amp; Institutions</h2>
                 <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#fff', opacity: 0.92, margin: '0 0 28px', lineHeight: 1.5, maxWidth: '36ch', fontFamily: f }}>Specialist legal counsel for businesses operating in complex, high-stakes environments</p>
                 <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
