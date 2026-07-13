@@ -260,10 +260,10 @@ export default function HomePage() {
 
       {/* ── DESKTOP ─────────────────────────────────────────── */}
       {isMobile === false && (
-        <div style={{ paddingTop: 56 }}>
+        <div>
 
-          {/* ── 78vh hero container — panels and rail share same bounds ── */}
-          <div style={{ position: 'relative', height: '78vh', overflow: 'hidden' }}>
+          {/* ── Hero container — sits below fixed nav, fills visual area ── */}
+          <div style={{ position: 'relative', height: 'calc(78vh + 56px)', marginTop: 56, overflow: 'hidden' }}>
 
             {/* Spine */}
             <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(255,255,255,0.6)', transform: 'translateX(-50%)', zIndex: 3, pointerEvents: 'none' }} />
