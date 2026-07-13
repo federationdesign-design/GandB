@@ -343,8 +343,8 @@ export default function MediaPage() {
         )}
         <canvas
           ref={canvasRef}
-          width={834}
-          height={1112}
+          width={1112}
+          height={834}
           style={{
             position: 'absolute', inset: 0,
             width: '100%', height: '100%',
