@@ -4,15 +4,15 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Nav from '../components/Nav'
 
-const LERP = 0.05
+const LERP = 0.12
 const CARD_WIDTH_VW = 38
 
 const services = [
-  { slug: 'aerospace', title: 'Aerospace, Aviation & Defence', tagline: 'Specialist counsel for one of the most heavily regulated and commercially complex sectors on earth.', image: '/frames/frame_0001.jpg', href: '/', color: '#1a2340' },
-  { slug: 'technology', title: 'Technology & Innovation', tagline: 'From IP protection to FinTech regulation, specialist counsel for businesses operating at the speed of the digital economy.', image: '/tech-frames/frame_0001.jpg', href: '/technology', color: '#1a2340' },
-  { slug: 'media', title: 'Media, Entertainment & Creative Industries', tagline: 'Rights, production, talent and disputes — specialist counsel where creative ambition meets commercial reality.', image: '/media-frames/frame_0001.jpg', href: '/media', color: '#1a2340' },
-  { slug: 'regulated', title: 'Regulated Industries', tagline: 'Financial services, energy, healthcare and beyond — specialist counsel for businesses operating under the most demanding frameworks.', image: '/regulated-frames/frame_0001.jpg', href: '/regulated-industries', color: '#1a2340' },
-  { slug: 'commercial', title: 'Commercial Law', tagline: 'M&A, contracts, disputes, finance and employment — direct, strategic counsel focused on outcomes.', image: '/commercial-frames/frame_0001.jpg', href: '/commercial', color: '#1a2340' },
+  { slug: 'aerospace', title: 'Aerospace, Aviation & Defence', tagline: 'Specialist counsel for one of the most heavily regulated and commercially complex sectors on earth.', frameDir: '/frames', frameCount: 30, href: '/', color: '#1a2340' },
+  { slug: 'technology', title: 'Technology & Innovation', tagline: 'From IP protection to FinTech regulation, specialist counsel for businesses operating at the speed of the digital economy.', frameDir: '/tech-frames', frameCount: 23, href: '/technology', color: '#1a2340' },
+  { slug: 'media', title: 'Media, Entertainment & Creative Industries', tagline: 'Rights, production, talent and disputes — specialist counsel where creative ambition meets commercial reality.', frameDir: '/media-frames', frameCount: 21, href: '/media', color: '#1a2340' },
+  { slug: 'regulated', title: 'Regulated Industries', tagline: 'Financial services, energy, healthcare and beyond — specialist counsel for businesses operating under the most demanding frameworks.', frameDir: '/regulated-frames', frameCount: 31, href: '/regulated-industries', color: '#1a2340' },
+  { slug: 'commercial', title: 'Commercial Law', tagline: 'M&A, contracts, disputes, finance and employment — direct, strategic counsel focused on outcomes.', frameDir: '/commercial-frames', frameCount: 12, href: '/commercial', color: '#1a2340' },
 ]
 
 const testimonials = [
@@ -36,6 +36,69 @@ const BtnArrow = () => (
   </svg>
 )
 
+function ServiceCard({ s, i, activeIndex, cardVw, embedded, onClick }: {
+  s: typeof services[0]; i: number; activeIndex: number; cardVw: number; embedded: boolean; onClick: () => void
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const framesRef = useRef<HTMLImageElement[]>([])
+  const loadedRef = useRef(false)
+  const prevFrameRef = useRef(-1)
+
+  useEffect(() => {
+    if (loadedRef.current) return
+    loadedRef.current = true
+    const imgs: HTMLImageElement[] = []
+    let loaded = 0
+    for (let n = 1; n <= s.frameCount; n++) {
+      const img = new Image()
+      img.src = `${s.frameDir}/frame_${String(n).padStart(4, '0')}.jpg`
+      img.onload = () => {
+        loaded++
+        if (loaded === s.frameCount) framesRef.current = imgs
+      }
+      imgs.push(img)
+    }
+  }, [s])
+
+  // Draw frame based on distance from active
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const frames = framesRef.current
+    if (!canvas || !frames.length) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    const dist = i - activeIndex
+    // Map distance to frame index: centre = middle frame, further = earlier/later frames
+    const mid = Math.floor(s.frameCount / 2)
+    const frameIdx = Math.max(0, Math.min(s.frameCount - 1, mid + Math.round(dist * 4)))
+    if (frameIdx === prevFrameRef.current) return
+    prevFrameRef.current = frameIdx
+    const frame = frames[frameIdx]
+    if (!frame?.complete) return
+    ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+  }, [activeIndex, i, s])
+
+  return (
+    <div
+      onClick={onClick}
+      style={{ flexShrink: 0, width: `${cardVw}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', cursor: 'pointer' }}>
+      <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
+      <canvas ref={canvasRef} width={1112} height={834}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+        <h3 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.title}</h3>
+        <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.tagline}</p>
+        <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
+        <a href={s.href} onClick={e => e.stopPropagation()} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+          Learn more <BtnArrow />
+        </a>
+      </div>
+    </div>
+  )
+}
+
 function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: number; embedded?: boolean }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -43,7 +106,6 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
   const targetXRef = useRef(0)
   const rafRef = useRef<number>(0)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null)
   const activeIndexRef = useRef(0)
 
   useEffect(() => {
@@ -87,7 +149,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
 
         // Snap after scroll stops
         clearTimeout(snapTimer)
-        snapTimer = setTimeout(snapToNearest, 180)
+        snapTimer = setTimeout(snapToNearest, 60)
       }
 
       container.addEventListener('wheel', handleWheel, { passive: false })
@@ -116,31 +178,22 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
     <div ref={sectionRef} style={ embedded ? { height: '100%', position: 'relative', overflow: 'hidden' } : { height: `${services.length * 110}vh`, position: 'relative' }}>
       <div style={{ position: embedded ? 'relative' : 'sticky', top, height, overflow: 'hidden' }}>
         <div ref={trackRef} style={{ display: 'flex', height: '100%', willChange: 'transform' }}>
-          {services.map((s, i) => {
-            const dist = Math.abs(i - activeIndex)
-            const isHovered = hoverIndex === i
-            const brightness = isHovered ? 1 : dist === 0 ? 1 : dist === 1 ? 0.75 : 0.5
-            const grayscale = isHovered || dist === 0 ? 0 : 100
-            return (
-              <div key={s.slug} onMouseEnter={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(null)}
-                style={{ flexShrink: 0, width: `${cardVw}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
-                <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-                <div style={{ position: 'absolute', inset: '-10%', transition: 'transform 0.6s ease' }}>
-                  <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.58 }} />
-                </div>
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-                  <h3 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.title}</h3>
-                  <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.tagline}</p>
-                  <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
-                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-                    Learn more <BtnArrow />
-                  </a>
-                </div>
-              </div>
-            )
-          })}
+          {services.map((s, i) => (
+            <ServiceCard
+              key={s.slug}
+              s={s} i={i}
+              activeIndex={activeIndex}
+              cardVw={cardVw}
+              embedded={embedded}
+              onClick={() => {
+                if (embedded) {
+                  const cardPx = (cardVw / 100) * window.innerWidth
+                  const next = Math.min(services.length - 1, activeIndexRef.current + 1)
+                  targetXRef.current = next * cardPx
+                }
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -177,7 +230,7 @@ function MobileServicesCarousel() {
         onTouchEnd={e => { const dx = startX.current - e.changedTouches[0].clientX; if (Math.abs(dx) > 40) goTo(index + (dx > 0 ? 1 : -1)) }}>
         {services.map((s, i) => (
           <div key={s.slug} style={{ flexShrink: 0, width: '100vw', height: '100%', position: 'relative', overflow: 'hidden' }}>
-            <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
+            <img src={`${s.frameDir}/frame_0001.jpg`} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)' }} />
             <div style={{ position: 'absolute', bottom: 100, left: 0, right: 0, padding: '0 32px', textAlign: 'center' }}>
               <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>{String(i + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</p>
