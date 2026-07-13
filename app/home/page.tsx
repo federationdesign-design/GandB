@@ -207,7 +207,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: n
 
       // Track scroll within active card for frame playback
       let cardScrollAccum = 0
-      const SCROLL_PER_CARD = 300 // px of wheel delta to play through all frames
+      const SCROLL_PER_CARD = 1200 // px of wheel delta to play through all frames
 
       const handleWheel = (e: WheelEvent) => {
         const cardPx = (cardVw / 100) * window.innerWidth
