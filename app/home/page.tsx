@@ -354,6 +354,49 @@ function useIsMobile(): boolean | null {
   return val
 }
 
+
+function ServicesDropdown({ f }: { f: string }) {
+  const [open, setOpen] = useState(false)
+  const specialisms = [
+    { label: 'Aerospace, Aviation & Defence', href: '/aerospace' },
+    { label: 'Technology & Innovation', href: '/technology' },
+    { label: 'Media, Entertainment & Creative Industries', href: '/media' },
+    { label: 'Regulated Industries', href: '/regulated-industries' },
+    { label: 'Commercial Law', href: '/commercial' },
+  ]
+  return (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 12, fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}
+      >
+        Our services
+        <svg viewBox="0 0 24 24" fill="none" style={{ width: 16, height: 16, transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s ease' }}>
+          <path d="M6 9l6 6 6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: 4, background: '#0f1a2e', border: '1px solid rgba(255,255,255,0.12)', minWidth: 320, zIndex: 50 }}>
+          {specialisms.map((s, i) => (
+            <a
+              key={s.href}
+              href={s.href}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', color: '#fff', textDecoration: 'none', fontFamily: f, fontSize: '0.85rem', fontWeight: 400, letterSpacing: '0.04em', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', transition: 'background 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+            >
+              {s.label}
+              <svg viewBox="0 0 24 24" fill="none" style={{ width: 12, height: 12, opacity: 0.4 }}>
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function HomePage() {
   const router = useRouter()
   const isMobile = useIsMobile()
@@ -472,9 +515,9 @@ export default function HomePage() {
                 </button>
                 <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em', fontFamily: f }}>Expert legal representation for individuals and those who need it most.</p>
                 <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32, fontFamily: f }}>We take on a limited number of private client matters each year, and we reserve capacity for pro bono work for individuals facing complex legal challenges without the means to meet them.</p>
-                <button onClick={() => navigate('private')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
-                  Get in touch
-                </button>
+                <a href="/contact" style={{ display: 'inline-block', fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', textDecoration: 'none', fontFamily: f }}>
+                  Log a request
+                </a>
               </div>
               <div style={{ background: 'rgba(255,255,255,0.1)', width: 1, margin: '0 auto' }} />
               <div style={{ paddingLeft: 50 }}>
@@ -483,9 +526,7 @@ export default function HomePage() {
                 </button>
                 <p style={{ fontSize: '2.2rem', fontWeight: 600, color: '#fff', lineHeight: 1.3, marginBottom: 28, letterSpacing: '-0.01em', fontFamily: f }}>Specialist counsel for businesses where legal complexity is a constant.</p>
                 <p style={{ fontSize: '1.2rem', fontWeight: 300, color: '#fff', opacity: 0.85, lineHeight: 1.5, marginBottom: 32, fontFamily: f }}>From aerospace procurement to FinTech regulation, from media rights to commercial restructuring, we provide expert legal advice to institutions that cannot afford generalist counsel.</p>
-                <button onClick={() => navigate('corporate')} style={{ fontSize: '0.95rem', fontWeight: 500, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '22px 32px', border: '1px solid rgba(255,255,255,0.4)', background: 'none', cursor: 'pointer', fontFamily: f }}>
-                  View our services
-                </button>
+                <ServicesDropdown f={f} />
               </div>
             </div>
           </div>
