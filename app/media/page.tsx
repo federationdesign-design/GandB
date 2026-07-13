@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Nav from '../components/Nav'
 
-const TOTAL_FRAMES = 17
+const TOTAL_FRAMES = 21
 
 const sections = [
   {
