@@ -99,6 +99,62 @@ function ServiceCard({ s, i, activeIndex, cardVw, embedded, onClick, scrollProgr
   )
 }
 
+function HeroPanel({ frameDir, frameCount, canvasW, canvasH }: {
+  frameDir: string; frameCount: number; canvasW: number; canvasH: number
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const framesRef = useRef<HTMLImageElement[]>([])
+  const rafRef = useRef<number>(0)
+  const currentFrameRef = useRef(0)
+  const targetFrameRef = useRef(0)
+
+  useEffect(() => {
+    const imgs: HTMLImageElement[] = []
+    for (let n = 1; n <= frameCount; n++) {
+      const img = new Image()
+      img.src = `${frameDir}/frame_${String(n).padStart(4, '0')}.jpg`
+      img.onload = () => { framesRef.current = imgs }
+      imgs.push(img)
+    }
+
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const drawFrame = (idx: number) => {
+      const frame = framesRef.current[idx]
+      if (frame?.complete) ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+    }
+
+    const animate = () => {
+      const diff = targetFrameRef.current - currentFrameRef.current
+      if (Math.abs(diff) > 0.5) {
+        currentFrameRef.current += diff * 0.08
+        drawFrame(Math.round(currentFrameRef.current))
+      }
+      rafRef.current = requestAnimationFrame(animate)
+    }
+    rafRef.current = requestAnimationFrame(animate)
+
+    const handleScroll = () => {
+      const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.8)))
+      targetFrameRef.current = p * (frameCount - 1)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      cancelAnimationFrame(rafRef.current)
+    }
+  }, [frameDir, frameCount])
+
+  return (
+    <canvas ref={canvasRef} width={canvasW} height={canvasH}
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+  )
+}
+
 function ServicesRail({ cardVw = CARD_WIDTH_VW, embedded = false }: { cardVw?: number; embedded?: boolean }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -345,8 +401,7 @@ export default function HomePage() {
             <button onClick={() => navigate('private')}
               style={{ position: 'absolute', top: 0, left: 0, width: 'calc(50% - 25px)', height: '100%', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', background: '#1a2340' }}>
               <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-              <img src="/regulated-frames/frame_0001.jpg" alt=""
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+              <HeroPanel frameDir="/regulated-frames" frameCount={31} canvasW={1920} canvasH={1080} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-end', fontFamily: f }}>
@@ -364,8 +419,7 @@ export default function HomePage() {
             <button onClick={() => navigate('corporate')}
               style={{ position: 'absolute', top: 0, right: 0, width: 'calc(50% - 25px)', height: '100%', border: 'none', padding: 0, cursor: 'pointer', overflow: 'hidden', background: '#1a2340' }}>
               <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
-              <img src="/commercial-frames/frame_0001.jpg" alt=""
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.58 }} />
+              <HeroPanel frameDir="/commercial-frames" frameCount={12} canvasW={1112} canvasH={834} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', fontFamily: f }}>
