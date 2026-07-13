@@ -36,7 +36,7 @@ const BtnArrow = () => (
   </svg>
 )
 
-function ServicesRail() {
+function ServicesRail({ cardVw = CARD_WIDTH_VW }: { cardVw?: number }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const currentXRef = useRef(0)
@@ -54,7 +54,7 @@ function ServicesRail() {
     const animate = () => {
       currentXRef.current = lerp(currentXRef.current, targetXRef.current, LERP)
       if (track) track.style.transform = `translateX(-${currentXRef.current}px)`
-      const cardPx = (CARD_WIDTH_VW / 100) * window.innerWidth
+      const cardPx = (cardVw / 100) * window.innerWidth
       const current = Math.min(Math.round(currentXRef.current / cardPx), services.length - 1)
       if (current !== activeIndexRef.current) { activeIndexRef.current = current; setActiveIndex(current) }
       rafRef.current = requestAnimationFrame(animate)
@@ -80,20 +80,18 @@ function ServicesRail() {
             const grayscale = isHovered || dist === 0 ? 0 : 100
             return (
               <div key={s.slug} onMouseEnter={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(null)}
-                style={{ flexShrink: 0, width: `${CARD_WIDTH_VW}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
-                <div style={{ position: 'absolute', inset: 0, transform: `scale(${dist === 0 ? 1.03 : 1})`, transition: 'transform 0.6s ease', background: s.color }}>
-                  <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                style={{ flexShrink: 0, width: `${cardVw}vw`, height: '100%', position: 'relative', overflow: 'hidden', borderRight: '5px solid var(--navy)', filter: `brightness(${brightness}) grayscale(${grayscale}%)`, transition: 'filter 0.5s ease' }}>
+                <div style={{ position: 'absolute', inset: 0, background: '#2A6AAA' }} />
+                <div style={{ position: 'absolute', inset: 0, transform: `scale(${dist === 0 ? 1.03 : 1})`, transition: 'transform 0.6s ease' }}>
+                  <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.58 }} />
                 </div>
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(6,39,93,0.95) 0%, rgba(11,78,186,0.2) 55%, transparent 100%)' }} />
-                <div style={{ position: 'absolute', top: 90, left: 0, right: 0, textAlign: 'center', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
-                  {String(i + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
-                </div>
-                <div style={{ position: 'absolute', bottom: 200, left: 0, right: 0, padding: '0 60px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <a href={s.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <h3 style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.9rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15 }}>{s.title}</h3>
-                  </a>
-                  <p style={{ fontSize: '0.94rem', fontWeight: 300, color: '#fff', lineHeight: 1.4, opacity: 0.85, marginBottom: 28, maxWidth: '32ch' }}>{s.tagline}</p>
-                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none', border: '1px solid #fff', padding: '11px 22px' }}>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px 48px 50px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15 }}>{s.title}</h3>
+                  <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch' }}>{s.tagline}</p>
+                  <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
+                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none' }}>
                     Learn more <BtnArrow />
                   </a>
                 </div>
@@ -292,19 +290,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Services rail — slides in from right over the top */}
+          {/* Services rail — slides in from left half only */}
           <div style={{
             position: 'absolute',
-            top: 0, left: 0, right: 0,
+            top: 0, left: 0,
+            width: 'calc(50% - 25px)',
             height: '78vh',
-            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(100%)',
+            transform: choice === 'corporate' ? 'translateX(0)' : 'translateX(-100%)',
             transition: 'transform 0.8s cubic-bezier(0.62, 0.92, 0, 1)',
             willChange: 'transform',
             zIndex: 10,
             background: '#1a2340',
             overflow: 'hidden',
           }}>
-            <ServicesRail />
+            <ServicesRail cardVw={48} />
           </div>
 
         </div>
