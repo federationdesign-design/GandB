@@ -1,4 +1,4 @@
-/* ── Google Fonts ────────────────────────────────────────────── */
+/* ── Google Fonts ─────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ── View Transitions ─────────────────────────────────────────── */
@@ -46,8 +46,11 @@ body { overflow-x: clip; }
 
 /* ── About section ───────────────────────────────────────────── */
 .gandb-about-full {
-  background: linear-gradient(to bottom, #FF7B7B 0px, #FF7B7B 40px, #ffcece 300px, #ffffff 900px);
+  background: #FF7B7B;
   position: relative;
+}
+.gandb-outer {
+  background: linear-gradient(to bottom, #FF7B7B 0px, #ffcece 200px, #ffffff 600px);
 }
 .gandb-about-inner { padding-left: 20px; }
 
@@ -78,5 +81,3 @@ body { overflow-x: clip; }
   .gandb-card { flex: 0 0 45%; max-width: 45%; padding: 0; }
   .gandb-card-inner { padding: 48px; }
 }
-/* Tue Jul 14 00:14:21 BST 2026 */
-
