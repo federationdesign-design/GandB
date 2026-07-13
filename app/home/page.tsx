@@ -36,7 +36,7 @@ const BtnArrow = () => (
   </svg>
 )
 
-function ServicesRail({ cardVw = CARD_WIDTH_VW }: { cardVw?: number }) {
+function ServicesRail({ cardVw = CARD_WIDTH_VW, railHeight = 'calc(100vh - 56px)' }: { cardVw?: number; railHeight?: string }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const currentXRef = useRef(0)
@@ -71,7 +71,7 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW }: { cardVw?: number }) {
 
   return (
     <div ref={sectionRef} style={{ height: `${services.length * 110}vh`, position: 'relative' }}>
-      <div style={{ position: 'sticky', top: 56, height: '78vh', overflow: 'hidden' }}>
+      <div style={{ position: 'sticky', top: 56, height: railHeight, overflow: 'hidden' }}>
         <div ref={trackRef} style={{ display: 'flex', height: '100%', willChange: 'transform' }}>
           {services.map((s, i) => {
             const dist = Math.abs(i - activeIndex)
@@ -87,11 +87,11 @@ function ServicesRail({ cardVw = CARD_WIDTH_VW }: { cardVw?: number }) {
                 </div>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0B4EBA, #06275D)', opacity: 0.45, zIndex: 1 }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)', zIndex: 1 }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px 48px 50px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15 }}>{s.title}</h3>
-                  <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch' }}>{s.tagline}</p>
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2, padding: '60px 48px 50px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+                  <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 600, color: '#fff', marginBottom: 14, lineHeight: 1.15, fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.title}</h3>
+                  <p style={{ fontSize: '1rem', fontWeight: 300, color: '#fff', lineHeight: 1.5, opacity: 0.92, marginBottom: 24, maxWidth: '36ch', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{s.tagline}</p>
                   <div style={{ height: 1, background: '#fff', opacity: 0.6, marginBottom: 18, width: '90%' }} />
-                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none' }}>
+                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#fff', textDecoration: 'none', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                     Learn more <BtnArrow />
                   </a>
                 </div>
@@ -166,7 +166,17 @@ export default function HomePage() {
   const router = useRouter()
   const isMobile = useIsMobile()
   const [choice, setChoice] = useState<'corporate' | null>(null)
-    const mobileSectionRef = useRef<HTMLDivElement>(null)
+    // Lock body scroll when rail is open
+  useEffect(() => {
+    if (choice === 'corporate') {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [choice])
+
+  const mobileSectionRef = useRef<HTMLDivElement>(null)
   const mobileTrackRef = useRef<HTMLDivElement>(null)
   const mobilePrivateRef = useRef<HTMLDivElement>(null)
   const mobilePrivateTextRef = useRef<HTMLDivElement>(null)
